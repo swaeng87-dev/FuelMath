@@ -60,12 +60,23 @@
     if (noRes) noRes.classList.toggle('hidden', visible > 0);
   }
 
-  if (searchInput) searchInput.addEventListener('input', filterTools);
+  if (searchInput) {
+    searchInput.addEventListener('input', filterTools);
+  }
 
-  // Exposed for the "Clear Search" button
-  window.resetSearch = function () {
-    if (searchInput) { searchInput.value = ''; filterTools(); }
-  };
+  // Reset search function
+  function resetSearch() {
+    if (searchInput) {
+      searchInput.value = '';
+      filterTools();
+    }
+  }
+
+  // Bind the "Clear Search Filter" button
+  var clearBtn = $('clearSearchBtn');
+  if (clearBtn) {
+    clearBtn.addEventListener('click', resetSearch);
+  }
 
   /* ---------- 3. Blog page enhancements ---------- */
   var article = document.querySelector('[data-blog]');
