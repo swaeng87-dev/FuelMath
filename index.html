@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FuelMath — Hydrocarbon, Natural Gas & Fuel Calculators Engine</title>
+  <meta name="description" content="50 free, precision calculators for gas engineers, traders, and fleet logistics. Convert natural gas, LNG, pipeline thermodynamics, petroleum density, and fuel costs.">
+  <meta name="keywords" content="natural gas converter, SCM to kg, MMBtu to SCM, pipeline linepack, LNG converter, fuel cost per km, CNG mileage calculator">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="FuelMath — Precision Energy & Fuel Calculators">
+  <meta property="og:description" content="Fast, 100% client-side calculation engines for natural gas engineering, petroleum standards, and fleet logistics.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fuelmath.net">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- FIX: Prevents the sticky header from covering section titles on anchor click -->
+  <style>
+    .category-section {
+      scroll-margin-top: 5rem; 
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="#mobility" class="hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+        <a href="#biofuels" class="hover:text-blue-300 transition-colors">Biofuels</a>
+        <a href="#tax-emissions" class="hover:text-blue-300 transition-colors">Tax & Carbon</a>
+      </nav>
+
+      <!-- Mobile & Tablet Hamburger Toggle Button -->
+      <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+
+    <!-- Mobile & Tablet Dropdown Navigation Menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="#gas-engineering" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300 transition-colors">Gas Engineering</a>
+      <a href="#industrial" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300 transition-colors">Industrial Fuel</a>
+      <a href="#petroleum" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+      <a href="#mobility" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+      <a href="#biofuels" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300 transition-colors">Biofuels</a>
+      <a href="#tax-emissions" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300 transition-colors">Tax & Carbon</a>
+    </div>
+  </header>
+
+  <!-- Hero Section & Live Search Engine -->
+  <section class="max-w-4xl mx-auto text-center px-4 pt-12 pb-10">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-bold uppercase tracking-wider mb-6">
+      <span class="w-2.5 h-2.5 rounded-full bg-blue-400 animate-pulse"></span> 50 Client-Side Engineering Tools
+    </div>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-white mb-4 leading-tight">
+      Hydrocarbon & Fuel Math, <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-400 to-indigo-300">Simplified.</span>
+    </h1>
+    <p class="text-slate-300 text-base sm:text-lg mb-8 max-w-2xl mx-auto font-normal">
+      Instant, browser-based calculators built to ISO, ASTM, and AGA engineering standards for traders, pipeline operators, and logistics managers.
+    </p>
+
+    <!-- Real-Time Search Box -->
+    <div class="relative max-w-2xl mx-auto">
+      <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-300">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      </div>
+      <input type="text" id="toolSearch" onkeyup="filterTools()" 
+        placeholder="Type to filter... (e.g., 'SCM to kg', 'Linepack', 'LNG', 'CNG', 'ASTM')" 
+        class="w-full bg-slate-800 text-white placeholder-slate-400 rounded-xl pl-11 pr-4 py-3.5 border border-slate-600 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/50 text-base shadow-lg transition-all font-medium">
+    </div>
+  </section>
+
+  <!-- Master Directory Grid -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 pb-20 w-full">
+
+    <!-- Group 1: Natural Gas, LNG & Pipeline Engineering -->
+    <section id="gas-engineering" class="category-section mb-12">
+      <h2 class="text-xl font-bold text-blue-300 mb-4 pb-2 border-b border-slate-700 flex items-center gap-2">
+        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        1. Natural Gas, LNG & Pipeline Engineering
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <a href="/gas-engineering/scm-to-kg.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">SCM to kg Converter</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Converts Standard Cubic Metres to mass weight using density presets.</p>
+        </a>
+
+        <a href="/gas-engineering/mmbtu-to-scm.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">MMBtu to SCM Gas Billing</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Converts energy billing units to standard volumetric consumption.</p>
+        </a>
+
+        <a href="/gas-engineering/mt-lng-to-scm.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">MT of LNG to SCM / MMSCMD</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Converts metric tons of LNG into gas-phase volumes and flow rates.</p>
+        </a>
+
+        <a href="/gas-engineering/weymouth-panhandle.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Weymouth & Panhandle Flow</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Solves gas flow rate and pressure drops for high-pressure pipelines.</p>
+        </a>
+
+        <a href="/gas-engineering/pipeline-linepack.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Pipeline Linepack Storage</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Estimates gas volume stored under pressure in active pipeline segments.</p>
+        </a>
+
+        <a href="/gas-engineering/wobbe-index.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Wobbe Index (WI) Calculator</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Calculates heating value over specific gravity for burner compatibility.</p>
+        </a>
+
+        <a href="/gas-engineering/compressibility-z-factor.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Compressibility Z-Factor</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Applies Hall-Yarborough / DAK models for high-pressure real gas math.</p>
+        </a>
+
+        <a href="/gas-engineering/lng-bog-loss.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">LNG Boil-Off Gas (BOG) Estimator</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Calculates cryogenic tank boil-off evaporation rates during storage.</p>
+        </a>
+
+        <a href="/gas-engineering/cng-dispenser-cascading.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">CNG Dispenser Cascading Pressure</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Computes mass transfer efficiency across low, mid, and high storage banks.</p>
+        </a>
+
+        <a href="/gas-engineering/cng-lpg-pvt-cylinder.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">CNG/LPG Cylinder Fill (PVT)</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Calculates exact gas mass inside cylinders from pressure & temperature.</p>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Group 2: Industrial Fuel Switching & Commercial Energy -->
+    <section id="industrial" class="category-section mb-12">
+      <h2 class="text-xl font-bold text-blue-300 mb-4 pb-2 border-b border-slate-700 flex items-center gap-2">
+        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+        2. Industrial Fuel Switching & Commercial Energy
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <a href="/industrial-energy/png-vs-lpg.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">PNG vs. LPG Industrial Cost</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Compares piped natural gas and commercial LPG burners for plant power.</p>
+        </a>
+
+        <a href="/industrial-energy/lng-to-png-savings.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">LNG to PNG Virtual Pipeline</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Models regasification & trucking costs of off-grid LNG vs. piped gas.</p>
+        </a>
+
+        <a href="/industrial-energy/solid-fuel-to-gas.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Coal / Petcoke to Gas Converter</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Calculates gas replacement volumes and cost deltas for boilers.</p>
+        </a>
+
+        <a href="/industrial-energy/boiler-conversion.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Industrial Boiler Fuel Efficiency</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Determines fuel consumption and thermal efficiency across burner conversions.</p>
+        </a>
+
+        <a href="/industrial-energy/price-per-energy.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Price-per-Energy Unit Converter</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Converts fuel cost across $/MMBtu, $/kWh, $/GJ, and $/Gcal.</p>
+        </a>
+
+        <a href="/industrial-energy/gcv-ncv-converter.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Gross vs. Net Calorific Value (GCV/NCV)</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Adjusts fuel energy potential based on latent heat of water vaporization.</p>
+        </a>
+
+        <a href="/industrial-energy/dg-set-power-cost.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">DG Set Diesel Electricity Cost</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Calculates total generation cost per kWh on back-up diesel generators.</p>
+        </a>
+
+        <a href="/industrial-energy/solar-to-dg-displacement.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Solar-to-Diesel DG Displacement</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Models fuel savings and ROI timelines when adding PV to diesel setups.</p>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Group 3: Petroleum Liquids, Density & ASTM Standards -->
+    <section id="petroleum" class="category-section mb-12">
+      <h2 class="text-xl font-bold text-blue-300 mb-4 pb-2 border-b border-slate-700 flex items-center gap-2">
+        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+        3. Petroleum Liquids, Density & ASTM Standards
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <a href="/petroleum-standards/astm-d1250-density.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">ASTM D1250 API Density Corrector</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Corrects liquid petroleum density to standard 15°C / 60°F reference.</p>
+        </a>
+
+        <a href="/petroleum-standards/volume-to-mass-density.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Volume-to-Mass Converter</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Converts volume to weight using Petrol, Diesel, HFO, Jet A1 presets.</p>
+        </a>
+
+        <a href="/petroleum-standards/viscosity-converter.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Viscosity Unit Converter</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Converts cSt ↔ cP ↔ SSU units using temperature and density inputs.</p>
+        </a>
+
+        <a href="/petroleum-standards/tank-evaporation-dip.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Bulk Storage Dip-Rod & Loss Matrix</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Converts tank dip height to volume and estimates evaporation loss.</p>
+        </a>
+
+        <a href="/petroleum-standards/marine-fuel-iso-8217.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Marine Fuel ISO 8217 & CCAI Tool</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Evaluates Calculated Carbon Aromaticity Index for heavy fuel oils.</p>
+        </a>
+
+        <a href="/petroleum-standards/fuel-viscosity-blending.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Fuel Viscosity-Temperature Blending</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Calculates pre-heating temperatures required for heavy fuel injection.</p>
+        </a>
+
+        <a href="/petroleum-standards/barrel-to-ton-crude.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Barrel-to-Ton Crude Oil Converter</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Converts volumetric barrels (bbl) to metric tons via API gravity.</p>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Group 4: Mobility, Fleet & Logistics Math -->
+    <section id="mobility" class="category-section mb-12">
+      <h2 class="text-xl font-bold text-blue-300 mb-4 pb-2 border-b border-slate-700 flex items-center gap-2">
+        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0zM13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+        4. Mobility, Fleet & Logistics Math
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <a href="/mobility-logistics/cng-vs-petrol-mileage.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">CNG vs. Petrol / Diesel Savings</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Calculates monthly running cost savings and kit payback periods.</p>
+        </a>
+
+        <a href="/mobility-logistics/trip-fuel-toll-matrix.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Trip Fuel Expense & Toll Matrix</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Computes total journey budget based on distance, mileage, and load.</p>
+        </a>
+
+        <a href="/mobility-logistics/fuel-cost-per-km.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Fuel Cost per Kilometer / Mile</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Converts fuel price and vehicle efficiency into direct cost per km.</p>
+        </a>
+
+        <a href="/mobility-logistics/petrol-diesel-ev-tco.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Petrol vs. Diesel vs. EV TCO</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Compares buying price, energy cost, and maintenance over 5 years.</p>
+        </a>
+
+        <a href="/mobility-logistics/fleet-route-optimizer.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Inter-State Refueling Route Optimizer</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Recommends fuel stops across state borders based on regional tax rates.</p>
+        </a>
+
+        <a href="/mobility-logistics/idling-fuel-burn.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Engine Idling Fuel Loss Calculator</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Estimates wasted fuel and money lost during commercial engine idling.</p>
+        </a>
+
+        <a href="/mobility-logistics/driver-fuel-performance.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Driver Fuel Economy Performance Grader</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Scores fleet drivers on target fuel efficiency vs. actual consumption.</p>
+        </a>
+
+        <a href="/mobility-logistics/adblue-def-dosing.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">AdBlue / DEF Dosing Rate Tool</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Predicts diesel exhaust fluid consumption relative to diesel burn.</p>
+        </a>
+
+        <a href="/mobility-logistics/tankful-mileage-checker.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Tankful Mileage Discrepancy Tool</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Calculates true mileage from odometer logs vs. dashboard displays.</p>
+        </a>
+
+        <a href="/mobility-logistics/tyre-pressure-fuel-loss.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Tire Pressure Fuel Efficiency Loss</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Calculates extra fuel burned due to under-inflated tire drag.</p>
+        </a>
+
+        <a href="/mobility-logistics/ac-fuel-consumption.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">AC vs. Non-AC Fuel Consumption</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Estimates fuel consumption penalties when running cabin air conditioning.</p>
+        </a>
+
+        <a href="/mobility-logistics/wrong-fuel-flushing.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Wrong Fuel Flushing Cost Estimator</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Calculates repair and tank drainage costs for accidental misfueling.</p>
+        </a>
+
+        <a href="/mobility-logistics/fuel-surcharge-escalation.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Fuel Surcharge Escalation Formula</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Calculates freight contract rate adjustments based on fuel price shifts.</p>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Group 5: Biofuels, Blending & Tuning -->
+    <section id="biofuels" class="category-section mb-12">
+      <h2 class="text-xl font-bold text-blue-300 mb-4 pb-2 border-b border-slate-700 flex items-center gap-2">
+        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+        5. Biofuels, Blending & Tuning
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <a href="/biofuels-blending/ethanol-blending-e10-e20.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Ethanol Blend (E10, E20, E85) Tool</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Calculates octane boosts and fuel economy reduction from ethanol.</p>
+        </a>
+
+        <a href="/biofuels-blending/biodiesel-blending-b5-b20.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Biodiesel Blend (B5, B20) Calculator</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Estimates final blend cetane rating, density, and cold flow behavior.</p>
+        </a>
+
+        <a href="/biofuels-blending/gge-dge-converter.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">GGE & DGE Equivalent Converter</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Converts alternative gas volumes to equivalent petrol/diesel gallons.</p>
+        </a>
+
+        <a href="/biofuels-blending/octane-ron-mon-aki.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Octane Rating (RON ↔ MON ↔ AKI)</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Converts international octane scales (RON, MON) to US Pump AKI.</p>
+        </a>
+
+        <a href="/biofuels-blending/fuel-injector-flow.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Fuel Injector Flow Rate & Sizing</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Determines required fuel injector size based on horsepower targets.</p>
+        </a>
+
+        <a href="/biofuels-blending/bsfc-engine-efficiency.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">BSFC Engine Thermal Efficiency</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Computes engine efficiency in grams of fuel per kilowatt-hour.</p>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Group 6: Tax, Pricing & Carbon Accounting -->
+    <section id="tax-emissions" class="category-section mb-12">
+      <h2 class="text-xl font-bold text-blue-300 mb-4 pb-2 border-b border-slate-700 flex items-center gap-2">
+        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM10 8.5a.5.5 0 11-1 0 .5.5 0 011 0zm5 5a.5.5 0 11-1 0 .5.5 0 011 0z"></path></svg>
+        6. Tax, Pricing & Carbon Accounting
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <a href="/tax-emissions/tax-vat-excise-breakdown.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Fuel Tax & Excise Duty Breakdown</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Unpacks fuel price components: base price, margin, VAT, and taxes.</p>
+        </a>
+
+        <a href="/tax-emissions/gcv-price-settlement.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">GCV Price & Quality Settlement</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Calculates billing adjustments for gas delivered below contract GCV.</p>
+        </a>
+
+        <a href="/tax-emissions/fuel-co2-emissions.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Fuel Combustion CO₂ Output</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Calculates direct carbon emission mass per unit of fuel burned.</p>
+        </a>
+
+        <a href="/tax-emissions/methane-leakage-venting.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Methane Leakage & Flaring Impact</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Converts unburned gas leaks into CO₂ equivalent (CO₂e) footprint.</p>
+        </a>
+
+        <a href="/tax-emissions/carbon-tax-exposure.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Carbon Tax Financial Exposure</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Projects annual tax liabilities across fossil vs. renewable fuel ratios.</p>
+        </a>
+
+        <a href="/tax-emissions/fuel-price-budget-shock.html" class="tool-card group bg-slate-800 hover:bg-slate-700/80 p-4.5 rounded-xl border border-slate-700 hover:border-blue-400 transition-all shadow-sm">
+          <h3 class="text-base font-bold text-white group-hover:text-blue-300 transition-colors">Fuel Price Hike Budget Impact</h3>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Calculates monthly household/fleet expense shocks from price hikes.</p>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- No Results Placeholder for Search -->
+    <div id="noResults" class="hidden text-center py-12">
+      <p class="text-slate-300 text-lg font-medium">No calculators matching your search term.</p>
+      <button onclick="resetSearch()" class="mt-4 px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-semibold transition-colors shadow-md">Clear Search Filter</button>
+    </div>
+
+  </main>
+
+  <!-- Engineering Standards & E-E-A-T Trust Banner -->
+  <section class="border-t border-slate-700 bg-slate-800/60 py-12 px-4">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-slate-300 text-sm">
+      <div class="flex items-start gap-3.5">
+        <div class="px-2.5 py-1 rounded bg-blue-500/20 text-blue-300 font-mono text-xs font-bold border border-blue-400/30">ISO</div>
+        <div>
+          <h4 class="font-bold text-white text-base mb-1">Standard Reference Conditions</h4>
+          <p class="text-slate-300 leading-relaxed">Calculations adhere strictly to international standards including <strong class="text-white">ISO 13443</strong>, <strong class="text-white">ASTM D1250</strong>, and <strong class="text-white">AGA Report No. 8</strong> equations.</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3.5">
+        <div class="px-2.5 py-1 rounded bg-blue-500/20 text-blue-300 font-mono text-xs font-bold border border-blue-400/30">JS</div>
+        <div>
+          <h4 class="font-bold text-white text-base mb-1">100% Client-Side Engine</h4>
+          <p class="text-slate-300 leading-relaxed">Calculations execute locally in your browser JavaScript. Zero server latency, zero data tracking, and maximum privacy.</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3.5">
+        <div class="px-2.5 py-1 rounded bg-blue-500/20 text-blue-300 font-mono text-xs font-bold border border-blue-400/30">B2B</div>
+        <div>
+          <h4 class="font-bold text-white text-base mb-1">Open Engineering Methodologies</h4>
+          <p class="text-slate-300 leading-relaxed">Every tool details its exact underlying mathematical formulas, reference constants, and worked step-by-step examples.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology & Standards</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy Policy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms of Use</a>
+        <a href="/sitemap.xml" class="hover:text-blue-300 transition-colors">Sitemap</a>
+      </div>
+    </div>
+    <p class="mt-4 text-slate-400 max-w-3xl mx-auto leading-relaxed">Disclaimer: FuelMath.net calculators are engineered for estimation, planning, and academic reference. Critical industrial operations should be cross-verified by licensed professional engineers.</p>
+  </footer>
+
+  <!-- Instant Search & Mobile Navigation Scripts -->
+  <script>
+    // Mobile Navigation Toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const openIcon = document.getElementById('hamburgerIcon');
+      const closeIcon = document.getElementById('closeIcon');
+      
+      const isHidden = menu.classList.contains('hidden');
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        openIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+      } else {
+        menu.classList.add('hidden');
+        openIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      }
+    }
+
+    // Real-Time Search Engine (Robust Version)
+    function filterTools() {
+      const input = document.getElementById('toolSearch').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.tool-card');
+      const sections = document.querySelectorAll('.category-section');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        // Show card if it matches search OR if search is empty
+        if (text.includes(input) || input === "") {
+          card.style.display = "";
+          visibleCount++;
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      sections.forEach(section => {
+        // Check if section has at least one visible card
+        const hasVisibleCard = Array.from(section.querySelectorAll('.tool-card'))
+                                    .some(card => card.style.display !== 'none');
+        
+        if (!hasVisibleCard && input !== "") {
+          section.style.display = "none";
+        } else {
+          section.style.display = "";
+        }
+      });
+
+      // Show/Hide "No Results" message
+      const noResults = document.getElementById('noResults');
+      noResults.classList.toggle('hidden', visibleCount > 0);
+    }
+
+    function resetSearch() {
+      document.getElementById('toolSearch').value = "";
+      filterTools();
+    }
+  </script>
+
+</body>
+</html>
