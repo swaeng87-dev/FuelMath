@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Methodology & Standards — FuelMath.net</title>
+  <meta name="description" content="Engineering methodology, reference standards, and formula documentation for all 50 FuelMath calculators.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/" class="hover:text-blue-300 transition-colors">All Calculators</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-black text-white mb-6">Engineering Methodology & Standards</h1>
+    <article data-blog class="space-y-4">
+      <p>Every FuelMath calculator executes <strong>100% client-side</strong> and documents its governing equations, reference constants, and assumptions. This page indexes the methodology behind each tool.</p>
+
+      <h2>Reference Conditions</h2>
+      <p>Unless stated otherwise, all gas volume calculations use standard reference conditions of <strong>15°C (288.15 K)</strong> and <strong>101.325 kPa</strong> per ISO 13443.</p>
+
+      <h2>Primary Standards Used</h2>
+      <ul>
+        <li><strong>ISO 13443 / ISO 6976</strong> — Natural gas reference conditions & calorific value calculation</li>
+        <li><strong>AGA Report No. 8 / ISO 12213</strong> — Real gas compressibility (Dranchuk–Abu–Kassem)</li>
+        <li><strong>AGA Weymouth & Panhandle A/B</strong> — Gas transmission pipeline flow</li>
+        <li><strong>ASTM D1250 / API MPMS 11.1</strong> — Petroleum volume & density correction</li>
+        <li><strong>ASTM D240 / D445 / D341 / D5865</strong> — Calorific value, viscosity, blending, solid fuels</li>
+        <li><strong>IPCC AR6</strong> — Global Warming Potentials (CH₄: GWP₁₀₀ = 29.8, GWP₂₀ = 82.5)</li>
+        <li><strong>ISO 8528 / ISO 22241 / ISO 8217</strong> — DG sets, DEF/AdBlue, marine fuels</li>
+        <li><strong>SAE J1349 / NIST HB 44</strong> — Engine power testing, fuel energy equivalence</li>
+      </ul>
+
+      <h2>Estimation Disclaimer</h2>
+      <p>Simplified correlations are clearly labeled on each tool page. Critical industrial, custody-transfer, or safety operations must be verified by a licensed professional engineer.</p>
+    </article>
+  </main>
+
+  <footer class="border-t border-slate-700 py-6 px-4 text-center text-slate-400 text-xs">
+    © FuelMath.net — All rights reserved.
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+</body>
+</html>
