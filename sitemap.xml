@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
+  <url>
+    <loc>https://fuelmath.net/</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- CAT-01: Natural Gas, LNG & Pipeline Engineering -->
+  <url><loc>https://fuelmath.net/gas-engineering/scm-to-kg.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/gas-engineering/mmbtu-to-scm.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/gas-engineering/mt-lng-to-scm.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/gas-engineering/weymouth-panhandle.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/gas-engineering/pipeline-linepack.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/gas-engineering/wobbe-index.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/gas-engineering/compressibility-z-factor.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/gas-engineering/lng-bog-loss.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/gas-engineering/cng-dispenser-cascading.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/gas-engineering/cng-lpg-pvt-cylinder.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- CAT-02: Industrial Fuel Switching & Commercial Energy -->
+  <url><loc>https://fuelmath.net/industrial-energy/png-vs-lpg.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/industrial-energy/lng-to-png-savings.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/industrial-energy/solid-fuel-to-gas.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/industrial-energy/boiler-conversion.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/industrial-energy/price-per-energy.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/industrial-energy/gcv-ncv-converter.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/industrial-energy/dg-set-power-cost.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/industrial-energy/solar-to-dg-displacement.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- CAT-03: Petroleum Liquids, Density & ASTM Standards -->
+  <url><loc>https://fuelmath.net/petroleum-standards/astm-d1250-density.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/petroleum-standards/volume-to-mass-density.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/petroleum-standards/viscosity-converter.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/petroleum-standards/tank-evaporation-dip.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/petroleum-standards/marine-fuel-iso-8217.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/petroleum-standards/fuel-viscosity-blending.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/petroleum-standards/barrel-to-ton-crude.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- CAT-04: Mobility, Fleet & Logistics Math -->
+  <url><loc>https://fuelmath.net/mobility-logistics/cng-vs-petrol-mileage.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/mobility-logistics/trip-fuel-toll-matrix.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/mobility-logistics/fuel-cost-per-km.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/mobility-logistics/petrol-diesel-ev-tco.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/mobility-logistics/fleet-route-optimizer.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/mobility-logistics/idling-fuel-burn.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/mobility-logistics/driver-fuel-performance.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/mobility-logistics/adblue-def-dosing.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/mobility-logistics/tankful-mileage-checker.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/mobility-logistics/tyre-pressure-fuel-loss.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/mobility-logistics/ac-fuel-consumption.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/mobility-logistics/wrong-fuel-flushing.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/mobility-logistics/fuel-surcharge-escalation.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- CAT-05: Biofuels, Blending & Engine Tuning -->
+  <url><loc>https://fuelmath.net/biofuels-blending/ethanol-blending-e10-e20.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/biofuels-blending/biodiesel-blending-b5-b20.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/biofuels-blending/gge-dge-converter.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/biofuels-blending/octane-ron-mon-aki.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/biofuels-blending/fuel-injector-flow.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/biofuels-blending/bsfc-engine-efficiency.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- CAT-06: Tax, Pricing & Carbon Accounting -->
+  <url><loc>https://fuelmath.net/tax-emissions/tax-vat-excise-breakdown.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/tax-emissions/gcv-price-settlement.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/tax-emissions/fuel-co2-emissions.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/tax-emissions/methane-leakage-venting.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/tax-emissions/carbon-tax-exposure.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fuelmath.net/tax-emissions/fuel-price-budget-shock.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+</urlset>
