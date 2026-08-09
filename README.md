@@ -13,42 +13,34 @@
 - 📐 **Standards-Compliant** — formulas built on ISO, ASTM, AGA, API, SAE & IPCC references
 - 🔒 **Privacy-First** — no cookies, no analytics, no data leaves the user's browser
 - 📱 **Fully Responsive** — Tailwind CSS, mobile-first design
-- 🚀 **Static Architecture** — GitHub Repository → Cloudflare Pages (no build step required)
+- 🚀 **Static Architecture** — lightweight, globally distributed static web engine
 
 ---
 
-## 🏗️ Architecture
-
-```
-GitHub Repository  ──(push)──▶  Cloudflare Pages  ──(deploy)──▶  fuelmath.net
-        │
-        ├── Pure HTML5
-        ├── Tailwind CSS (CDN)
-        └── Vanilla JavaScript (client-side math engines)
-```
+## 🏗️ Technology Stack
 
 | Property | Value |
 |---|---|
 | **Domain** | fuelmath.net |
 | **Type** | Static Web Engine |
-| **Hosting** | Cloudflare Pages |
-| **Source Control** | GitHub |
 | **Execution** | Client-Side JavaScript |
-| **Build Step** | None |
+| **Styling** | Tailwind CSS (CDN) |
+| **Markup** | Semantic HTML5 |
+| **Build Step** | None (Pure Static) |
 | **Total Tools** | 50 |
 
 ---
 
 ## 📁 Repository Structure
 
-```
+```text
 fuelmath/
 ├── index.html                  # Master directory + live search engine
-├── README.md                   # This file
+├── README.md                   # Project documentation
 ├── methodology.html            # Engineering methodology & standards
 ├── privacy.html                # Privacy policy
 ├── terms.html                  # Terms of use
-├── sitemap.xml                 # SEO sitemap (51 URLs)
+├── sitemap.xml                 # SEO sitemap
 │
 ├── gas-engineering/            # CAT-01 · 10 tools
 ├── industrial-energy/          # CAT-02 · 8 tools
@@ -60,7 +52,7 @@ fuelmath/
 
 ---
 
-## 🧮 Master Catalog
+## 🧮 Master Catalog Summary
 
 | Category ID | Category Name | Tools | Subdirectory |
 |---|---|---|---|
@@ -102,7 +94,7 @@ fuelmath/
 | 5 | Price-per-Energy Unit Converter | `price-per-energy.html` | IEA Conversion Factors |
 | 6 | Gross vs. Net Calorific Value (GCV/NCV) | `gcv-ncv-converter.html` | ASTM D240 / ISO 1928 |
 | 7 | Diesel Back-up (DG Set) Power Cost Tool | `dg-set-power-cost.html` | ISO 8528 |
-| 8 | Solar-to-Diesel Generator Displacement | `solar-to-dg-displacement.html` | Hybrid Microgrid Methodology |
+| 8 | Solar-to-Diesel Generator Displacement | `solar-to-dg-displacement.html` | Hybrid Microgrid Methodologies |
 
 ### CAT-03 · Petroleum Liquids, Density & ASTM Standards (`/petroleum-standards/`)
 
@@ -160,7 +152,7 @@ fuelmath/
 
 ## 💻 Local Development
 
-No build tools, no package managers, no environment variables.
+Because FuelMath is a pure static engine, there are no build tools, package managers, or environment variables required.
 
 ```bash
 # 1. Clone the repository
@@ -176,32 +168,7 @@ npx serve .
 # http://localhost:8000
 ```
 
-You can also simply double-click `index.html` — everything runs client-side.
-
----
-
-## ☁️ Deployment — Cloudflare Pages
-
-1. Push this repository to **GitHub**.
-2. In the Cloudflare dashboard: **Workers & Pages → Create → Pages → Connect to Git**.
-3. Select the `fuelmath` repository.
-4. Configure build settings:
-   - **Build command:** *(leave empty)*
-   - **Build output directory:** `/` *(root)*
-5. Click **Save and Deploy**.
-6. Attach the custom domain `fuelmath.net` under **Custom Domains**.
-
-Every `git push` to `main` triggers an automatic production deploy.
-
----
-
-## ➕ Adding a New Tool
-
-1. Create the tool page in the correct category subdirectory using kebab-case naming (e.g., `gas-engineering/new-tool.html`).
-2. Add a `<a class="tool-card">` entry to the matching section in `index.html`.
-3. Add the URL to `sitemap.xml`.
-4. Document the formula, reference constants, and a worked example inside the tool page (E-E-A-T requirement).
-5. Update the tool count in this README if the catalog total changes.
+You can also simply double-click `index.html` — everything runs locally in your browser.
 
 ---
 
@@ -227,5 +194,5 @@ FuelMath.net calculators are engineered for **estimation, planning, and academic
 ---
 
 <div align="center">
-  <sub>Built as a static, privacy-first engineering resource. GitHub → Cloudflare Pages.</sub>
+  <sub>Built as a static, privacy-first engineering resource.</sub>
 </div>
