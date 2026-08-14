@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CNG/LPG Cylinder Fill Estimator (PVT Gas Law) — FuelMath.net</title>
+  <meta name="description" content="Calculate exact gas mass inside CNG and LPG cylinders from pressure gauge reading, temperature, and water capacity using the real gas law.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#gas-engineering" class="hover:text-blue-400">Gas Engineering</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">CNG/LPG Cylinder Fill Estimator</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">CNG/LPG Cylinder Fill Estimator (PVT Gas Law)</h1>
+    <p class="text-slate-400 mb-8 text-base">Calculate the exact gas mass (kg) inside on-board CNG or LPG cylinders from pressure gauge reading, temperature, and water capacity.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="cng-lpg-pvt-cylinder" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Cylinder Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Pressure & Temperature -->
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 mb-1">Gauge Pressure</label>
+              <div class="relative">
+                <input type="number" data-field="pressure" placeholder="e.g. 200" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 pl-3 pr-14 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">bar</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 mb-1">Temperature</label>
+              <div class="relative">
+                <input type="number" data-field="temp" value="20" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 pl-3 pr-12 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">°C</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Water Capacity -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Water Capacity <span class="text-slate-500 font-normal">(cylinder volume)</span></label>
+            <div class="relative">
+              <input type="number" data-field="capacity" placeholder="e.g. 60" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-12 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">L</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">Stamped on the cylinder shoulder. Typical CNG vehicle cylinder = 50–100 L.</p>
+          </div>
+
+          <!-- Gas Properties -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Gas Properties</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Molar Mass (g/mol)</label>
+                <input type="number" data-field="molar" value="16.04" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Z-Factor</label>
+                <input type="number" data-field="zfactor" value="0.9" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+            </div>
+          </div>
+
+          <!-- Common Molar Mass Reference -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Common Molar Masses</p>
+            <div class="space-y-1.5 text-xs font-mono">
+              <div class="flex justify-between text-slate-300"><span>CNG (Methane, CH₄)</span><span class="text-blue-300">16.04 g/mol</span></div>
+              <div class="flex justify-between text-slate-300"><span>LPG (Propane, C₃H₈)</span><span class="text-blue-300">44.10 g/mol</span></div>
+              <div class="flex justify-between text-slate-300"><span>LPG (Butane, C₄H₁₀)</span><span class="text-blue-300">58.12 g/mol</span></div>
+              <div class="flex justify-between text-slate-300"><span>LPG (Commercial 60/40 mix)</span><span class="text-blue-300">≈ 49.7 g/mol</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Cylinder Contents
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Gas Mass in Cylinder</p>
+            <p class="text-4xl font-black text-white font-mono" data-result="mass">—</p>
+          </div>
+
+          <!-- Practical Reference -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Verification Benchmarks</p>
+            <div class="space-y-1.5 text-xs text-slate-300">
+              <p>• 60 L CNG cylinder @ 200 bar ≈ 10–11 kg methane</p>
+              <p>• 14.2 kg domestic LPG cylinder ≈ 31 L water capacity</p>
+              <p>• Commercial LPG (19 kg) ≈ 40 L water capacity</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>The <strong class="text-slate-200">Real Gas Law</strong> extends the ideal gas equation with a compressibility correction factor Z, accounting for intermolecular forces at high cylinder pressures. For CNG at 200 bar, Z ≈ 0.85–0.95; ignoring this correction overestimates mass by 10–15%.</p>
+
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          m = (P × V × M) / (Z × R × T)
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">m</strong> = Gas mass (kg)</li>
+          <li><strong class="text-slate-200">P</strong> = Absolute pressure (Pa) — gauge reading × 100,000</li>
+          <li><strong class="text-slate-200">V</strong> = Water capacity (m³) — liters ÷ 1,000</li>
+          <li><strong class="text-slate-200">M</strong> = Molar mass (kg/mol) — g/mol ÷ 1,000</li>
+          <li><strong class="text-slate-200">Z</strong> = Compressibility factor (CNG ≈ 0.9 at 200 bar, LPG vapor ≈ 0.95)</li>
+          <li><strong class="text-slate-200">R</strong> = Universal gas constant = 8.314 J/(mol·K)</li>
+          <li><strong class="text-slate-200">T</strong> = Absolute temperature (K) = °C + 273.15</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <p class="text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">Model Limitation</p>
+          <p class="text-slate-300 text-xs">LPG cylinders contain liquid in equilibrium with vapor — this PVT model applies only to the vapor space or fully vaporized contents. For liquid LPG mass, use the liquid density directly (propane ≈ 0.493 kg/L at 25°C, butane ≈ 0.573 kg/L). This calculator is accurate for CNG and gaseous-phase LPG calculations.</p>
+        </div>
+
+        <div class="mt-2 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference Standard: Real Gas Law (PVT)</p>
+          <p class="text-slate-300 text-xs">The real gas law is the foundational thermodynamic equation for compressed gas inventory management, cylinder custody verification, and vehicle fuel state-of-charge estimation. For precise Z values at specific pressures, use the Z-Factor Calculator.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Gas Engineering Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/gas-engineering/cng-dispenser-cascading.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">CNG Dispenser Cascading Pressure</h3>
+          <p class="text-xs text-slate-400 mt-1">Model station-side bank fills that supply this cylinder.</p>
+        </a>
+        <a href="/gas-engineering/compressibility-z-factor.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Compressibility Z-Factor</h3>
+          <p class="text-xs text-slate-400 mt-1">Derive an exact Z at your cylinder's pressure and temperature.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
