@@ -1,6 +1,6 @@
-# ⛽ FuelMath.net — Hydrocarbon, Natural Gas & Fuel Calculators Engine
+# ⛽ FuelMath.net — Hydrocarbon, Natural Gas & Fuel Calculators & Converters. 
 
-**50 specialized, precision calculators** for gas engineers, fuel traders, pipeline operators, and fleet logistics managers. Every computation executes **100% client-side** in the browser — zero server latency, zero data tracking, zero sign-ups.
+**50+ specialized, precision calculators** for gas engineers, fuel traders, pipeline operators, and fleet logistics managers. Every computation executes **100% client-side** in the browser — zero server latency, zero data tracking, zero sign-ups.
 
 🌐 **Live Site:** [https://fuelmath.net](https://fuelmath.net)
 
@@ -156,7 +156,7 @@ Because FuelMath is a pure static engine, there are no build tools, package mana
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/YOUR-USERNAME/fuelmath.git
+git clone https://github.com/swaeng87-dev/fuelmath.git
 cd fuelmath
 
 # 2. Serve locally (any static server works)
