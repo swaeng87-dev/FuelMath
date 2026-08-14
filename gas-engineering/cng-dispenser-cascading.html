@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CNG Dispenser Cascading Pressure Calculator | NGV2 / NFPA 52 — FuelMath.net</title>
+  <meta name="description" content="Model mass transfer efficiency across Low, Medium, and High bank CNG storage cascades during vehicle fills. NGV2 / NFPA 52 compliant estimator.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#gas-engineering" class="hover:text-blue-400">Gas Engineering</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">CNG Dispenser Cascading Pressure</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">CNG Dispenser Cascading Pressure Calculator</h1>
+    <p class="text-slate-400 mb-8 text-base">Model mass transfer efficiency and pressure drops across Low, Medium, and High bank stationary CNG cascades during vehicle fills.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="cng-dispenser-cascading" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Cascade & Vehicle Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Group: Storage Banks -->
+          <div>
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Station Storage Banks (fill order: Low → Med → High)</p>
+
+            <!-- Low Bank -->
+            <div class="mb-2">
+              <label class="block text-xs font-semibold text-slate-400 mb-1">Low Bank</label>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="relative">
+                  <input type="number" data-field="lowP" placeholder="e.g. 120" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-14 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">bar</span>
+                </div>
+                <div class="relative">
+                  <input type="number" data-field="lowV" placeholder="e.g. 800" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-12 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">L</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Medium Bank -->
+            <div class="mb-2">
+              <label class="block text-xs font-semibold text-slate-400 mb-1">Medium Bank</label>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="relative">
+                  <input type="number" data-field="medP" placeholder="e.g. 180" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-14 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">bar</span>
+                </div>
+                <div class="relative">
+                  <input type="number" data-field="medV" placeholder="e.g. 600" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-12 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">L</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- High Bank -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 mb-1">High Bank</label>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="relative">
+                  <input type="number" data-field="highP" placeholder="e.g. 250" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-14 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">bar</span>
+                </div>
+                <div class="relative">
+                  <input type="number" data-field="highV" placeholder="e.g. 400" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-12 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">L</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Group: Vehicle Tank -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Vehicle Tank</p>
+            <div class="grid grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Volume (L)</label>
+                <input type="number" data-field="vehVolume" placeholder="e.g. 80" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Start P (bar)</label>
+                <input type="number" data-field="vehStartP" placeholder="e.g. 20" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Target P (bar)</label>
+                <input type="number" data-field="vehTargetP" placeholder="e.g. 200" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+            </div>
+          </div>
+
+          <!-- Group: Gas Properties -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Gas Properties</p>
+            <div class="grid grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Temp (°C)</label>
+                <input type="number" data-field="temp" value="20" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Molar (g/mol)</label>
+                <input type="number" data-field="molar" value="16.04" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Z-Factor</label>
+                <input type="number" data-field="zfactor" value="0.9" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Fill Results
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Mass Delivered to Vehicle</p>
+            <p class="text-4xl font-black text-white font-mono" data-result="massKg">—</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Final Vehicle Pressure</p>
+              <p class="text-xl font-bold text-blue-300 font-mono" data-result="finalP">—</p>
+            </div>
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Transfer Efficiency</p>
+              <p class="text-xl font-bold text-blue-300 font-mono" data-result="efficiency">—</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>CNG dispensers draw from a <strong class="text-slate-200">three-tier storage cascade</strong> (Low → Medium → High pressure banks). The dispenser connects the vehicle to the lowest bank whose pressure exceeds the vehicle's current pressure, equalizes, then steps up to the next bank. This staged approach maximizes mass transfer without requiring compressor intervention during every fill.</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Isothermal Equalization (per bank)</p>
+            <p class="font-mono text-blue-300 text-lg">P<sub>eq</sub> = (P<sub>bank</sub> × V<sub>bank</sub> + P<sub>veh</sub> × V<sub>veh</sub>) / (V<sub>bank</sub> + V<sub>veh</sub>)</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Mass Delivered (Real Gas Law)</p>
+            <p class="font-mono text-blue-300 text-lg">m = (ΔP·V)<sub>veh</sub> × M / (Z × R × T)</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Mass Transfer Efficiency</p>
+            <p class="font-mono text-blue-300 text-lg">η = m<sub>vehicle</sub> / m<sub>withdrawn</sub> × 100%</p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Fill sequence</strong>: Low bank fills the vehicle from P<sub>start</sub> until pressures equalize, then Medium bank, then High bank — the High bank alone must reach the target fill pressure</li>
+          <li><strong class="text-slate-200">M</strong> = Molar mass (methane = 16.04 g/mol), <strong class="text-slate-200">Z</strong> = Compressibility (≈0.9 at 200 bar), <strong class="text-slate-200">R</strong> = 8.314 J/(mol·K)</li>
+          <li>Typical cascade configurations: Low ≈ 100–150 bar, Medium ≈ 150–200 bar, High ≈ 200–250 bar</li>
+          <li>Typical mass transfer efficiency for a well-sized cascade: <strong class="text-slate-200">70–90%</strong></li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <p class="text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">Model Limitation</p>
+          <p class="text-slate-300 text-xs">This estimator uses an isothermal ideal-gas equalization model. Real fills exhibit temperature rise (Joule-Thomson and compression heating), which reduces mass density and final state-of-charge. For NGV2-compliant station design, use SAE J2601 thermal modeling software.</p>
+        </div>
+
+        <div class="mt-2 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference Standard: NGV2 / NFPA 52</p>
+          <p class="text-slate-300 text-xs">NFPA 52 governs CNG vehicular fuel system design and station safety in the US. NGV2 defines the global standard for CNG cylinder filling protocols, including maximum fill rates and pressure-temperature compensation requirements.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Gas Engineering Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/gas-engineering/cng-lpg-pvt-cylinder.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">CNG/LPG Cylinder Fill (PVT)</h3>
+          <p class="text-xs text-slate-400 mt-1">Compute exact gas mass inside a cylinder from pressure, temperature, and water capacity.</p>
+        </a>
+        <a href="/gas-engineering/compressibility-z-factor.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Compressibility Z-Factor</h3>
+          <p class="text-xs text-slate-400 mt-1">Derive an accurate Z value at high CNG pressures for better mass estimates.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
