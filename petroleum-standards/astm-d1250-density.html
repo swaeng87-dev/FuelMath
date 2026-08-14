@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASTM D1250 API Gravity & Density Temperature Corrector — FuelMath.net</title>
+  <meta name="description" content="Correct observed liquid hydrocarbon density and °API gravity at ambient temperature to standard 15°C / 60°F reference. ASTM D1250 / API MPMS 11.1 compliant.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors text-blue-300">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#petroleum" class="hover:text-blue-400">Petroleum ASTM</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">ASTM D1250 Density Corrector</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">ASTM D1250 API Gravity & Density Temperature Corrector</h1>
+    <p class="text-slate-400 mb-8 text-base">Correct observed liquid hydrocarbon density and °API gravity at ambient temperature to the standard 15°C / 60°F reference base.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="astm-d1250-density" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Observed Measurement Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Observed Density -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Observed Density <span class="text-slate-500 font-normal">(hydrometer reading)</span></label>
+            <div class="relative">
+              <input type="number" data-field="density" placeholder="e.g. 830" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-20 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">kg/m³</span>
+            </div>
+          </div>
+
+          <!-- Observed Temperature -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Observed Temperature</label>
+            <div class="relative">
+              <input type="number" data-field="temp" placeholder="e.g. 35" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-12 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">°C</span>
+            </div>
+          </div>
+
+          <!-- Expansion Coefficient -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Volumetric Expansion Coefficient <span class="text-slate-500 font-normal">(α)</span></label>
+            <div class="relative">
+              <input type="number" data-field="expansion" value="0.0008" step="0.0001" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-16 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">1/°C</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">Select from the reference table below based on product type.</p>
+          </div>
+
+          <!-- Expansion Coefficient Reference -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Typical Expansion Coefficients (α)</p>
+            <div class="space-y-1.5 text-xs font-mono">
+              <div class="flex justify-between text-slate-300"><span>Gasoline / Petrol</span><span class="text-blue-300">0.0012 /°C</span></div>
+              <div class="flex justify-between text-slate-300"><span>Jet Fuel (Jet A1)</span><span class="text-blue-300">0.0010 /°C</span></div>
+              <div class="flex justify-between text-slate-300"><span>Diesel / HSD</span><span class="text-blue-300">0.0008 /°C</span></div>
+              <div class="flex justify-between text-slate-300"><span>Crude Oil (typical)</span><span class="text-blue-300">0.0007 – 0.0009 /°C</span></div>
+              <div class="flex justify-between text-slate-300"><span>Fuel Oil / HFO</span><span class="text-blue-300">0.0006 /°C</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Corrected Values (15°C / 60°F)
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Density at 15°C</p>
+            <p class="text-3xl font-black text-white font-mono" data-result="density15">—</p>
+          </div>
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">API Gravity</p>
+            <p class="text-3xl font-black text-blue-300 font-mono" data-result="api">—</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Petroleum density is temperature-dependent — liquids expand when heated, reducing measured density. All commercial petroleum transactions use density corrected to the <strong class="text-slate-200">standard reference temperature of 15°C (60°F)</strong>. This tool applies a linear thermal expansion correction followed by the API gravity conversion.</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Step 1 — Temperature Correction to 15°C</p>
+            <p class="font-mono text-blue-300 text-lg">ρ₁₅ = ρ<sub>T</sub> × (1 + α × (T − 15))</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Step 2 — Specific Gravity at 60°F</p>
+            <p class="font-mono text-blue-300 text-lg">SG = ρ₁₅ / 999.0</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Step 3 — API Gravity Conversion</p>
+            <p class="font-mono text-blue-300 text-lg">°API = (141.5 / SG) − 131.5</p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">ρ<sub>T</sub></strong> = Observed density (kg/m³), <strong class="text-slate-200">T</strong> = Observed temperature (°C), <strong class="text-slate-200">α</strong> = Volumetric expansion coefficient (1/°C)</li>
+          <li><strong class="text-slate-200">999.0 kg/m³</strong> = Density of water at 15°C (API reference base)</li>
+          <li>API gravity is inversely related to density: lighter crudes have higher °API values</li>
+        </ul>
+
+        <!-- API Classification Reference -->
+        <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+          <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Crude Oil Classification by API Gravity</p>
+          <div class="space-y-1.5 text-xs font-mono">
+            <div class="flex justify-between text-slate-300"><span>Light Crude</span><span class="text-blue-300">&gt; 31.1 °API</span></div>
+            <div class="flex justify-between text-slate-300"><span>Medium Crude</span><span class="text-blue-300">22.3 – 31.1 °API</span></div>
+            <div class="flex justify-between text-slate-300"><span>Heavy Crude</span><span class="text-blue-300">10.0 – 22.3 °API</span></div>
+            <div class="flex justify-between text-slate-300"><span>Extra-Heavy / Bitumen</span><span class="text-blue-300">&lt; 10.0 °API</span></div>
+          </div>
+        </div>
+
+        <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <p class="text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">Model Limitation</p>
+          <p class="text-slate-300 text-xs">This tool uses a linear expansion approximation suitable for field estimates and small temperature deltas (±20°C from base). For custody-transfer precision, the full ASTM D1250 Table 54 algorithm uses product-specific coefficients and non-linear VCF interpolation. Always use certified VCF tables for contract settlement.</p>
+        </div>
+
+        <div class="mt-2 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference Standard: ASTM D1250 / API MPMS Chapter 11.1</p>
+          <p class="text-slate-300 text-xs">ASTM D1250 and API MPMS Ch. 11.1 define the Petroleum Measurement Tables used globally for volume and density correction. The API gravity scale was established by the American Petroleum Institute and remains the universal crude oil quality metric in trading and refining.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Petroleum Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/petroleum-standards/barrel-to-ton-crude.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Barrel-to-Ton Crude Converter</h3>
+          <p class="text-xs text-slate-400 mt-1">Convert barrels to metric tons using API gravity — pairs directly with this tool.</p>
+        </a>
+        <a href="/petroleum-standards/volume-to-mass-density.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Volume-to-Mass Converter</h3>
+          <p class="text-xs text-slate-400 mt-1">Convert liters, gallons, or m³ to kg and metric tons with petroleum presets.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
