@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volume-to-Mass Converter (Petroleum Presets) — FuelMath.net</title>
+  <meta name="description" content="Convert fluid volume (liters, gallons, m³) to weight (kg, metric tons) with standard density presets for Petrol, Diesel, Kerosene, Jet A1, and HFO.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors text-blue-300">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#petroleum" class="hover:text-blue-400">Petroleum ASTM</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">Volume-to-Mass Converter</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">Volume-to-Mass Converter (Petroleum Presets)</h1>
+    <p class="text-slate-400 mb-8 text-base">Convert fluid volume (liters, gallons, m³) to weight (kg, metric tons) with standard density presets for common petroleum products.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="volume-to-mass-density" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Volume Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Fuel Preset -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Product Type</label>
+            <select data-field="preset" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <option value="petrol">Petrol / Gasoline (740 kg/m³)</option>
+              <option value="diesel" selected>Diesel / HSD (840 kg/m³)</option>
+              <option value="kerosene">Kerosene (800 kg/m³)</option>
+              <option value="jeta1">Jet A1 (800 kg/m³)</option>
+              <option value="hfo">Heavy Fuel Oil / HFO (950 kg/m³)</option>
+              <option value="custom">Custom Density</option>
+            </select>
+          </div>
+
+          <!-- Custom Density (shown contextually) -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Density <span class="text-slate-500 font-normal">(at 15°C — edit for Custom)</span></label>
+            <div class="relative">
+              <input type="number" data-field="density" value="840" step="5" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-20 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">kg/m³</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">Presets auto-fill this field. For custom products, select "Custom Density" and enter your measured value.</p>
+          </div>
+
+          <!-- Volume & Unit -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Volume to Convert</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Volume</label>
+                <input type="number" data-field="volume" placeholder="e.g. 10000" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Unit</label>
+                <select data-field="unit" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <option value="litre">Litres</option>
+                  <option value="gallon">US Gallons</option>
+                  <option value="m3">Cubic Metres (m³)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Density Ranges Reference -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Typical Density Ranges at 15°C</p>
+            <div class="space-y-1.5 text-xs font-mono">
+              <div class="flex justify-between text-slate-300"><span>Petrol / Gasoline</span><span class="text-blue-300">720 – 775 kg/m³</span></div>
+              <div class="flex justify-between text-slate-300"><span>Diesel / HSD</span><span class="text-blue-300">820 – 860 kg/m³</span></div>
+              <div class="flex justify-between text-slate-300"><span>Kerosene / Jet A1</span><span class="text-blue-300">775 – 840 kg/m³</span></div>
+              <div class="flex justify-between text-slate-300"><span>Heavy Fuel Oil (HFO)</span><span class="text-blue-300">920 – 1010 kg/m³</span></div>
+              <div class="flex justify-between text-slate-300"><span>Crude Oil</span><span class="text-blue-300">750 – 950 kg/m³</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Mass Results
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Mass in Kilograms</p>
+            <p class="text-3xl font-black text-white font-mono" data-result="kg">—</p>
+          </div>
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Mass in Metric Tons</p>
+            <p class="text-2xl font-bold text-blue-300 font-mono" data-result="mt">—</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Volume-to-mass conversion is fundamental to petroleum custody transfer, inventory accounting, and transport planning. Since density varies by product grade and temperature, this tool applies standard density presets at the <strong class="text-slate-200">15°C reference condition</strong>.</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Step 1 — Unit Normalization to m³</p>
+            <p class="font-mono text-blue-300 text-lg">V (m³) = V (L) × 0.001 &nbsp;•&nbsp; V (m³) = V (US gal) × 0.00378541</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Step 2 — Mass Calculation</p>
+            <p class="font-mono text-blue-300 text-lg">m (kg) = V (m³) × ρ (kg/m³)</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Step 3 — Metric Ton Conversion</p>
+            <p class="font-mono text-blue-300 text-lg">m (MT) = m (kg) / 1000</p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">1 US gallon</strong> = 3.78541 litres = 0.00378541 m³</li>
+          <li><strong class="text-slate-200">1 m³</strong> = 1,000 litres = 264.172 US gallons</li>
+          <li>Densities shown are mid-range values at 15°C; actual product density depends on refinery slate and seasonal blending</li>
+          <li>For temperature-corrected density, use the ASTM D1250 Corrector first, then feed the result here</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference: Standard Petroleum Density Tables</p>
+          <p class="text-slate-300 text-xs">Density presets align with published petroleum product specification ranges (EN 228 for petrol, EN 590 for diesel, DEF STAN 91-91 for Jet A1, ISO 8217 for fuel oils). For contract-grade precision, always use laboratory-measured density from the certificate of quality.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Petroleum Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/petroleum-standards/astm-d1250-density.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">ASTM D1250 Density Corrector</h3>
+          <p class="text-xs text-slate-400 mt-1">Correct observed density to 15°C before converting volume to mass.</p>
+        </a>
+        <a href="/petroleum-standards/barrel-to-ton-crude.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Barrel-to-Ton Crude Converter</h3>
+          <p class="text-xs text-slate-400 mt-1">Convert barrels to metric tons accounting for varying API gravities.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
