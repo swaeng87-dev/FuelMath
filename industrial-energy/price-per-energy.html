@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Price-per-Energy Unit Converter | IEA Factors — FuelMath.net</title>
+  <meta name="description" content="Convert fuel market prices across normalized energy bases: $/MMBtu, $/kWh, $/GJ, and ₹/Gcal. IEA standard energy conversion factors.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors text-blue-300">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#industrial" class="hover:text-blue-400">Industrial Fuel</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">Price-per-Energy Unit Converter</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">Price-per-Energy Unit Converter</h1>
+    <p class="text-slate-400 mb-8 text-base">Convert fuel market prices across normalized energy bases — $/MMBtu, $/kWh, $/GJ, and ₹/Gcal — using IEA standard conversion factors.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="price-per-energy" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Fuel Quote Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Price -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Fuel Price <span class="text-slate-500 font-normal">(per purchased unit)</span></label>
+            <div class="relative">
+              <input type="number" data-field="price" placeholder="e.g. 0.45" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-24 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">$ / unit</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">Enter the price exactly as quoted — per SCM, per kg, per litre, per kWh, etc.</p>
+          </div>
+
+          <!-- Energy Density -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Energy Content of That Unit</label>
+            <div class="relative">
+              <input type="number" data-field="energyDensity" placeholder="e.g. 38" step="0.1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-24 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">MJ / unit</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">How many megajoules of energy does one purchased unit contain?</p>
+          </div>
+
+          <!-- Common Fuel Energy Density Reference -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Common Fuel Energy Densities</p>
+            <div class="space-y-1.5 text-xs font-mono">
+              <div class="flex justify-between text-slate-300"><span>Natural Gas</span><span class="text-blue-300">≈ 38 MJ/SCM</span></div>
+              <div class="flex justify-between text-slate-300"><span>LPG</span><span class="text-blue-300">≈ 46.1 MJ/kg · 25.7 MJ/L</span></div>
+              <div class="flex justify-between text-slate-300"><span>Diesel (HSD)</span><span class="text-blue-300">≈ 38 MJ/L · 45 MJ/kg</span></div>
+              <div class="flex justify-between text-slate-300"><span>Petrol (Gasoline)</span><span class="text-blue-300">≈ 34.2 MJ/L · 45.8 MJ/kg</span></div>
+              <div class="flex justify-between text-slate-300"><span>Furnace Oil</span><span class="text-blue-300">≈ 40 MJ/kg</span></div>
+              <div class="flex justify-between text-slate-300"><span>Electricity</span><span class="text-blue-300">3.6 MJ/kWh</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Normalized Energy Prices
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Price per MMBtu</p>
+            <p class="text-2xl font-bold text-white font-mono" data-result="perMMBtu">—</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Price per GJ</p>
+              <p class="text-xl font-bold text-blue-300 font-mono" data-result="perGJ">—</p>
+            </div>
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Price per kWh</p>
+              <p class="text-xl font-bold text-blue-300 font-mono" data-result="perKWh">—</p>
+            </div>
+          </div>
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Price per Gcal</p>
+            <p class="text-2xl font-bold text-white font-mono" data-result="perGcal">—</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Fuel prices quoted in different units — per SCM, per litre, per kilogram, per kWh — cannot be compared directly. This tool normalizes any fuel quote to a common energy basis using the <strong class="text-slate-200">International Energy Agency (IEA)</strong> standard conversion factors.</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Base Normalization</p>
+            <p class="font-mono text-blue-300 text-lg">Price per MJ = Quote Price / Energy Density (MJ)</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Unit Conversions</p>
+            <p class="font-mono text-blue-300 text-sm">$/MMBtu = MJ price × 1055.06</p>
+            <p class="font-mono text-blue-300 text-sm">$/GJ = MJ price × 1000</p>
+            <p class="font-mono text-blue-300 text-sm">$/kWh = MJ price × 3.6</p>
+            <p class="font-mono text-blue-300 text-sm">₹/Gcal = MJ price × 4186.8</p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">1 MMBtu</strong> = 1,055.06 MJ ≈ 1.055 GJ</li>
+          <li><strong class="text-slate-200">1 kWh</strong> = 3.6 MJ</li>
+          <li><strong class="text-slate-200">1 Gcal</strong> = 4.1868 GJ = 4,186.8 MJ</li>
+          <li><strong class="text-slate-200">1 GJ</strong> = 277.78 kWh</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference Standard: IEA Energy Conversion Factors</p>
+          <p class="text-slate-300 text-xs">The IEA publishes the internationally accepted energy unit conversion factors used in energy statistics and market reporting. $/MMBtu is the global standard for gas trading (Henry Hub, TTF, JKM); ₹/Gcal is common in South Asian industrial gas contracts; $/kWh dominates electricity and DG-set comparisons.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Industrial Fuel Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/industrial-energy/gcv-ncv-converter.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">GCV / NCV Converter</h3>
+          <p class="text-xs text-slate-400 mt-1">Convert between gross and net calorific values using hydrogen content.</p>
+        </a>
+        <a href="/industrial-energy/png-vs-lpg.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">PNG vs. LPG Industrial Cost</h3>
+          <p class="text-xs text-slate-400 mt-1">Compare piped gas against LPG cylinders with payback analysis.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
