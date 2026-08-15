@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Drop Inter-State Fleet Fuel Route Optimizer — FuelMath.net</title>
+  <meta name="description" content="Identify the lowest-cost refueling states and depots along long-haul routes based on regional tax and price differentials. Logistics fuel optimization routing algorithm.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors text-blue-300">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#mobility" class="hover:text-blue-400">Mobility & Fleet</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">Inter-State Fleet Fuel Route Optimizer</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">Multi-Drop Inter-State Fleet Fuel Route Optimizer</h1>
+    <p class="text-slate-400 mb-8 text-base">Identify the lowest-cost refueling stops along long-haul routes by comparing regional tax and price differentials across candidate stations.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="fleet-route-optimizer" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Route & Price Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Fuel Required -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Total Fuel Required for Trip</label>
+            <div class="relative">
+              <input type="number" data-field="fuelNeeded" placeholder="e.g. 350" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-16 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">litres</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">Estimate from route distance ÷ loaded mileage. Use the Trip Fuel Matrix tool if unsure.</p>
+          </div>
+
+          <!-- Candidate Stop Prices -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Candidate Refueling Stop Prices</p>
+            <p class="text-xs text-slate-500 mb-3">Enter the pump price at each stop along your route (leave blank to exclude a stop). Prices vary by state/province taxes.</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Stop 1 — Origin Region</label>
+                <div class="relative">
+                  <input type="number" data-field="price1" placeholder="e.g. 1.42" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-14 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">$/L</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Stop 2</label>
+                <div class="relative">
+                  <input type="number" data-field="price2" placeholder="e.g. 1.28" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-14 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">$/L</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Stop 3</label>
+                <div class="relative">
+                  <input type="number" data-field="price3" placeholder="e.g. 1.35" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-14 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">$/L</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Stop 4 — Destination Region</label>
+                <div class="relative">
+                  <input type="number" data-field="price4" placeholder="e.g. 1.50" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-14 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">$/L</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price Differential Context -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Why Prices Vary Across Regions</p>
+            <div class="space-y-1.5 text-xs text-slate-300">
+              <p>• State/province VAT rates differ — often 5–15% price spread</p>
+              <p>• Central excise & freight surcharges vary by zone</p>
+              <p>• Highway vs. city station margins differ 3–8%</p>
+              <p>• Fleet cards / depot discounts may apply at networked stops</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Optimization Result
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-blue-500/10 border border-blue-500/30 p-4 rounded-lg">
+            <p class="text-xs text-blue-300 uppercase tracking-wider font-semibold mb-1">🏆 Recommended Refueling Stop</p>
+            <p class="text-2xl font-bold text-white font-mono" data-result="best">—</p>
+          </div>
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Total Fuel Cost at Best Price</p>
+            <p class="text-3xl font-black text-green-400 font-mono" data-result="total">—</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Inter-state long-haul routes cross multiple tax jurisdictions, creating <strong class="text-slate-200">fuel price differentials of 5–15%</strong> between regions. Fleet operators who strategically refuel at the lowest-priced stops on their route compound significant savings across thousands of trips per year.</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Step 1 — Collect Candidate Prices</p>
+            <p class="font-mono text-blue-300 text-lg">P = {p₁, p₂, p₃, p₄} (excluding blank stops)</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Step 2 — Identify Minimum</p>
+            <p class="font-mono text-blue-300 text-lg">p* = min(P) → recommended stop index</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Step 3 — Optimized Total Cost</p>
+            <p class="font-mono text-blue-300 text-lg">Cost<sub>optimal</sub> = Fuel Needed × p*</p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Fuel Needed</strong> = Total litres required for the trip (distance ÷ loaded mileage)</li>
+          <li><strong class="text-slate-200">p₁–p₄</strong> = Pump prices at each candidate stop along the route</li>
+          <li>Blank price fields are automatically excluded from the comparison</li>
+          <li>For a 15% price differential on a 350 L fill, the saving between worst and best stop is substantial — multiply across a fleet's annual mileage for the full impact</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <p class="text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">Operational Constraints</p>
+          <p class="text-slate-300 text-xs">This optimizer identifies the cheapest price point but real routing must also respect: tank capacity limits (can you reach the cheap stop with current fuel?), minimum reserve requirements, depot access hours, and driver duty-time regulations. For multi-leg journeys exceeding tank range, plan partial fills — buy enough at each stop to reach the next cheapest point.</p>
+        </div>
+
+        <div class="mt-2 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference: Logistics Fuel Optimization Routing Algorithm</p>
+          <p class="text-slate-300 text-xs">Fuel routing optimization is a standard practice in fleet logistics, where regional tax differentials create arbitrage opportunities. Large fleet operators integrate live fuel price APIs into route planning systems; this tool provides the core decision logic for single-trip manual planning.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Mobility & Fleet Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/mobility-logistics/trip-fuel-toll-matrix.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Trip Fuel Expense & Toll Matrix</h3>
+          <p class="text-xs text-slate-400 mt-1">Build the full journey budget including payload penalties and tolls.</p>
+        </a>
+        <a href="/mobility-logistics/fuel-surcharge-escalation.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Fuel Surcharge Escalation Formula</h3>
+          <p class="text-xs text-slate-400 mt-1">Adjust freight contract rates when fuel prices shift on your routes.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
