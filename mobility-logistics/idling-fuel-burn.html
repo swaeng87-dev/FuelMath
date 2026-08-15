@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Idling Fuel Burn & Expense Calculator | EPA Guidelines — FuelMath.net</title>
+  <meta name="description" content="Estimate fuel volume wasted and financial losses from engine idling during traffic, loading, and auxiliary operations. EPA fleet idling consumption guidelines.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors text-blue-300">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#mobility" class="hover:text-blue-400">Mobility & Fleet</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">Idling Fuel Burn & Expense</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">Idling Fuel Burn & Expense Calculator</h1>
+    <p class="text-slate-400 mb-8 text-base">Estimate the fuel volume wasted and financial losses caused by engine idling during traffic, loading, and auxiliary operations.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="idling-fuel-burn" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Idling Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Idling Hours -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Idling Time <span class="text-slate-500 font-normal">(per day, per vehicle)</span></label>
+            <div class="relative">
+              <input type="number" data-field="hoursDay" placeholder="e.g. 1.5" step="0.1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-20 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">hrs / day</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">Sum of all idling: traffic stops, loading docks, warm-up, and PTO/auxiliary use.</p>
+          </div>
+
+          <!-- Burn Rate -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Idling Burn Rate</label>
+            <div class="relative">
+              <input type="number" data-field="burnRate" value="0.8" step="0.05" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-16 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">L / hr</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">See reference table below for typical burn rates by vehicle class.</p>
+          </div>
+
+          <!-- Fuel Price & Operating Days -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Cost & Schedule</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Fuel Price</label>
+                <div class="relative">
+                  <input type="number" data-field="fuelPrice" placeholder="e.g. 1.25" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-14 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">$/L</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Operating Days / mo</label>
+                <input type="number" data-field="daysMonth" value="26" step="1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+            </div>
+          </div>
+
+          <!-- Burn Rate Reference -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Typical Idling Burn Rates</p>
+            <div class="space-y-1.5 text-xs font-mono">
+              <div class="flex justify-between text-slate-300"><span>Passenger Car (Petrol)</span><span class="text-blue-300">0.4 – 0.8 L/hr</span></div>
+              <div class="flex justify-between text-slate-300"><span>Light Van / Pickup</span><span class="text-blue-300">0.6 – 1.0 L/hr</span></div>
+              <div class="flex justify-between text-slate-300"><span>Heavy Diesel Truck</span><span class="text-blue-300">2.3 – 3.8 L/hr</span></div>
+              <div class="flex justify-between text-slate-300"><span>Truck w/ PTO / Reefer</span><span class="text-blue-300">3.8 – 6.0 L/hr</span></div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">EPA guideline: heavy diesel idles at 0.6–1.0 gal/hr (≈ 2.3–3.8 L/hr).</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Idling Losses
+        </h2>
+
+        <div class="space-y-4">
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Daily Fuel Wasted</p>
+              <p class="text-xl font-bold text-white font-mono" data-result="daily">—</p>
+            </div>
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Monthly Fuel Wasted</p>
+              <p class="text-xl font-bold text-red-300 font-mono" data-result="monthly">—</p>
+            </div>
+          </div>
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Monthly Financial Loss</p>
+            <p class="text-3xl font-black text-red-400 font-mono" data-result="costMonth">—</p>
+          </div>
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 leading-relaxed">💡 For a fleet, multiply the monthly loss by your vehicle count. A 20-truck fleet idling 1 hr/day can lose thousands per month — anti-idling policies and auto start-stop systems pay back rapidly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Idling burns fuel while producing <strong class="text-slate-200">zero distance</strong> — it is pure waste. Whether from traffic congestion, loading operations, cab climate control, or power take-off (PTO) equipment, idling converts fuel directly into cost and emissions with no productive output.</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Daily Fuel Wasted</p>
+            <p class="font-mono text-blue-300 text-lg">V<sub>day</sub> = Idling Hours × Burn Rate</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Monthly Fuel Wasted</p>
+            <p class="font-mono text-blue-300 text-lg">V<sub>month</sub> = V<sub>day</sub> × Operating Days</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Monthly Financial Loss</p>
+            <p class="font-mono text-blue-300 text-lg">Cost<sub>month</sub> = V<sub>month</sub> × Fuel Price</p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Idling Hours</strong> = Total idling time per day per vehicle</li>
+          <li><strong class="text-slate-200">Burn Rate</strong> = Fuel consumption while stationary (L/hr) — varies by engine size, load, and accessories</li>
+          <li><strong class="text-slate-200">Operating Days</strong> = Working days per month (default 26)</li>
+          <li>Annualize by multiplying monthly loss × 12 for full-year budgeting</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <p class="text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">Beyond Fuel Cost</p>
+          <p class="text-slate-300 text-xs">Idling also accelerates engine wear (incomplete combustion, oil dilution), increases maintenance intervals, and produces localized emissions. These hidden costs typically add 20–40% on top of the direct fuel figure. Anti-idling regulations in many cities also carry fines.</p>
+        </div>
+
+        <div class="mt-2 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference Standard: EPA / Fleet Idling Consumption Guidelines</p>
+          <p class="text-slate-300 text-xs">The US EPA and Argonne National Laboratory publish idling fuel consumption data: heavy-duty diesel trucks idle at approximately 0.6–1.0 gallons per hour (2.3–3.8 L/hr). These figures form the basis of fleet idle-reduction programs and anti-idling policy cost-benefit analyses.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Mobility & Fleet Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/mobility-logistics/driver-fuel-performance.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Driver Fuel Economy Performance Grader</h3>
+          <p class="text-xs text-slate-400 mt-1">Score drivers on efficiency — idling is a key performance factor.</p>
+        </a>
+        <a href="/tax-emissions/fuel-co2-emissions.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Fuel Combustion CO₂ Output</h3>
+          <p class="text-xs text-slate-400 mt-1">Quantify the Scope 1 emissions from your wasted idling fuel.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
