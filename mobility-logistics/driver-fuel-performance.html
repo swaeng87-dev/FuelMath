@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Driver Fuel Economy & Performance Grader — FuelMath.net</title>
+  <meta name="description" content="Grade commercial driver fuel efficiency against baseline target benchmarks based on route payload and terrain. Commercial Fleet Telematics Benchmark Index.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors text-blue-300">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#mobility" class="hover:text-blue-400">Mobility & Fleet</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">Driver Fuel Performance Grader</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">Driver Fuel Economy & Performance Grader</h1>
+    <p class="text-slate-400 mb-8 text-base">Grade commercial driver fuel efficiency against baseline target benchmarks and quantify the excess fuel cost of underperformance.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="driver-fuel-performance" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Performance Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Mileage Comparison -->
+          <div>
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Mileage Comparison</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Target Mileage</label>
+                <div class="relative">
+                  <input type="number" data-field="targetMileage" placeholder="e.g. 4.0" step="0.1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-14 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">km/L</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Actual Mileage</label>
+                <div class="relative">
+                  <input type="number" data-field="actualMileage" placeholder="e.g. 3.5" step="0.1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-14 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">km/L</span>
+                </div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Target = fleet benchmark for this route class (payload + terrain). Actual = driver's measured result.</p>
+          </div>
+
+          <!-- Route & Cost -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Route & Fuel Cost</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Route Distance</label>
+                <div class="relative">
+                  <input type="number" data-field="distance" placeholder="e.g. 600" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-12 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">km</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Fuel Price</label>
+                <div class="relative">
+                  <input type="number" data-field="fuelPrice" placeholder="e.g. 1.25" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-14 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">$/L</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grading Scale Reference -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Performance Grading Scale</p>
+            <div class="space-y-1.5 text-xs font-mono">
+              <div class="flex justify-between text-green-300"><span>Grade A</span><span>≥ 100% of target</span></div>
+              <div class="flex justify-between text-blue-300"><span>Grade B</span><span>90 – 99%</span></div>
+              <div class="flex justify-between text-yellow-300"><span>Grade C</span><span>80 – 89%</span></div>
+              <div class="flex justify-between text-red-300"><span>Grade D</span><span>&lt; 80%</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Driver Scorecard
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-blue-500/10 border border-blue-500/30 p-5 rounded-lg text-center">
+            <p class="text-xs text-blue-300 uppercase tracking-wider font-semibold mb-1">Performance Grade</p>
+            <p class="text-5xl font-black text-white" data-result="grade">—</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Efficiency Ratio</p>
+              <p class="text-xl font-bold text-blue-300 font-mono" data-result="ratio">—</p>
+            </div>
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Excess Fuel Used</p>
+              <p class="text-xl font-bold text-red-300 font-mono" data-result="excessFuel">—</p>
+            </div>
+          </div>
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Cost of Underperformance</p>
+            <p class="text-2xl font-bold text-red-400 font-mono" data-result="penalty">—</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Driver behavior is the largest controllable variable in fleet fuel economy — aggressive acceleration, poor gear selection, excessive speed, and idling can degrade mileage by <strong class="text-slate-200">15–30%</strong>. This tool grades each driver against a route-class benchmark and prices the cost of their underperformance.</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Step 1 — Efficiency Ratio</p>
+            <p class="font-mono text-blue-300 text-lg">Ratio = (Actual Mileage / Target Mileage) × 100%</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Step 2 — Excess Fuel Consumed</p>
+            <p class="font-mono text-blue-300 text-lg">V<sub>excess</sub> = (Distance / Actual) − (Distance / Target)</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Step 3 — Underperformance Cost & Grade</p>
+            <p class="font-mono text-blue-300 text-lg">Penalty = V<sub>excess</sub> × Price &nbsp;→&nbsp; Grade (A/B/C/D)</p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Target Mileage</strong> = Fleet benchmark for the route class (same vehicle, payload, and terrain profile)</li>
+          <li><strong class="text-slate-200">Actual Mileage</strong> = Driver's measured fuel economy from trip data</li>
+          <li><strong class="text-slate-200">Ratio ≥ 100%</strong> = Grade A (at or above target); <strong class="text-slate-200">&lt; 80%</strong> = Grade D (training/coaching required)</li>
+          <li>Benchmarks must be route-class specific — comparing a hilly heavy-haul route against a flat highway run produces false grades</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <p class="text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">Key Driver Behavior Factors</p>
+          <p class="text-slate-300 text-xs">Telematics data links fuel waste to: harsh acceleration & braking events, sustained over-speed (>90 km/h for trucks), excessive idling, improper gear selection, and failure to use engine braking. Grade D drivers typically show multiple of these patterns and benefit most from eco-driving coaching.</p>
+        </div>
+
+        <div class="mt-2 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference Standard: Commercial Fleet Telematics Benchmark Index</p>
+          <p class="text-slate-300 text-xs">Fleet telematics platforms benchmark driver fuel performance against route-class baselines using GPS, fuel-level sensors, and CAN-bus data. The A–D grading thresholds used here reflect common fleet incentive program structures, where top-quartile drivers receive fuel bonuses and bottom-quartile drivers enter coaching programs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Mobility & Fleet Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/mobility-logistics/idling-fuel-burn.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Idling Fuel Burn & Expense</h3>
+          <p class="text-xs text-slate-400 mt-1">Quantify the idling component of a driver's fuel waste.</p>
+        </a>
+        <a href="/mobility-logistics/tankful-mileage-checker.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Tankful Mileage Discrepancy Tool</h3>
+          <p class="text-xs text-slate-400 mt-1">Verify actual mileage from pump receipts and odometer readings.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
