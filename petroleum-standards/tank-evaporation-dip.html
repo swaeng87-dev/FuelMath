@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bulk Fuel Storage Evaporation & Dip-Rod Matrix Tool | API 2518 — FuelMath.net</title>
+  <meta name="description" content="Convert dipstick height measurements to liquid volume for vertical, horizontal, and rectangular tanks. Estimate ullage evaporation losses. API Standard 2518 compliant.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors text-blue-300">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#petroleum" class="hover:text-blue-400">Petroleum ASTM</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">Bulk Storage Dip-Rod & Loss Matrix</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">Bulk Fuel Storage Evaporation & Dip-Rod Matrix Tool</h1>
+    <p class="text-slate-400 mb-8 text-base">Convert dipstick height measurements to liquid volume for vertical, horizontal, and rectangular tanks — and estimate ullage evaporation losses.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="tank-evaporation-dip" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Tank & Dip Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Tank Shape -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Tank Geometry</label>
+            <select data-field="shape" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <option value="vertical" selected>Vertical Cylinder</option>
+              <option value="horizontal">Horizontal Cylinder</option>
+              <option value="rectangular">Rectangular / Box Tank</option>
+            </select>
+          </div>
+
+          <!-- Liquid Height -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Dip Height <span class="text-slate-500 font-normal">(liquid level from bottom)</span></label>
+            <div class="relative">
+              <input type="number" data-field="liquidHeight" placeholder="e.g. 2.5" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-12 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">m</span>
+            </div>
+          </div>
+
+          <!-- Tank Dimensions -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Tank Dimensions (m)</p>
+            <div class="grid grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Diameter</label>
+                <input type="number" data-field="diameter" placeholder="e.g. 4" step="0.1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Length</label>
+                <input type="number" data-field="length" placeholder="e.g. 8" step="0.1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Width</label>
+                <input type="number" data-field="width" placeholder="e.g. 3" step="0.1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Vertical cylinder: Diameter only. Horizontal cylinder: Diameter + Length. Rectangular: Length + Width.</p>
+          </div>
+
+          <!-- Fluid Properties -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Fluid Properties</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Density (kg/m³)</label>
+                <input type="number" data-field="density" value="840" step="5" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Evap. Loss Rate (%)</label>
+                <input type="number" data-field="evaporation" value="0.02" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Fixed-roof tanks: 0.01–0.05% typical. Volatile products (petrol) trend higher; heavy oils trend lower.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Tank Inventory Results
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Liquid Volume</p>
+            <p class="text-3xl font-black text-white font-mono" data-result="volume">—</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Inventory Mass</p>
+              <p class="text-xl font-bold text-blue-300 font-mono" data-result="mass">—</p>
+            </div>
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Est. Evap. Loss</p>
+              <p class="text-xl font-bold text-red-300 font-mono" data-result="loss">—</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Dipstick (dip-rod) measurements are the field-standard method for tank inventory verification. Converting a liquid height reading into volume depends on tank geometry — vertical cylinders are linear, but <strong class="text-slate-200">horizontal cylinders require circular segment integration</strong> because the cross-sectional area changes non-linearly with liquid height.</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Vertical Cylinder</p>
+            <p class="font-mono text-blue-300 text-lg">V = π × (D/2)² × h</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Horizontal Cylinder (Partial Fill — Circular Segment)</p>
+            <p class="font-mono text-blue-300 text-sm">V = L × [r²·cos⁻¹((r−h)/r) − (r−h)·√(2rh − h²)]</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Rectangular Tank</p>
+            <p class="font-mono text-blue-300 text-lg">V = Length × Width × h</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Evaporation Loss Estimate</p>
+            <p class="font-mono text-blue-300 text-lg">V<sub>loss</sub> = V × (Evap Rate / 100)</p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">h</strong> = Dip height (m), <strong class="text-slate-200">r</strong> = Tank radius (m), <strong class="text-slate-200">L</strong> = Tank length (m)</li>
+          <li>Horizontal cylinder volumes are non-linear — half the dip height does <em>not</em> equal half the volume</li>
+          <li>Evaporation losses occur in the ullage space (vapor headspace above the liquid) driven by temperature cycling and product volatility</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference Standard: API Standard 2518</p>
+          <p class="text-slate-300 text-xs">API Standard 2518 provides the methodology for estimating evaporation loss from fixed-roof tanks, accounting for tank dimensions, product vapor pressure, and ambient temperature cycling. For custody-grade inventory, apply temperature correction via the ASTM D1250 Corrector before mass accounting.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Petroleum Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/petroleum-standards/volume-to-mass-density.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Volume-to-Mass Converter</h3>
+          <p class="text-xs text-slate-400 mt-1">Convert tank volumes to kg and metric tons with petroleum presets.</p>
+        </a>
+        <a href="/petroleum-standards/astm-d1250-density.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">ASTM D1250 Density Corrector</h3>
+          <p class="text-xs text-slate-400 mt-1">Correct observed density to 15°C before inventory mass accounting.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
