@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carbon Tax Financial Exposure Calculator | World Bank Methodology — FuelMath.net</title>
+  <meta name="description" content="Project annual carbon tax liabilities under various emission scenarios and carbon price trajectories. World Bank Carbon Pricing methodology.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#tax-emissions" class="hover:text-blue-400">Tax & Carbon</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">Carbon Tax Financial Exposure</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">Carbon Tax Financial Exposure Calculator</h1>
+    <p class="text-slate-400 mb-8 text-base">Project annual carbon tax liabilities under different emission scenarios and carbon price trajectories — for planning, budgeting, and risk assessment.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="carbon-tax-exposure" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Exposure Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Emissions & Price -->
+          <div>
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Current Carbon Position</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Annual Emissions</label>
+                <div class="relative">
+                  <input type="number" data-field="annualEmissions" placeholder="e.g. 5000" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-20 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">t CO₂e</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Carbon Price</label>
+                <div class="relative">
+                  <input type="number" data-field="carbonPrice" placeholder="e.g. 50" step="0.5" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-14 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">$/t</span>
+                </div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Use the Fuel CO₂ Calculator to derive your annual emissions from fuel consumption.</p>
+          </div>
+
+          <!-- Growth & Horizon -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Projection Parameters</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Emission Growth</label>
+                <div class="relative">
+                  <input type="number" data-field="emissionGrowth" value="0" step="0.5" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-16 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">%/yr</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Projection Years</label>
+                <input type="number" data-field="years" value="5" step="1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Positive growth = expanding operations; negative = efficiency/reduction program.</p>
+          </div>
+
+          <!-- Carbon Price Reference -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Typical Carbon Prices by Jurisdiction</p>
+            <div class="space-y-1.5 text-xs font-mono">
+              <div class="flex justify-between text-slate-300"><span>EU ETS</span><span class="text-blue-300">≈ €60 – 100 / t</span></div>
+              <div class="flex justify-between text-slate-300"><span>UK ETS</span><span class="text-blue-300">≈ £40 – 80 / t</span></div>
+              <div class="flex justify-between text-slate-300"><span>California Cap-and-Trade</span><span class="text-blue-300">≈ $30 – 40 / t</span></div>
+              <div class="flex justify-between text-slate-300"><span>China National ETS</span><span class="text-blue-300">≈ $10 – 15 / t</span></div>
+              <div class="flex justify-between text-slate-300"><span>Internal Shadow Prices</span><span class="text-blue-300">$50 – 150 / t</span></div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Prices move — check the World Bank Carbon Pricing Dashboard for current rates.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Financial Exposure
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Year 1 Carbon Tax</p>
+            <p class="text-3xl font-black text-white font-mono" data-result="year1Cost">—</p>
+          </div>
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Cumulative Liability (Full Period)</p>
+            <p class="text-3xl font-black text-red-400 font-mono" data-result="total">—</p>
+          </div>
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 leading-relaxed">📊 The cumulative figure assumes the carbon price stays constant while emissions grow (or shrink) at the rate you set. Model multiple scenarios to bracket your exposure.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Carbon tax exposure is simply <strong class="text-slate-200">emissions × carbon price</strong> — but for planning you need it projected over multiple years, with emissions changing as your business grows or your reduction programs take effect.</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Year 1 Liability</p>
+            <p class="font-mono text-blue-300 text-lg">Cost₁ = Emissions × Carbon Price</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Annual Emission Trajectory</p>
+            <p class="font-mono text-blue-300 text-lg">Emissions<sub>n+1</sub> = Emissions<sub>n</sub> × (1 + Growth%)</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Cumulative Liability</p>
+            <p class="font-mono text-blue-300 text-lg">Total = Σ (Emissions<sub>n</sub> × Carbon Price), n = 1…Years</p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Annual emissions</strong> = total Scope 1 CO₂e in tonnes — derive this from the Fuel Combustion CO₂ Calculator</li>
+          <li><strong class="text-slate-200">Carbon price</strong> = the applicable tax or ETS allowance price ($/t CO₂e)</li>
+          <li><strong class="text-slate-200">Growth</strong> = expected change in emissions per year — positive for expansion, negative for decarbonization programs</li>
+          <li>This model holds the carbon price constant; for rising-price scenarios, run the tool at several price points to bracket the range</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <p class="text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">Use Shadow Pricing for Investment Decisions</p>
+          <p class="text-slate-300 text-xs">Many companies apply an internal "shadow" carbon price (often $50–150/t) to capital projects even where no mandatory price exists today — anticipating future regulation. Running this tool at your shadow price shows how a new boiler, fleet, or plant would perform under plausible future carbon costs.</p>
+        </div>
+
+        <div class="mt-2 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference: World Bank Carbon Pricing Dashboard Methodology</p>
+          <p class="text-slate-300 text-xs">The World Bank tracks carbon pricing instruments (taxes and emissions trading systems) across all jurisdictions, providing the benchmark prices used for exposure modeling. Carbon tax liability = verified emissions × applicable price is the standard formula applied in every carbon-pricing regime worldwide.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Tax & Carbon Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/tax-emissions/fuel-co2-emissions.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Fuel Combustion CO₂ Output</h3>
+          <p class="text-xs text-slate-400 mt-1">Derive your annual emissions input from fuel consumption.</p>
+        </a>
+        <a href="/tax-emissions/methane-leakage-venting.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Methane Leakage & Venting Impact</h3>
+          <p class="text-xs text-slate-400 mt-1">Convert CH₄ losses to CO₂e to include in your exposure base.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
