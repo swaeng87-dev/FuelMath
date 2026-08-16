@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fuel Injector Flow Rate & Sizing Tool — FuelMath.net</title>
+  <meta name="description" content="Determine required fuel injector size (cc/min, lb/hr) from target horsepower, BSFC, cylinder count, and duty cycle.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#biofuels" class="hover:text-blue-400">Biofuels & Blending</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">Fuel Injector Flow Rate & Sizing</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">Fuel Injector Flow Rate & Sizing Tool</h1>
+    <p class="text-slate-400 mb-8 text-base">Determine the required fuel injector size (cc/min and lb/hr) from target horsepower, BSFC, cylinder count, and duty cycle.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="fuel-injector-flow" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Engine & Fuel Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Horsepower -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Target Horsepower</label>
+            <div class="relative">
+              <input type="number" data-field="horsepower" placeholder="e.g. 350" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-12 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">hp</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">Use the engine output you're building toward, with a little margin over the dyno target.</p>
+          </div>
+
+          <!-- BSFC & Cylinders -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Engine Parameters</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">BSFC (lb/hp·hr)</label>
+                <input type="number" data-field="bsfc" value="0.50" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Cylinders</label>
+                <input type="number" data-field="cylinders" value="4" step="1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">See the BSFC reference table below for typical values by engine type.</p>
+          </div>
+
+          <!-- Duty Cycle & Density -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Injector & Fuel</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Max Duty Cycle</label>
+                <input type="number" data-field="duty" value="0.80" step="0.05" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Fuel Density (g/cc)</label>
+                <input type="number" data-field="density" value="0.74" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">80% duty is a safe ceiling for high-impedance injectors. Gasoline ≈ 0.74 g/cc; E85 ≈ 0.78 g/cc.</p>
+          </div>
+
+          <!-- BSFC Reference -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Typical BSFC by Engine Type</p>
+            <div class="space-y-1.5 text-xs font-mono">
+              <div class="flex justify-between text-slate-300"><span>Naturally Aspirated (Gasoline)</span><span class="text-blue-300">0.45 – 0.50</span></div>
+              <div class="flex justify-between text-slate-300"><span>Forced Induction (Gasoline)</span><span class="text-blue-300">0.55 – 0.60</span></div>
+              <div class="flex justify-between text-slate-300"><span>E85 / Rich Tuning</span><span class="text-blue-300">0.60 – 0.70</span></div>
+              <div class="flex justify-between text-slate-300"><span>Diesel</span><span class="text-blue-300">0.36 – 0.45</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Required Injector Size
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Flow per Injector (cc/min)</p>
+            <p class="text-3xl font-black text-white font-mono" data-result="ccmin">—</p>
+          </div>
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Flow per Injector (lb/hr)</p>
+            <p class="text-2xl font-bold text-blue-300 font-mono" data-result="lbhr">—</p>
+          </div>
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 leading-relaxed">🔧 Select the next standard injector size <em>above</em> this figure to leave headroom. Undersized injectors run out of flow at high RPM and cause a lean condition that can destroy an engine.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Injector sizing starts with the engine's total fuel demand — set by horsepower and BSFC — then divides that demand across the cylinders while respecting a safe maximum <strong class="text-slate-200">duty cycle</strong> so the injectors never run at 100% (where they lose control and can overheat).</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Total Engine Fuel Demand</p>
+            <p class="font-mono text-blue-300 text-lg">Fuel<sub>total</sub> = HP × BSFC &nbsp;[lb/hr]</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Flow per Injector (with duty cycle)</p>
+            <p class="font-mono text-blue-300 text-lg">Flow<sub>lb/hr</sub> = Fuel<sub>total</sub> / (Cylinders × Duty)</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Convert to Volumetric Flow</p>
+            <p class="font-mono text-blue-300 text-lg">Flow<sub>cc/min</sub> = (Flow<sub>lb/hr</sub> × 453.6) / (Density × 60)</p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">BSFC</strong> = Brake Specific Fuel Consumption (lb of fuel per hp per hour) — the engine's fuel efficiency at power</li>
+          <li><strong class="text-slate-200">Duty cycle</strong> = fraction of time the injector is open at peak RPM; 0.80 (80%) is the common safe maximum</li>
+          <li><strong class="text-slate-200">453.6</strong> = grams per pound, converting mass flow from lb/hr to g/hr</li>
+          <li><strong class="text-slate-200">Density</strong> converts mass flow (g/hr) to volume flow (cc/min); higher-density fuels like E85 need larger injectors for the same energy</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <p class="text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">Why Duty Cycle Matters</p>
+          <p class="text-slate-300 text-xs">An injector at 100% duty is effectively "stuck open" and can no longer meter fuel precisely — mixture control is lost exactly when the engine needs it most. Sizing to ≤80% duty preserves accurate control, keeps injector temperatures down, and leaves margin for fuel-pressure variation and future power increases.</p>
+        </div>
+
+        <div class="mt-2 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference: Internal Combustion Engine Fuel Delivery Sizing</p>
+          <p class="text-slate-300 text-xs">This method reflects standard engine-building and EFI tuning practice for selecting fuel injectors. Injector flow ratings are published at a reference pressure (commonly 3 bar / 43.5 psi); actual delivered flow scales with the square root of pressure ratio, so confirm the rating pressure matches your system before finalizing a part number.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Biofuel & Blending Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/biofuels-blending/bsfc-engine-efficiency.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">BSFC Engine Thermal Efficiency</h3>
+          <p class="text-xs text-slate-400 mt-1">Compute BSFC and thermal efficiency from measured fuel flow and power.</p>
+        </a>
+        <a href="/biofuels-blending/ethanol-blending-e10-e20.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Ethanol Blending (E10, E20, E85)</h3>
+          <p class="text-xs text-slate-400 mt-1">See how ethanol changes energy density — and why it needs bigger injectors.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
