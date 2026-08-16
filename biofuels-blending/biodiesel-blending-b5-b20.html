@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biodiesel Blend (B5, B20) Cetane & Density Calculator | ASTM D6751 — FuelMath.net</title>
+  <meta name="description" content="Estimate final blend cetane, density, viscosity, and cold-flow behavior for B5–B20 biodiesel blends. ASTM D6751 / EN 14214 compliant.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#biofuels" class="hover:text-blue-400">Biofuels & Blending</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">Biodiesel Blend (B5, B20) Calculator</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">Biodiesel Blend (B5, B20) Cetane & Density Calculator</h1>
+    <p class="text-slate-400 mb-8 text-base">Estimate the blended cetane, density, and viscosity of biodiesel blends — and understand the cold-flow behavior higher blends introduce.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="biodiesel-blending-b5-b20" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Blend Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Blend Percentage -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Biodiesel Blend Fraction</label>
+            <div class="relative">
+              <input type="number" data-field="blend" value="20" step="1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-24 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">% biodiesel</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">Common blends: B5 = 5%, B10 = 10%, B20 = 20%, B100 = 100%.</p>
+          </div>
+
+          <!-- Diesel Base Properties -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Base Diesel Properties</p>
+            <div class="grid grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Cetane</label>
+                <input type="number" data-field="dieselCetane" value="48" step="0.5" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Density (kg/m³)</label>
+                <input type="number" data-field="dieselDensity" value="840" step="1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Viscosity (cSt)</label>
+                <input type="number" data-field="dieselVisc" value="2.8" step="0.1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+            </div>
+          </div>
+
+          <!-- Biodiesel Properties -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Biodiesel (B100) Properties</p>
+            <div class="grid grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Cetane</label>
+                <input type="number" data-field="bioCetane" value="52" step="0.5" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Density (kg/m³)</label>
+                <input type="number" data-field="bioDensity" value="880" step="1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Viscosity (cSt)</label>
+                <input type="number" data-field="bioVisc" value="4.6" step="0.1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Biodiesel (FAME) typically: cetane 50–65, density 860–900 kg/m³, viscosity 4.0–6.0 cSt @ 40°C.</p>
+          </div>
+
+          <!-- Blend Reference -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Common Biodiesel Blends</p>
+            <div class="space-y-1.5 text-xs font-mono">
+              <div class="flex justify-between text-slate-300"><span>B5 (5%)</span><span class="text-blue-300">All diesel engines, no changes</span></div>
+              <div class="flex justify-between text-slate-300"><span>B10 – B20</span><span class="text-blue-300">Most modern diesels / fleets</span></div>
+              <div class="flex justify-between text-slate-300"><span>B50</span><span class="text-blue-300">Approved engines only</span></div>
+              <div class="flex justify-between text-slate-300"><span>B100 (100%)</span><span class="text-blue-300">Modifications + warm climate</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Blend Properties
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Blended Cetane</p>
+            <p class="text-3xl font-black text-green-400 font-mono" data-result="cetane">—</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Blended Density</p>
+              <p class="text-xl font-bold text-white font-mono" data-result="density">—</p>
+            </div>
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Blended Viscosity</p>
+              <p class="text-xl font-bold text-white font-mono" data-result="viscosity">—</p>
+            </div>
+          </div>
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 leading-relaxed">📈 Biodiesel raises cetane (cleaner, easier ignition) but also increases density and viscosity. Higher blends progressively worsen cold-flow performance — check CFPP for winter operation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Biodiesel (FAME — Fatty Acid Methyl Ester) blends with petroleum diesel by simple volume mixing. Cetane, density, and viscosity follow <strong class="text-slate-200">linear volume-weighted blending</strong>, making blend properties predictable from the two component fuels.</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Blended Cetane</p>
+            <p class="font-mono text-blue-300 text-lg">Cetane<sub>blend</sub> = Cetane<sub>diesel</sub> × (1 − x) + Cetane<sub>bio</sub> × x</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Blended Density</p>
+            <p class="font-mono text-blue-300 text-lg">ρ<sub>blend</sub> = ρ<sub>diesel</sub> × (1 − x) + ρ<sub>bio</sub> × x</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Blended Viscosity</p>
+            <p class="font-mono text-blue-300 text-lg">ν<sub>blend</sub> = ν<sub>diesel</sub> × (1 − x) + ν<sub>bio</sub> × x</p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">x</strong> = Biodiesel volume fraction (e.g., 0.20 for B20)</li>
+          <li>Biodiesel cetane (50–65) exceeds diesel (40–50), improving ignition quality and reducing cold-start noise</li>
+          <li>Higher density slightly increases energy per litre but injector calibration is volume-based, so net energy per injection drops ~1–2% per 10% blend</li>
+          <li>Higher viscosity improves lubricity (a benefit for low-sulfar diesel) but increases as temperature falls</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <p class="text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">Cold-Flow Behavior (CFPP)</p>
+          <p class="text-slate-300 text-xs">Biodiesel gels at higher temperatures than petroleum diesel — B100 CFPP is typically 10–15°C warmer than the base diesel. Each 10% of biodiesel raises the blend's cloud point and Cold Filter Plugging Point (CFPP). For winter operation above B5, verify CFPP against your minimum ambient temperature or use cold-flow additives / heated storage.</p>
+        </div>
+
+        <div class="mt-2 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference Standard: ASTM D6751 / EN 14214</p>
+          <p class="text-slate-300 text-xs">ASTM D6751 (US) and EN 14214 (Europe) define the specifications for neat biodiesel (B100) used in blending — including cetane number, density, viscosity, and cold-flow limits. Blends are then governed by the diesel fuel standard (ASTM D975 / EN 590), which permits up to B7 in standard EN 590 diesel and B20 under ASTM D7467.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Biofuel & Blending Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/biofuels-blending/ethanol-blending-e10-e20.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Ethanol Blending (E10, E20, E85)</h3>
+          <p class="text-xs text-slate-400 mt-1">Model gasoline-side blending: octane boost and economy loss.</p>
+        </a>
+        <a href="/biofuels-blending/gge-dge-converter.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">GGE & DGE Equivalent Converter</h3>
+          <p class="text-xs text-slate-400 mt-1">Express biodiesel energy in gasoline/diesel gallon equivalents.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
