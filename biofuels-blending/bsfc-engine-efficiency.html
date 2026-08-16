@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSFC Engine Thermal Efficiency Calculator | SAE J1349 — FuelMath.net</title>
+  <meta name="description" content="Calculate Brake Specific Fuel Consumption (BSFC) and thermal efficiency from measured fuel mass flow and output power. SAE J1349 engine power test code.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#biofuels" class="hover:text-blue-400">Biofuels & Blending</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">BSFC Engine Thermal Efficiency</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">BSFC Engine Thermal Efficiency Calculator</h1>
+    <p class="text-slate-400 mb-8 text-base">Calculate Brake Specific Fuel Consumption (BSFC) and thermal efficiency from measured fuel mass flow and output power.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="bsfc-engine-efficiency" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Measured Engine Data
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Fuel Flow -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Fuel Mass Flow Rate</label>
+            <div class="relative">
+              <input type="number" data-field="fuelFlow" placeholder="e.g. 25000" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-16 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">g / hr</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">Measured fuel consumption per hour. 1 L gasoline ≈ 740 g; 1 L diesel ≈ 840 g.</p>
+          </div>
+
+          <!-- Power -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Output Power</label>
+            <div class="relative">
+              <input type="number" data-field="power" placeholder="e.g. 100" step="0.1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-12 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">kW</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">Brake power at the operating point. 1 kW = 1.341 hp.</p>
+          </div>
+
+          <!-- LHV -->
+          <div class="pt-3 border-t border-slate-700">
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Fuel Lower Heating Value (LHV)</label>
+            <div class="relative">
+              <input type="number" data-field="lhv" value="43.0" step="0.1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-20 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">MJ / kg</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">See the LHV reference table below for common fuels.</p>
+          </div>
+
+          <!-- LHV Reference -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Fuel Lower Heating Values (LHV)</p>
+            <div class="space-y-1.5 text-xs font-mono">
+              <div class="flex justify-between text-slate-300"><span>Gasoline</span><span class="text-blue-300">≈ 43.0 MJ/kg</span></div>
+              <div class="flex justify-between text-slate-300"><span>Diesel</span><span class="text-blue-300">≈ 42.5 MJ/kg</span></div>
+              <div class="flex justify-between text-slate-300"><span>Ethanol</span><span class="text-blue-300">≈ 26.8 MJ/kg</span></div>
+              <div class="flex justify-between text-slate-300"><span>Methanol</span><span class="text-blue-300">≈ 19.9 MJ/kg</span></div>
+              <div class="flex justify-between text-slate-300"><span>LPG</span><span class="text-blue-300">≈ 46.0 MJ/kg</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Efficiency Results
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Brake Specific Fuel Consumption</p>
+            <p class="text-3xl font-black text-white font-mono" data-result="bsfc">—</p>
+          </div>
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Thermal Efficiency</p>
+            <p class="text-3xl font-black text-green-400 font-mono" data-result="efficiency">—</p>
+          </div>
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 leading-relaxed">📉 Lower BSFC = more efficient. The best modern diesels reach ~180 g/kWh (~45% efficiency); gasoline engines typically 250–350 g/kWh (25–35%).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p><strong class="text-slate-200">BSFC</strong> expresses how much fuel an engine burns to produce one unit of power for one hour — the universal measure of engine fuel efficiency. From BSFC and the fuel's energy content, we derive the <strong class="text-slate-200">thermal efficiency</strong>: the fraction of fuel energy actually converted into useful work.</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Brake Specific Fuel Consumption</p>
+            <p class="font-mono text-blue-300 text-lg">BSFC = Fuel Flow (g/hr) / Power (kW) &nbsp;[g/kWh]</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Thermal Efficiency</p>
+            <p class="font-mono text-blue-300 text-lg">η = 3600 / (BSFC × LHV) × 100%</p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">3600</strong> = 3.6 MJ/kWh expressed in kJ, since BSFC×LHV yields kJ of fuel energy per kWh of output</li>
+          <li><strong class="text-slate-200">LHV</strong> = Lower Heating Value — the standard basis for engine efficiency, excluding latent heat in exhaust water vapor</li>
+          <li>The efficiency figure is <em>brake thermal efficiency</em> — based on power actually delivered at the crankshaft, after friction and pumping losses</li>
+          <li>For ethanol or methanol, use the fuel's own (lower) LHV — efficiency numbers are only comparable when the correct LHV is used</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <p class="text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">Reading BSFC Maps</p>
+          <p class="text-slate-300 text-xs">BSFC varies across the engine's speed/load range — best efficiency usually sits at moderate-to-high load, mid RPM. A single-point BSFC (like this tool computes) is useful for a specific operating condition; full engine development uses a BSFC map across the whole operating envelope to find the efficiency "island".</p>
+        </div>
+
+        <div class="mt-2 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference Standard: SAE J1349 (Engine Power Test Code)</p>
+          <p class="text-slate-300 text-xs">SAE J1349 is the standard test code for measuring engine power and fuel consumption in automotive applications, defining correction factors and measurement procedures. BSFC and brake thermal efficiency derived per this standard are the basis for engine specifications, emissions certification, and fuel-economy development.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Biofuel & Blending Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/biofuels-blending/fuel-injector-flow.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Fuel Injector Flow Rate & Sizing</h3>
+          <p class="text-xs text-slate-400 mt-1">Size injectors for your target power using the same BSFC input.</p>
+        </a>
+        <a href="/biofuels-blending/octane-ron-mon-aki.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Octane Rating Converter (RON ⇄ MON ⇄ AKI)</h3>
+          <p class="text-xs text-slate-400 mt-1">Convert octane scales when tuning for a specific fuel grade.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
