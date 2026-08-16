@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tire Pressure Fuel Efficiency Loss Calculator | US DOE — FuelMath.net</title>
+  <meta name="description" content="Calculate the extra fuel burned due to under-inflated tire drag using the US DOE fuel economy and tire pressure loss coefficient.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors text-blue-300">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#mobility" class="hover:text-blue-400">Mobility & Fleet</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">Tire Pressure Fuel Efficiency Loss</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">Tire Pressure vs. Fuel Efficiency Loss Calculator</h1>
+    <p class="text-slate-400 mb-8 text-base">Calculate the extra fuel burned and money lost due to the increased rolling resistance of under-inflated tires.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="tyre-pressure-fuel-loss" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Tire & Trip Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Under-inflation -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Under-Inflation <span class="text-slate-500 font-normal">(below recommended pressure)</span></label>
+            <div class="relative">
+              <input type="number" data-field="underinflation" placeholder="e.g. 5" step="0.5" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-24 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">psi below</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">How far below the door-jamb / manual recommended pressure are your tires? Check all four; use the average shortfall.</p>
+          </div>
+
+          <!-- Trip Distance & Mileage -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Trip Parameters</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Distance</label>
+                <div class="relative">
+                  <input type="number" data-field="distance" placeholder="e.g. 500" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-12 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">km</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Mileage (correct)</label>
+                <div class="relative">
+                  <input type="number" data-field="mileage" placeholder="e.g. 14" step="0.1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-14 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">km/L</span>
+                </div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Mileage should be the correctly-inflated baseline efficiency.</p>
+          </div>
+
+          <!-- Fuel Price -->
+          <div class="pt-3 border-t border-slate-700">
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Fuel Price</label>
+            <div class="relative">
+              <input type="number" data-field="fuelPrice" placeholder="e.g. 1.35" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-14 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">$/L</span>
+            </div>
+          </div>
+
+          <!-- Loss Coefficient Reference -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">US DOE Loss Coefficient</p>
+            <div class="space-y-1.5 text-xs text-slate-300">
+              <p>• Fuel economy drops ≈ <strong class="text-blue-300">0.2% per 1 psi</strong> under-inflation (all four tires combined)</p>
+              <p>• 10 psi under → ≈ 2% extra fuel burned</p>
+              <p>• Under-inflation also shortens tread life by up to 25%</p>
+              <p>• Check pressure monthly and before long trips — tires lose ~1 psi/month naturally</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Efficiency Loss
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Fuel Economy Penalty</p>
+            <p class="text-3xl font-black text-white font-mono" data-result="penalty">—</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Extra Fuel Burned</p>
+              <p class="text-xl font-bold text-red-300 font-mono" data-result="extraFuel">—</p>
+            </div>
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Extra Cost</p>
+              <p class="text-xl font-bold text-red-300 font-mono" data-result="extraCost">—</p>
+            </div>
+          </div>
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 leading-relaxed">💡 The fix is free: inflate to the recommended pressure. Across a fleet, a monthly tire-pressure check program is one of the highest-ROI fuel-saving measures available.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Under-inflated tires deform more with each rotation, increasing <strong class="text-slate-200">rolling resistance</strong>. The engine must work harder to maintain speed, burning extra fuel. The US Department of Energy quantifies this loss at approximately 0.2% of fuel economy for every 1 psi of under-inflation.</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Step 1 — Fuel Economy Penalty</p>
+            <p class="font-mono text-blue-300 text-lg">Penalty% = Under-inflation (psi) × 0.2</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Step 2 — Baseline Fuel Requirement</p>
+            <p class="font-mono text-blue-300 text-lg">V<sub>base</sub> = Distance / Mileage</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Step 3 — Extra Fuel & Cost</p>
+            <p class="font-mono text-blue-300 text-lg">V<sub>extra</sub> = V<sub>base</sub> × (Penalty% / 100) &nbsp;•&nbsp; Cost = V<sub>extra</sub> × Price</p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">0.2% per psi</strong> = US DOE coefficient for combined under-inflation of all four tires</li>
+          <li><strong class="text-slate-200">V<sub>base</sub></strong> = Fuel the trip would use at correct pressure</li>
+          <li><strong class="text-slate-200">V<sub>extra</sub></strong> = Additional fuel wasted due to tire drag</li>
+          <li>The penalty is linear in this model — real-world loss can be slightly higher at severe under-inflation</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <p class="text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">Beyond Fuel: Safety & Tire Life</p>
+          <p class="text-slate-300 text-xs">Under-inflation also causes uneven/accelerated tread wear (up to 25% shorter tire life), poor handling, longer braking distances, and increased blowout risk — especially under load at highway speeds. The fuel saving alone rarely captures the full value of correct tire pressure.</p>
+        </div>
+
+        <div class="mt-2 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference Standard: US DOE Fuel Economy & Tire Pressure Loss Coefficient</p>
+          <p class="text-slate-300 text-xs">The US Department of Energy and National Highway Traffic Safety Administration publish the 0.2% per psi fuel economy loss figure used in federal fuel-saving guidance. It is the standard coefficient for fleet tire-pressure management programs and eco-driving education.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Mobility & Fleet Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/mobility-logistics/fuel-cost-per-km.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Fuel Cost per Kilometer / Mile</h3>
+          <p class="text-xs text-slate-400 mt-1">Compute your baseline per-km cost at correct tire pressure.</p>
+        </a>
+        <a href="/mobility-logistics/ac-fuel-consumption.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">AC vs. Non-AC Fuel Consumption</h3>
+          <p class="text-xs text-slate-400 mt-1">Quantify another hidden efficiency loss — air conditioning load.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
