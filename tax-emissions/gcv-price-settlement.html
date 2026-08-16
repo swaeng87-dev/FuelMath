@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GCV Price & Quality Settlement Calculator — FuelMath.net</title>
+  <meta name="description" content="Compute settlement price adjustments when delivered natural gas deviates from contracted calorific value. Gas Sales Agreement quality adjustment formula.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#tax-emissions" class="hover:text-blue-400">Tax & Carbon</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">GCV Price & Quality Settlement</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">GCV Price & Quality Settlement Calculator</h1>
+    <p class="text-slate-400 mb-8 text-base">Compute the settlement price adjustment when delivered natural gas deviates from the contracted calorific value (GCV).</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="gcv-price-settlement" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Contract & Delivery Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Contract Terms -->
+          <div>
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Contract Terms</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Contract Price</label>
+                <div class="relative">
+                  <input type="number" data-field="contractPrice" placeholder="e.g. 8.50" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-20 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">$/unit</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Contract GCV</label>
+                <div class="relative">
+                  <input type="number" data-field="contractGCV" placeholder="e.g. 38.0" step="0.1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-20 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">MJ/unit</span>
+                </div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">The price and GCV basis fixed in the Gas Sales Agreement (GSA).</p>
+          </div>
+
+          <!-- Delivered Quality -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Delivered Gas</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Delivered GCV</label>
+                <div class="relative">
+                  <input type="number" data-field="deliveredGCV" placeholder="e.g. 36.5" step="0.1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-20 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">MJ/unit</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Delivered Volume</label>
+                <div class="relative">
+                  <input type="number" data-field="volume" placeholder="e.g. 100000" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-20 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">units</span>
+                </div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Actual GCV from the period's quality analysis and metered volume.</p>
+          </div>
+
+          <!-- Settlement Direction Reference -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Settlement Direction</p>
+            <div class="space-y-1.5 text-xs font-mono">
+              <div class="flex justify-between text-green-300"><span>Delivered GCV &gt; Contract</span><span>Price ↑ — credit to seller</span></div>
+              <div class="flex justify-between text-slate-300"><span>Delivered GCV = Contract</span><span>No adjustment</span></div>
+              <div class="flex justify-between text-red-300"><span>Delivered GCV &lt; Contract</span><span>Price ↓ — penalty to seller</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Settlement Result
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Adjusted Unit Price</p>
+            <p class="text-3xl font-black text-white font-mono" data-result="adjusted">—</p>
+          </div>
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Total Adjustment Amount</p>
+            <p class="text-2xl font-bold text-blue-300 font-mono" data-result="adjustment">—</p>
+          </div>
+          <div class="bg-blue-500/10 border border-blue-500/30 p-4 rounded-lg">
+            <p class="text-xs text-blue-300 uppercase tracking-wider font-semibold mb-1">Settlement Direction</p>
+            <p class="text-xl font-bold text-white" data-result="direction">—</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Gas is bought and sold for its <strong class="text-slate-200">energy content</strong>, not just its volume. When the delivered calorific value differs from the contractual basis, the unit price is adjusted proportionally so the buyer pays for the energy actually received and the seller is compensated fairly for higher-quality gas.</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Adjusted Unit Price</p>
+            <p class="font-mono text-blue-300 text-lg">P<sub>adj</sub> = P<sub>contract</sub> × (GCV<sub>delivered</sub> / GCV<sub>contract</sub>)</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Total Adjustment Amount</p>
+            <p class="font-mono text-blue-300 text-lg">Δ = (P<sub>adj</sub> − P<sub>contract</sub>) × Volume</p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Positive Δ</strong> = delivered GCV exceeded contract → buyer pays more → <span class="text-green-300">credit to seller</span></li>
+          <li><strong class="text-slate-200">Negative Δ</strong> = delivered GCV fell short → buyer pays less → <span class="text-red-300">penalty to seller</span></li>
+          <li>The adjustment is <em>linear</em> in the GCV ratio — a 2% GCV shortfall produces a 2% price reduction</li>
+          <li>Contract and delivered GCV must use the same basis (both GCV or both NCV) for the ratio to be valid</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <p class="text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">Beyond Simple Price Adjustment</p>
+          <p class="text-slate-300 text-xs">Real GSAs often add quality tolerances, off-spec penalties, and Wobbe Index limits on top of the linear GCV adjustment. Gas outside tolerance may be rejected outright or subject to additional liquidated damages. This tool models the core proportional price adjustment — check your specific contract for tolerance bands and extra penalty clauses.</p>
+        </div>
+
+        <div class="mt-2 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference: Gas Sales Agreement (GSA) Quality Adjustment Formula</p>
+          <p class="text-slate-300 text-xs">Proportional calorific-value price adjustment is the standard mechanism in pipeline gas and LNG sales contracts worldwide. It ensures energy-equivalent pricing across supply periods where gas composition (and therefore heating value) naturally varies, protecting both buyer and seller.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Tax & Carbon Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/industrial-energy/gcv-ncv-converter.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">GCV / NCV Converter</h3>
+          <p class="text-xs text-slate-400 mt-1">Ensure contract and delivered values share the same calorific basis.</p>
+        </a>
+        <a href="/industrial-energy/price-per-energy.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Price-per-Energy Unit Converter</h3>
+          <p class="text-xs text-slate-400 mt-1">Normalize the adjusted price to $/MMBtu, $/kWh, $/GJ, or ₹/Gcal.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
