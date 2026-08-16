@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fuel Combustion CO₂ Emissions Calculator | IPCC Tier 1 — FuelMath.net</title>
+  <meta name="description" content="Calculate direct CO₂ emissions from fuel combustion using IPCC Tier 1 / EPA emission factors. Diesel, petrol, LPG, natural gas, fuel oil, coal.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#tax-emissions" class="hover:text-blue-400">Tax & Carbon</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">Fuel Combustion CO₂ Output</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">Fuel Combustion CO₂ Emissions Calculator (IPCC Tier 1)</h1>
+    <p class="text-slate-400 mb-8 text-base">Calculate the direct carbon dioxide emissions from burning fossil fuels — for carbon footprints, fleet reporting, and Scope 1 inventories.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="fuel-co2-emissions" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Combustion Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Fuel Type -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Fuel Type</label>
+            <select data-field="fuel" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <option value="diesel" selected>Diesel / HSD</option>
+              <option value="petrol">Petrol / Gasoline</option>
+              <option value="lpg">LPG (Autogas)</option>
+              <option value="naturalgas">Natural Gas</option>
+              <option value="fueloil">Fuel Oil / HFO</option>
+              <option value="coal">Coal</option>
+            </select>
+            <p class="text-xs text-slate-500 mt-1.5">Each fuel uses its characteristic emission factor per unit.</p>
+          </div>
+
+          <!-- Quantity -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Fuel Quantity Consumed</label>
+            <div class="relative">
+              <input type="number" data-field="quantity" placeholder="e.g. 1000" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-20 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">units</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">Units by fuel: liquids in litres, natural gas in SCM, coal in kg.</p>
+          </div>
+
+          <!-- Emission Factor Reference -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">CO₂ Emission Factors</p>
+            <div class="space-y-1.5 text-xs font-mono">
+              <div class="flex justify-between text-slate-300"><span>Diesel</span><span class="text-blue-300">2.68 kg CO₂ / L</span></div>
+              <div class="flex justify-between text-slate-300"><span>Petrol</span><span class="text-blue-300">2.31 kg CO₂ / L</span></div>
+              <div class="flex justify-between text-slate-300"><span>LPG</span><span class="text-blue-300">1.66 kg CO₂ / L</span></div>
+              <div class="flex justify-between text-slate-300"><span>Natural Gas</span><span class="text-blue-300">1.96 kg CO₂ / SCM</span></div>
+              <div class="flex justify-between text-slate-300"><span>Fuel Oil</span><span class="text-blue-300">3.15 kg CO₂ / L</span></div>
+              <div class="flex justify-between text-slate-300"><span>Coal</span><span class="text-blue-300">2.42 kg CO₂ / kg</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          CO₂ Emissions
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Carbon Dioxide Emitted</p>
+            <p class="text-3xl font-black text-white font-mono" data-result="co2">—</p>
+          </div>
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">In Metric Tonnes</p>
+            <p class="text-2xl font-bold text-blue-300 font-mono" data-result="tonnes">—</p>
+          </div>
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 leading-relaxed">🏭 These are direct combustion emissions — <span class="text-blue-300">Scope 1</span> in the GHG Protocol. Burning 1 litre of diesel releases ~2.68 kg CO₂ because carbon in the fuel combines with oxygen in the air.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Every fossil fuel contains carbon. When burned, that carbon combines with atmospheric oxygen to form CO₂ — so emissions are directly proportional to the fuel consumed, via a fuel-specific <strong class="text-slate-200">emission factor</strong>.</p>
+
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          CO₂ = Quantity × Emission Factor
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Quantity</strong> = fuel consumed (litres, SCM, or kg depending on fuel)</li>
+          <li><strong class="text-slate-200">Emission factor</strong> = kg CO₂ per unit of fuel — set by the fuel's carbon content and combustion chemistry</li>
+          <li><strong class="text-slate-200">t CO₂</strong> = kg ÷ 1000, the standard unit for corporate reporting</li>
+          <li>Diesel emits ~15% more CO₂ per litre than petrol due to higher carbon content and density</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <p class="text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">Why CO₂ Exceeds the Fuel's Weight</p>
+          <p class="text-slate-300 text-xs">It seems surprising that 1 L of diesel (~0.84 kg) produces 2.68 kg of CO₂ — but the extra mass is oxygen pulled from the air during combustion. Each carbon atom (12 u) binds two oxygen atoms (2×16 u), so the CO₂ molecule is ~3.7× the mass of the carbon alone. This is why fuel emissions are greater than the fuel's own weight.</p>
+        </div>
+
+        <div class="mt-2 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference Standard: IPCC Tier 1 / EPA Emission Factors</p>
+          <p class="text-slate-300 text-xs">The IPCC Tier 1 method applies default emission factors to activity data (fuel consumed) — the standard first-tier approach for national inventories and corporate Scope 1 reporting. These direct combustion emissions fall under Scope 1 of the GHG Protocol. For a full footprint, add CH₄ and N₂O (using GWPs) and upstream Scope 3 emissions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Tax & Carbon Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/tax-emissions/methane-leakage-venting.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Methane Leakage & Venting Impact</h3>
+          <p class="text-xs text-slate-400 mt-1">Add CH₄ emissions to complete your Scope 1 inventory.</p>
+        </a>
+        <a href="/tax-emissions/carbon-tax-exposure.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Carbon Tax Financial Exposure</h3>
+          <p class="text-xs text-slate-400 mt-1">Turn your CO₂ total into a projected carbon-tax liability.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
