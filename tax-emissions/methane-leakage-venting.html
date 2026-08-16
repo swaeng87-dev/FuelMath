@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Methane Leakage & Venting Impact Estimator | IPCC AR6 — FuelMath.net</title>
+  <meta name="description" content="Convert unburned methane leaks into CO₂-equivalent (CO₂e) warming impact using IPCC AR6 GWP100/GWP20 coefficients. EPA Methane Challenge.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#tax-emissions" class="hover:text-blue-400">Tax & Carbon</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">Methane Leakage & Venting Impact</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">Methane Leakage & Venting Impact Estimator</h1>
+    <p class="text-slate-400 mb-8 text-base">Convert unburned methane leaks and venting into CO₂-equivalent warming impact — and quantify the economic value of the lost gas.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="methane-leakage-venting" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Leakage Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Methane Mass -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Methane Lost <span class="text-slate-500 font-normal">(leaked / vented)</span></label>
+            <div class="relative">
+              <input type="number" data-field="methaneMass" placeholder="e.g. 50" step="0.1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-16 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">kg CH₄</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">Mass of unburned methane released. Convert from volume: 1 kg CH₄ ≈ 1.4 SCM.</p>
+          </div>
+
+          <!-- GWP Horizon -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Global Warming Potential Horizon</label>
+            <select data-field="gwp" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <option value="100" selected>GWP100 — standard reporting (×29.8)</option>
+              <option value="20">GWP20 — short-term impact (×82.5)</option>
+            </select>
+            <p class="text-xs text-slate-500 mt-1.5">GWP100 is the regulatory default; GWP20 shows methane's intense near-term effect.</p>
+          </div>
+
+          <!-- Gas Price (Optional) -->
+          <div class="pt-3 border-t border-slate-700">
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Gas Value <span class="text-slate-500 font-normal">(optional, for economic loss)</span></label>
+            <div class="relative">
+              <input type="number" data-field="gasPrice" value="0" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 pr-16 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">$/kg</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1.5">Enter the gas price per kg to see the monetary value of the lost methane.</p>
+          </div>
+
+          <!-- Common Leakage Sources -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Common Methane Leakage Sources</p>
+            <div class="space-y-1.5 text-xs text-slate-300">
+              <p>• Pipeline & fitting leaks (fugitive emissions)</p>
+              <p>• Intentional venting during maintenance / blowdown</p>
+              <p>• LNG boil-off gas (BOG) not reliquefied or used</p>
+              <p>• Incomplete combustion / unburned slip in engines</p>
+              <p>• Pneumatic devices & pressure-relief valves</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Climate & Economic Impact
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">CO₂-Equivalent (CO₂e)</p>
+            <p class="text-3xl font-black text-white font-mono" data-result="co2e">—</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">In Tonnes CO₂e</p>
+              <p class="text-xl font-bold text-blue-300 font-mono" data-result="tonnes">—</p>
+            </div>
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Economic Loss</p>
+              <p class="text-xl font-bold text-red-300 font-mono" data-result="lossValue">—</p>
+            </div>
+          </div>
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 leading-relaxed">🌍 Methane is the main component of natural gas and a potent GHG — over its first 20 years it traps ~82.5× the heat of the same mass of CO₂. Even small leaks matter.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Unburned methane released to the atmosphere is both an <strong class="text-slate-200">environmental liability</strong> (potent greenhouse gas) and an <strong class="text-slate-200">economic loss</strong> (lost product). The Global Warming Potential (GWP) converts a methane mass into the equivalent mass of CO₂ over a chosen time horizon.</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">CO₂-Equivalent</p>
+            <p class="font-mono text-blue-300 text-lg">CO₂e = CH₄ mass × GWP</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">GWP Multipliers (IPCC AR6)</p>
+            <p class="font-mono text-blue-300 text-lg">GWP100 = 29.8 &nbsp;•&nbsp; GWP20 = 82.5</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Economic Loss (optional)</p>
+            <p class="font-mono text-blue-300 text-lg">Loss = CH₄ mass × Gas price</p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">GWP100 = 29.8</strong> — the standard reporting horizon used in national inventories and most corporate disclosures</li>
+          <li><strong class="text-slate-200">GWP20 = 82.5</strong> — captures methane's intense short-term warming; increasingly used to prioritize near-term abatement</li>
+          <li>Methane persists ~12 years in the atmosphere before breaking down, hence the higher short-term multiplier</li>
+          <li><strong class="text-slate-200">1 kg CH₄ ≈ 1.4 SCM</strong> — use the SCM-to-kg converter to translate volume measurements to mass</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <p class="text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">Why Methane Leaks Undermine Gas as a "Bridge Fuel"</p>
+          <p class="text-slate-300 text-xs">Natural gas only has a climate advantage over coal if leakage stays low. Because methane is so potent short-term, a leak rate above ~3% can erase gas's CO₂ benefit versus coal for power generation. This is why leak detection and repair (LDAR) programs are central to methane-reduction pledges.</p>
+        </div>
+
+        <div class="mt-2 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference Standard: IPCC AR6 / EPA Methane Challenge</p>
+          <p class="text-slate-300 text-xs">The GWP100 = 29.8 and GWP20 = 82.5 values are from the IPCC Sixth Assessment Report (AR6). The EPA Methane Challenge and the Global Methane Pledge (target: cut methane 30% by 2030) drive corporate and national methane accounting, for which this CO₂e conversion is the foundational step.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Tax & Carbon Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/tax-emissions/fuel-co2-emissions.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Fuel Combustion CO₂ Output</h3>
+          <p class="text-xs text-slate-400 mt-1">Compute the combustion CO₂ to pair with this methane figure.</p>
+        </a>
+        <a href="/gas-engineering/lng-bog-loss.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">LNG Boil-Off Gas (BOG) Estimator</h3>
+          <p class="text-xs text-slate-400 mt-1">Estimate the LNG boil-off that may be vented as methane.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
