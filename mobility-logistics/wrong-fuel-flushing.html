@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wrong Fuel Flushing Cost Estimator — FuelMath.net</title>
+  <meta name="description" content="Estimate repair and tank drainage costs from accidental misfueling — petrol in diesel or diesel in petrol. Common Misfueling Diagnostic Protocols.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors text-blue-300">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#mobility" class="hover:text-blue-400">Mobility & Fleet</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">Wrong Fuel Flushing Cost</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">Wrong Fuel Flushing Cost Estimator</h1>
+    <p class="text-slate-400 mb-8 text-base">Estimate repair and tank drainage costs following accidental misfueling — petrol into a diesel vehicle or vice versa.</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="wrong-fuel-flushing" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Repair Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Labour -->
+          <div>
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Labour</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Labour Hours</label>
+                <input type="number" data-field="labourHours" value="3" step="0.5" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Labour Rate ($/hr)</label>
+                <input type="number" data-field="labourRate" placeholder="e.g. 80" step="1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Drain-only ≈ 1–2 hrs. Full system flush ≈ 3–5 hrs. Component repair adds more.</p>
+          </div>
+
+          <!-- Parts & Disposal -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Parts & Disposal</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Parts / Filters ($)</label>
+                <input type="number" data-field="parts" placeholder="e.g. 150" step="1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Disposal Fee ($)</label>
+                <input type="number" data-field="disposal" value="50" step="1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Fuel-filter replacement is standard; injectors/pump only if the engine was run.</p>
+          </div>
+
+          <!-- Wasted Fuel -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Wasted Fuel</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Wrong Fuel Volume</label>
+                <div class="relative">
+                  <input type="number" data-field="fuelVolume" placeholder="e.g. 45" step="0.1" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-10 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">L</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Fuel Price</label>
+                <div class="relative">
+                  <input type="number" data-field="fuelPrice" placeholder="e.g. 1.35" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 pl-3 pr-14 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs font-semibold">$/L</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scenario Reference -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Misfueling Severity Guide</p>
+            <div class="space-y-1.5 text-xs font-mono">
+              <div class="flex justify-between text-slate-300"><span>Petrol in Diesel — NOT started</span><span class="text-green-300">Drain + flush</span></div>
+              <div class="flex justify-between text-slate-300"><span>Petrol in Diesel — started/driven</span><span class="text-red-300">Pump + injector risk</span></div>
+              <div class="flex justify-between text-slate-300"><span>Diesel in Petrol — NOT started</span><span class="text-green-300">Drain + flush</span></div>
+              <div class="flex justify-between text-slate-300"><span>Diesel in Petrol — started</span><span class="text-yellow-300">Flush + plugs/coils</span></div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Petrol in diesel is far more damaging — petrol strips lubrication from the high-pressure injection system.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Estimated Cost
+        </h2>
+
+        <div class="space-y-4">
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Labour Cost</p>
+            <p class="text-2xl font-bold text-white font-mono" data-result="labour">—</p>
+          </div>
+          <div class="bg-slate-900/60 p-5 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Total Repair Cost</p>
+            <p class="text-3xl font-black text-red-400 font-mono" data-result="total">—</p>
+            <p class="text-xs text-slate-500 mt-1">Labour + parts + disposal + wasted fuel</p>
+          </div>
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 leading-relaxed">🚨 If you've just misfuelled: do NOT start the engine. Not starting it is the single biggest factor keeping this cost low — running the wrong fuel through the system multiplies the damage.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Misfueling recovery cost is the sum of <strong class="text-slate-200">labour, replacement parts, hazardous-waste disposal, and the wasted fuel itself</strong>. The dominant variable is whether the engine was started — running the wrong fuel circulates it through pumps, lines, and injectors, escalating the job from a simple drain to component repair.</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Labour Cost</p>
+            <p class="font-mono text-blue-300 text-lg">C<sub>labour</sub> = Hours × Rate</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Wasted Fuel Cost</p>
+            <p class="font-mono text-blue-300 text-lg">C<sub>fuel</sub> = Volume × Price</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Total Recovery Cost</p>
+            <p class="font-mono text-blue-300 text-lg">Total = C<sub>labour</sub> + Parts + Disposal + C<sub>fuel</sub></p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Engine NOT started</strong> — tank drain, line flush, and filter change only (lowest cost)</li>
+          <li><strong class="text-slate-200">Engine started / driven</strong> — fuel has circulated; add inspection and likely replacement of fuel pump, injectors, or high-pressure components</li>
+          <li><strong class="text-slate-200">Petrol in diesel</strong> — most severe: petrol is a solvent that destroys the lubrication diesel injection systems rely on</li>
+          <li><strong class="text-slate-200">Diesel in petrol</strong> — less severe: usually resolved with drain, flush, and spark-plug cleaning, since diesel won't ignite in a petrol engine</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <p class="text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">Immediate Action Steps</p>
+          <p class="text-slate-300 text-xs">1) Do not start the engine or turn the ignition to "on" (primes the fuel pump). 2) Put the car in neutral and move it clear of the pumps. 3) Call a mobile drain service or have it towed. Acting before starting can keep the bill to a drain-and-flush rather than a full injection-system rebuild.</p>
+        </div>
+
+        <div class="mt-2 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference Standard: Common Misfueling Diagnostic Protocols</p>
+          <p class="text-slate-300 text-xs">This estimator follows standard automotive misfueling recovery protocols used by roadside assistance and workshop service chains. Actual quotes vary by vehicle make, fuel-system design (common-rail diesel is most vulnerable), and regional labour rates — use this for budgeting and insurance-claim estimates.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Mobility & Fleet Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/petroleum-standards/volume-to-mass-density.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Volume-to-Mass Converter</h3>
+          <p class="text-xs text-slate-400 mt-1">Convert between petrol and diesel volumes and weights.</p>
+        </a>
+        <a href="/mobility-logistics/fuel-cost-per-km.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Fuel Cost per Kilometer / Mile</h3>
+          <p class="text-xs text-slate-400 mt-1">Return to routine fuel costing once the vehicle is repaired.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
