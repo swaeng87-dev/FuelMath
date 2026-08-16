@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Octane Rating Converter (RON ⇄ MON ⇄ AKI) | ASTM D2699 / D2700 — FuelMath.net</title>
+  <meta name="description" content="Convert between international octane scales — Research (RON), Motor (MON), and US pump AKI — using ASTM D2699 / D2700 definitions.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#biofuels" class="hover:text-blue-400">Biofuels & Blending</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">Octane Rating Converter (RON ⇄ MON ⇄ AKI)</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">Octane Rating Converter (RON ⇄ MON ⇄ AKI)</h1>
+    <p class="text-slate-400 mb-8 text-base">Convert between international octane scales — Research (RON), Motor (MON), and the US/Canada pump rating (AKI).</p>
+
+    <!-- CALCULATOR ENGINE -->
+    <div data-tool="octane-ron-mon-aki" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+
+      <!-- Inputs Panel -->
+      <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+          Converter Inputs
+        </h2>
+
+        <div class="space-y-5">
+
+          <!-- Mode -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-300 mb-1.5">Conversion Direction</label>
+            <select data-field="mode" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 text-lg font-mono">
+              <option value="ronmon" selected>Direction 1 — RON + MON → AKI</option>
+              <option value="aki">Direction 2 — AKI → RON + MON</option>
+            </select>
+            <p class="text-xs text-slate-500 mt-1.5">Pick a direction, then fill in the matching input group below. The corresponding results update on the right.</p>
+          </div>
+
+          <!-- Direction 1 Inputs -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Direction 1 — RON + MON inputs</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Research Octane (RON)</label>
+                <input type="number" data-field="ron" placeholder="e.g. 95" step="0.5" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Motor Octane (MON)</label>
+                <input type="number" data-field="mon" placeholder="e.g. 85" step="0.5" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+            </div>
+          </div>
+
+          <!-- Direction 2 Inputs -->
+          <div class="pt-3 border-t border-slate-700">
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Direction 2 — AKI inputs</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">US Pump Octane (AKI)</label>
+                <input type="number" data-field="aki" placeholder="e.g. 87" step="0.5" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Octane Sensitivity</label>
+                <input type="number" data-field="sensitivity" value="9" step="0.5" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">Sensitivity = RON − MON. Typical gasoline: 8–12. Default 9.</p>
+          </div>
+
+          <!-- Common Octane Reference -->
+          <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-2">Common Octane Cross-Reference</p>
+            <div class="space-y-1.5 text-xs font-mono">
+              <div class="flex justify-between text-slate-300"><span>US Regular 87 AKI</span><span class="text-blue-300">≈ 91–92 RON</span></div>
+              <div class="flex justify-between text-slate-300"><span>US Premium 91–93 AKI</span><span class="text-blue-300">≈ 95–98 RON</span></div>
+              <div class="flex justify-between text-slate-300"><span>Euro 95 RON</span><span class="text-blue-300">≈ 91 AKI</span></div>
+              <div class="flex justify-between text-slate-300"><span>Euro 98 RON</span><span class="text-blue-300">≈ 93–94 AKI</span></div>
+              <div class="flex justify-between text-slate-300"><span>Ethanol (E100)</span><span class="text-blue-300">108–113 RON</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-800/50 p-6 rounded-xl border border-blue-500/30 shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          Converted Octane
+        </h2>
+
+        <div class="space-y-4">
+          <!-- Direction 1 Results -->
+          <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Direction 1 — RON + MON → AKI</p>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">US Pump (AKI)</p>
+              <p class="text-2xl font-bold text-white font-mono" data-result="aki">—</p>
+            </div>
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Sensitivity</p>
+              <p class="text-2xl font-bold text-blue-300 font-mono" data-result="sensitivity">—</p>
+            </div>
+          </div>
+
+          <!-- Direction 2 Results -->
+          <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 mt-2">Direction 2 — AKI → RON + MON</p>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Research (RON)</p>
+              <p class="text-2xl font-bold text-white font-mono" data-result="ron">—</p>
+            </div>
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
+              <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Motor (MON)</p>
+              <p class="text-2xl font-bold text-blue-300 font-mono" data-result="mon">—</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Octane ratings measure a fuel's resistance to engine knock, but different regions use different scales. Europe, Asia, and Australia display <strong class="text-slate-200">RON</strong> at the pump; the US and Canada display the <strong class="text-slate-200">AKI</strong> — the average of RON and MON — which is why a US "87 octane" equals a European "91".</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">AKI (Anti-Knock Index) — US Pump Rating</p>
+            <p class="font-mono text-blue-300 text-lg">AKI = (RON + MON) / 2</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Octane Sensitivity</p>
+            <p class="font-mono text-blue-300 text-lg">S = RON − MON</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+            <p class="text-xs font-bold text-blue-400 uppercase mb-1">Reverse — Recover RON & MON from AKI</p>
+            <p class="font-mono text-blue-300 text-lg">RON = AKI + S/2 &nbsp;•&nbsp; MON = AKI − S/2</p>
+          </div>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">RON</strong> (Research Octane Number) — measured under mild, low-speed conditions (ASTM D2699); typically the higher number</li>
+          <li><strong class="text-slate-200">MON</strong> (Motor Octane Number) — measured under harsher, higher-load conditions (ASTM D2700); typically 8–12 points below RON</li>
+          <li><strong class="text-slate-200">AKI</strong> = the average of the two, shown on North American pumps as (R+M)/2</li>
+          <li>The reverse direction needs an assumed sensitivity (default 9) since AKI alone can't uniquely determine RON and MON</li>
+        </ul>
+
+        <div class="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <p class="text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">Why the Confusion Matters</p>
+          <p class="text-slate-300 text-xs">A driver comparing a US "91 premium" (AKI) with a European "95" (RON) is comparing different scales — the US 91 AKI is roughly a 95 RON. Importing vehicles, tuning engines, or blending fuels across markets requires converting to a common basis first, which is exactly what this tool does.</p>
+        </div>
+
+        <div class="mt-2 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference Standard: ASTM D2699 / D2700</p>
+          <p class="text-slate-300 text-xs">ASTM D2699 defines the Research Octane Number test method and ASTM D2700 defines the Motor Octane Number, both using standardized cooperative test engines. The AKI — (R+M)/2 — is the labeling convention mandated for retail gasoline dispensers in the United States by the EPA and FTC.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Related Biofuel & Blending Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="/biofuels-blending/ethanol-blending-e10-e20.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">Ethanol Blending (E10, E20, E85)</h3>
+          <p class="text-xs text-slate-400 mt-1">See how ethanol raises blended octane for your target grade.</p>
+        </a>
+        <a href="/biofuels-blending/bsfc-engine-efficiency.html" class="group bg-slate-800 hover:bg-slate-700/80 p-4 rounded-xl border border-slate-700 hover:border-blue-400 transition-all">
+          <h3 class="font-bold text-white group-hover:text-blue-300">BSFC Engine Thermal Efficiency</h3>
+          <p class="text-xs text-slate-400 mt-1">Relate octane-enabled compression to engine efficiency.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/search.js" defer></script>
+  <script src="/js/calculators.js" defer></script>
+</body>
+</html>
