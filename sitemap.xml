@@ -69,4 +69,23 @@
   <url><loc>https://fuelmath.net/tax-emissions/methane-leakage-venting.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://fuelmath.net/tax-emissions/carbon-tax-exposure.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://fuelmath.net/tax-emissions/fuel-price-budget-shock.html</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <!-- Static Pages -->
+<url>
+  <loc>https://fuelmath.net/methodology.html</loc>
+  <lastmod>2026-08-17</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://fuelmath.net/privacy.html</loc>
+  <lastmod>2026-08-17</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.3</priority>
+</url>
+<url>
+  <loc>https://fuelmath.net/terms.html</loc>
+  <lastmod>2026-08-17</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.3</priority>
+</url>
 </urlset>
