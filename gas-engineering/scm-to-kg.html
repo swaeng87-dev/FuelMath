@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SCM to kg Converter | Natural Gas Mass Calculator — FuelMath.net</title>
   <meta name="description" content="Convert Standard Cubic Metres (SCM) of natural gas to mass in kilograms (kg) and Metric Tons (MT). ISO 13443 compliant client-side calculator.">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-62883Q48DF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-62883Q48DF');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-62883Q48DF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-62883Q48DF');
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -48,13 +47,13 @@
 
   <!-- Main Content -->
   <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
-    
+
     <!-- Breadcrumb -->
     <nav class="text-xs text-slate-400 mb-6 font-medium">
-      <a href="/" class="hover:text-blue-400">Home</a> 
-      <span class="mx-2">/</span> 
-      <a href="/#gas-engineering" class="hover:text-blue-400">Gas Engineering</a> 
-      <span class="mx-2">/</span> 
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/#gas-engineering" class="hover:text-blue-400">Gas Engineering</a>
+      <span class="mx-2">/</span>
       <span class="text-slate-200">SCM to kg Converter</span>
     </nav>
 
@@ -62,16 +61,14 @@
     <p class="text-slate-400 mb-8 text-base">Convert Standard Cubic Metres (SCM) of natural gas to mass in kilograms (kg) and Metric Tons (MT) using standard density presets.</p>
 
     <!-- CALCULATOR ENGINE -->
-    <!-- The data-tool attribute connects this UI to calculators.js -->
     <div data-tool="scm-to-kg" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-      
+
       <!-- Inputs Panel -->
       <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
         <h2 class="text-lg font-bold text-blue-300 mb-4 flex items-center gap-2">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
           Inputs
         </h2>
-        
         <div class="space-y-5">
           <div>
             <label for="vol" class="block text-sm font-semibold text-slate-300 mb-1.5">Gas Volume</label>
@@ -80,7 +77,6 @@
               <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-sm">SCM</span>
             </div>
           </div>
-
           <div>
             <label for="den" class="block text-sm font-semibold text-slate-300 mb-1.5">Gas Density <span class="text-slate-500 font-normal">(at 15°C)</span></label>
             <div class="relative">
@@ -98,7 +94,6 @@
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
           Results
         </h2>
-        
         <div class="space-y-4">
           <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-700">
             <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Total Mass</p>
@@ -117,17 +112,14 @@
       <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methodology & Formula</h2>
       <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
         <p>This calculator determines the physical mass of natural gas based on its volumetric flow or storage size at standard reference conditions.</p>
-        
         <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
           m = V × ρ
         </div>
-
         <ul class="list-disc list-inside space-y-2 text-slate-400">
           <li><strong class="text-slate-200">m</strong> = Mass (kg)</li>
           <li><strong class="text-slate-200">V</strong> = Volume at standard conditions (SCM)</li>
           <li><strong class="text-slate-200">ρ</strong> = Density of the gas mixture (kg/m³)</li>
         </ul>
-
         <div class="mt-4 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
           <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Reference Standard: ISO 13443</p>
           <p class="text-slate-300 text-xs">Standard reference conditions for natural gas custody transfer and volumetric measurement are defined as <strong>15°C (288.15 K)</strong> and <strong>101.325 kPa (1 atm)</strong>. Ensure your SCM volume is corrected to these base conditions before calculating mass.</p>
@@ -150,20 +142,128 @@
       </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- INSERTED ARTICLE SECTIONS ABOVE THE FOOTER -->
-    <!-- ========================================== -->
+    <!-- ============================================================ -->
+    <!-- ARTICLE SECTIONS — properly styled, inside <main>           -->
+    <!-- ============================================================ -->
+
+    <!-- Article: CM vs SCM -->
     <section class="mb-12">
-      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Cubic Meter Vs Standard Cubic Meter</h2>
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Cubic Meter (CM) Vs Standard Cubic Meter (SCM)</h2>
       <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
-        <p>The volume of gas is generally measured in <b>CM</b> (Cubic Meters). But the word 'Standard' is used when the volume varies due to composition or temperature. For the measurement of PNG (Piped Natural Gas), <b>SCM</b> (Standard Cubic Meter) is used. The composition of PNG differs from distributor to distributor, and from region to region. The main composition of PNG is Methane. But it also contains Ethane, Propane, and Butane. PNG is 90% to 95% Methane. As there is no fixed Methane ratio and it flows through pipes in different temperature regions, calculating the gas in <b>CM</b> becomes difficult. So it is measured in <b>SCM</b>.</p>
+        <p>The volume of gas is generally measured in <b class="text-white">CM</b> (Cubic Meters). But the word 'Standard' is used when the volume varies due to composition or temperature. For the measurement of PNG (Piped Natural Gas), <b class="text-white">SCM</b> (Standard Cubic Meter) is used. The composition of PNG differs from distributor to distributor, and from region to region. The main component of PNG is Methane. But it also contains Ethane, Propane, and Butane and incombustible gases like CO₂, N₂ and inert gases. PNG is 90% to 95% Methane. As there is no fixed Methane ratio and it flows through pipes in different temperature regions, calculating the gas in <b class="text-white">CM</b> becomes difficult. So it is measured in <b class="text-white">SCM</b>. It refers to cubic meters of gases at <b class="text-white">15°C (288.15 K)</b> temperature and <b class="text-white">1 atmosphere pressure (101.325 kPa)</b>.</p>
       </div>
     </section>
 
+    <!-- Article: SCM to KG -->
     <section class="mb-12">
       <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">SCM to KG</h2>
       <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
-        <p>As the gas (PNG) is measured in SCM, it becomes very difficult to convert it into KG. Generally, 1 SCM is equivalent to 0.72 to 0.76 kg. The difference is due to the composition and temperature. The more Methane in the PNG, the lighter it is. For commercial PNG billing, 1 SCM is considered as 0.76 kg.</p>
+        <p>As the PNG is measured in SCM, it becomes very difficult to convert it into KG. Generally, 1 SCM of Piped Natural Gas is about <b class="text-white">0.71 to 0.80 kg</b>. The difference is due to the composition and temperature of the gas. Pure Methane is approximately <b class="text-white">0.71 kg</b> in standard conditions. As Methane is lighter, the more Methane in the PNG, the lighter it is. For commercial PNG billing, you can consider <b class="text-white">1 SCM of PNG is equivalent to 0.76 kg</b>.</p>
+      </div>
+    </section>
+
+    <!-- Article: SCM to Metric Ton -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">SCM to Metric Ton</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>If you want to convert SCM into Metric Tons (MT), you can safely divide it by 1000.</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          Metric Tons = kg ÷ 1000
+        </div>
+        <p>For 1 SCM of PNG, if you take it as 0.76 kg, divide it by 1000 and you get <b class="text-white">0.00076 MT</b>.</p>
+        <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 font-mono text-center text-slate-300 text-sm">
+          0.76 ÷ 1000 = 0.00076
+        </div>
+      </div>
+    </section>
+
+    <!-- Article: How to Calculate Manually -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">How to Calculate SCM to KG Manually</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>If your SCM value is not in the table below, you can easily calculate it using the standard conversion factor of <b class="text-white">0.76</b>. But before calculating the value, I would suggest checking your gas bill, if there is another value instead of 0.76.</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          Weight in KG = SCM × 0.76
+        </div>
+        <ul class="list-disc list-inside space-y-3 text-slate-400">
+          <li><b class="text-slate-200">Example 1:</b> Convert 250 SCM to KG.
+            <br><span class="text-slate-500 italic ml-4">250 × 0.76 = 190 KG</span></li>
+          <li><b class="text-slate-200">Example 2:</b> Convert 450 SCM to KG.
+            <br><span class="text-slate-500 italic ml-4">450 × 0.76 = 342 KG</span></li>
+          <li><b class="text-slate-200">Example 3:</b> Convert 1,500 SCM to Metric Tons (MT).
+            <br><span class="text-slate-500 italic ml-4">First, find KG: 1,500 × 0.76 = 1,140 KG. Then divide by 1000: 1,140 ÷ 1000 = 1.14 MT</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Article: Conversion Table -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">SCM to KG/MT Conversion Table</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 overflow-x-auto">
+        <table class="w-full text-sm text-left text-slate-300">
+          <thead>
+            <tr class="border-b border-slate-600 text-xs uppercase tracking-wider text-slate-400">
+              <th class="px-4 py-3 font-semibold">SCM</th>
+              <th class="px-4 py-3 font-semibold">KG Range</th>
+              <th class="px-4 py-3 font-semibold">KG (×0.76)</th>
+              <th class="px-4 py-3 font-semibold">MT</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-700/50 font-mono text-xs">
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">1</td><td class="px-4 py-2 text-slate-400">0.71 – 0.80</td><td class="px-4 py-2 text-blue-300">0.76</td><td class="px-4 py-2">0.00076</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">2</td><td class="px-4 py-2 text-slate-400">1.42 – 1.60</td><td class="px-4 py-2 text-blue-300">1.52</td><td class="px-4 py-2">0.00152</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">3</td><td class="px-4 py-2 text-slate-400">2.13 – 2.40</td><td class="px-4 py-2 text-blue-300">2.28</td><td class="px-4 py-2">0.00228</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">4</td><td class="px-4 py-2 text-slate-400">2.84 – 3.20</td><td class="px-4 py-2 text-blue-300">3.04</td><td class="px-4 py-2">0.00304</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">5</td><td class="px-4 py-2 text-slate-400">3.55 – 4.00</td><td class="px-4 py-2 text-blue-300">3.80</td><td class="px-4 py-2">0.00380</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">6</td><td class="px-4 py-2 text-slate-400">4.26 – 4.80</td><td class="px-4 py-2 text-blue-300">4.56</td><td class="px-4 py-2">0.00456</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">7</td><td class="px-4 py-2 text-slate-400">4.97 – 5.60</td><td class="px-4 py-2 text-blue-300">5.32</td><td class="px-4 py-2">0.00532</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">8</td><td class="px-4 py-2 text-slate-400">5.68 – 6.40</td><td class="px-4 py-2 text-blue-300">6.08</td><td class="px-4 py-2">0.00608</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">9</td><td class="px-4 py-2 text-slate-400">6.39 – 7.20</td><td class="px-4 py-2 text-blue-300">6.84</td><td class="px-4 py-2">0.00684</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">10</td><td class="px-4 py-2 text-slate-400">7.10 – 8.00</td><td class="px-4 py-2 text-blue-300">7.60</td><td class="px-4 py-2">0.00760</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">11</td><td class="px-4 py-2 text-slate-400">7.81 – 8.80</td><td class="px-4 py-2 text-blue-300">8.36</td><td class="px-4 py-2">0.00836</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">12</td><td class="px-4 py-2 text-slate-400">8.52 – 9.60</td><td class="px-4 py-2 text-blue-300">9.12</td><td class="px-4 py-2">0.00912</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">13</td><td class="px-4 py-2 text-slate-400">9.23 – 10.40</td><td class="px-4 py-2 text-blue-300">9.88</td><td class="px-4 py-2">0.00988</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">14</td><td class="px-4 py-2 text-slate-400">9.94 – 11.20</td><td class="px-4 py-2 text-blue-300">10.64</td><td class="px-4 py-2">0.01064</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">15</td><td class="px-4 py-2 text-slate-400">10.65 – 12.00</td><td class="px-4 py-2 text-blue-300">11.40</td><td class="px-4 py-2">0.01140</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">16</td><td class="px-4 py-2 text-slate-400">11.36 – 12.80</td><td class="px-4 py-2 text-blue-300">12.16</td><td class="px-4 py-2">0.01216</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">17</td><td class="px-4 py-2 text-slate-400">12.07 – 13.60</td><td class="px-4 py-2 text-blue-300">12.92</td><td class="px-4 py-2">0.01292</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">18</td><td class="px-4 py-2 text-slate-400">12.78 – 14.40</td><td class="px-4 py-2 text-blue-300">13.68</td><td class="px-4 py-2">0.01368</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors bg-blue-500/10"><td class="px-4 py-2 text-blue-300">18.68</td><td class="px-4 py-2 text-slate-400">13.26 – 14.94</td><td class="px-4 py-2 text-blue-300 font-bold">14.20</td><td class="px-4 py-2">0.01420</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">19</td><td class="px-4 py-2 text-slate-400">13.49 – 15.20</td><td class="px-4 py-2 text-blue-300">14.44</td><td class="px-4 py-2">0.01444</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">20</td><td class="px-4 py-2 text-slate-400">14.20 – 16.00</td><td class="px-4 py-2 text-blue-300">15.20</td><td class="px-4 py-2">0.01520</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">25</td><td class="px-4 py-2 text-slate-400">17.75 – 20.00</td><td class="px-4 py-2 text-blue-300">19.00</td><td class="px-4 py-2">0.01900</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">30</td><td class="px-4 py-2 text-slate-400">21.30 – 24.00</td><td class="px-4 py-2 text-blue-300">22.80</td><td class="px-4 py-2">0.02280</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">35</td><td class="px-4 py-2 text-slate-400">24.85 – 28.00</td><td class="px-4 py-2 text-blue-300">26.60</td><td class="px-4 py-2">0.02660</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">40</td><td class="px-4 py-2 text-slate-400">28.40 – 32.00</td><td class="px-4 py-2 text-blue-300">30.40</td><td class="px-4 py-2">0.03040</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">45</td><td class="px-4 py-2 text-slate-400">31.95 – 36.00</td><td class="px-4 py-2 text-blue-300">34.20</td><td class="px-4 py-2">0.03420</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">50</td><td class="px-4 py-2 text-slate-400">35.50 – 40.00</td><td class="px-4 py-2 text-blue-300">38.00</td><td class="px-4 py-2">0.03800</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">55</td><td class="px-4 py-2 text-slate-400">39.05 – 44.00</td><td class="px-4 py-2 text-blue-300">41.80</td><td class="px-4 py-2">0.04180</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">60</td><td class="px-4 py-2 text-slate-400">42.60 – 48.00</td><td class="px-4 py-2 text-blue-300">45.60</td><td class="px-4 py-2">0.04560</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">65</td><td class="px-4 py-2 text-slate-400">46.15 – 52.00</td><td class="px-4 py-2 text-blue-300">49.40</td><td class="px-4 py-2">0.04940</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">70</td><td class="px-4 py-2 text-slate-400">49.70 – 56.00</td><td class="px-4 py-2 text-blue-300">53.20</td><td class="px-4 py-2">0.05320</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">75</td><td class="px-4 py-2 text-slate-400">53.25 – 60.00</td><td class="px-4 py-2 text-blue-300">57.00</td><td class="px-4 py-2">0.05700</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">80</td><td class="px-4 py-2 text-slate-400">56.80 – 64.00</td><td class="px-4 py-2 text-blue-300">60.80</td><td class="px-4 py-2">0.06080</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">85</td><td class="px-4 py-2 text-slate-400">60.35 – 68.00</td><td class="px-4 py-2 text-blue-300">64.60</td><td class="px-4 py-2">0.06460</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">90</td><td class="px-4 py-2 text-slate-400">63.90 – 72.00</td><td class="px-4 py-2 text-blue-300">68.40</td><td class="px-4 py-2">0.06840</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">95</td><td class="px-4 py-2 text-slate-400">67.45 – 76.00</td><td class="px-4 py-2 text-blue-300">72.20</td><td class="px-4 py-2">0.07220</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors bg-slate-700/40 font-semibold"><td class="px-4 py-2 text-white">100</td><td class="px-4 py-2 text-slate-300">71.00 – 80.00</td><td class="px-4 py-2 text-blue-300">76.00</td><td class="px-4 py-2 text-white">0.07600</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors bg-slate-700/40 font-semibold"><td class="px-4 py-2 text-white">200</td><td class="px-4 py-2 text-slate-300">142.00 – 160.00</td><td class="px-4 py-2 text-blue-300">152.00</td><td class="px-4 py-2 text-white">0.15200</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors bg-slate-700/40 font-semibold"><td class="px-4 py-2 text-white">500</td><td class="px-4 py-2 text-slate-300">355.00 – 400.00</td><td class="px-4 py-2 text-blue-300">380.00</td><td class="px-4 py-2 text-white">0.38000</td></tr>
+            <tr class="hover:bg-slate-700/30 transition-colors bg-slate-700/40 font-semibold"><td class="px-4 py-2 text-white">1000</td><td class="px-4 py-2 text-slate-300">710.00 – 800.00</td><td class="px-4 py-2 text-blue-300">760.00</td><td class="px-4 py-2 text-white">0.76000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Article: SCM vs Sm³ vs Nm³ -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">SCM vs Sm³ vs Nm³</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>The main difference is in the temperature. <b class="text-white">SCM</b> and <b class="text-white">Sm³</b> are basically the same. 'S' stands for 'Standard', while 'm³' is the abbreviation of Cubic Meter (CM). It refers to gas volume at <b class="text-white">15°C (288.15 K)</b> or sometimes 20°C, and 1 atmosphere (101.325 kPa) of pressure. But <b class="text-white">Nm³</b> is different. It stands for Normal Cubic Meter. It refers to gas volume at <b class="text-white">0°C (273.15 K)</b> and 1 atmosphere (101.325 kPa) of pressure.</p>
+        <p>It matters because gas volume differs at different temperatures. Gas at 0°C is denser than the gas at 15°C. For a rough conversion:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          1 Nm³ ≈ 1.06 Sm³ (at 15°C)
+        </div>
       </div>
     </section>
 
