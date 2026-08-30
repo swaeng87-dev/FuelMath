@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CNG Dispenser Cascading Pressure Calculator | NGV2 / NFPA 52 — FuelMath.net</title>
   <meta name="description" content="Model mass transfer efficiency across Low, Medium, and High bank CNG storage cascades during vehicle fills. NGV2 / NFPA 52 compliant estimator.">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-62883Q48DF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-62883Q48DF');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-62883Q48DF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-62883Q48DF');
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -69,11 +68,9 @@
         </h2>
 
         <div class="space-y-5">
-
           <!-- Group: Storage Banks -->
           <div>
             <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Station Storage Banks (fill order: Low → Med → High)</p>
-
             <!-- Low Bank -->
             <div class="mb-2">
               <label class="block text-xs font-semibold text-slate-400 mb-1">Low Bank</label>
@@ -88,7 +85,6 @@
                 </div>
               </div>
             </div>
-
             <!-- Medium Bank -->
             <div class="mb-2">
               <label class="block text-xs font-semibold text-slate-400 mb-1">Medium Bank</label>
@@ -103,7 +99,6 @@
                 </div>
               </div>
             </div>
-
             <!-- High Bank -->
             <div>
               <label class="block text-xs font-semibold text-slate-400 mb-1">High Bank</label>
@@ -157,7 +152,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -239,6 +233,162 @@
           <h3 class="font-bold text-white group-hover:text-blue-300">Compressibility Z-Factor</h3>
           <p class="text-xs text-slate-400 mt-1">Derive an accurate Z value at high CNG pressures for better mass estimates.</p>
         </a>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- NEW INTEGRATED CONTENT SECTIONS                              -->
+    <!-- ============================================================ -->
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">CNG Pressure Cascade: What Does It Mean?</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>A CNG Pressure Cascade refers to a CNG filling system found in gas filling stations. It is used to dispense gas into the vehicle's tank at high pressure, generally at 200 bar (3000 psi) or 250 bar (3600 psi). A pressure differentiation method is used in the filling process.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">How Does CNG Cascade Filling Work?</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Instead of drawing gas from a single large storage vessel, gas is stored sequentially into three different pressure tanks—low, medium, and high-pressure tanks—and gas is drawn from each tank sequentially.</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Low Pressure Banks:</strong> Initially, when a vehicle arrives at a gas filling station, gas is pushed into the vehicle's tank from this bank.</li>
+          <li><strong class="text-slate-200">Medium Pressure Banks:</strong> After filling some gas at low pressure, when the vehicle's tank is moderately filled, gas is pushed from medium pressure banks.</li>
+          <li><strong class="text-slate-200">High Pressure Banks:</strong> After pushing gas from the medium pressure bank, gas is pushed from high pressure banks to ensure the required 200 bar or 250 bar is reached.</li>
+        </ul>
+        <p>This sequential filling ensures that the compressor does not have to run all the time and allows steady filling at a low energy cost. A priority panel automatically controls the switching based on pressure differentials.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Typical CNG Cascade Pressure Ranges</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>The exact pressure ranges depend on the filling station's design. Local regulations like NGV2 (ANSI/NGV 2) and ISO 11439 / ISO 15500 also play a critical role in the cascade pressure. However, a standard 200 bar gas filling cascade setup should follow:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Low Pressure Bank:</strong> 25 to 50 bar</li>
+          <li><strong class="text-slate-200">Medium Pressure Bank:</strong> 50 to 120 bar</li>
+          <li><strong class="text-slate-200">High Pressure Bank:</strong> 120 to 250 bar</li>
+        </ul>
+        <div class="mt-4 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+          <p class="text-blue-300 font-bold text-xs uppercase tracking-wider mb-1">Important Note</p>
+          <p class="text-slate-300 text-xs">The High Pressure Tank must be maintained at a pressure at least 20% higher than the vehicle's tank for a complete fill.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">What Factors Affect CNG Dispenser Pressure?</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Several factors affect the CNG Dispenser Pressure. The four primary factors are:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Initial Vehicle Tank Pressure:</strong> A nearly empty vehicle tank allows for a higher initial mass flow rate (kg/min) due to the greater pressure differential (ΔP) between the bank and the vehicle.</li>
+          <li><strong class="text-slate-200">Cascade Bank Volumes:</strong> The physical volume of the cascade banks (low, medium, and high) affects the flow.</li>
+          <li><strong class="text-slate-200">Ambient and Gas Temperature:</strong> Temperature affects gas density and pressure.</li>
+          <li><strong class="text-slate-200">Flow Rate:</strong> Faster filling produces heat and temporarily spikes pressure. This leads to an underfill once the gas cools.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">CNG Cascade Pressure vs. Dispenser Pressure</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>It is important to understand the difference between CNG Cascade Pressure and Dispenser Pressure. Cascade Pressure means the pressure in the storage tanks, and Dispenser Pressure refers to the pressure at the nozzle before the gas enters the vehicle tank. Cascade Pressure is static, and Dispenser Pressure fluctuates through hoses, valves, and meters. Dispenser Pressure always remains slightly lower than the Cascade Pressure.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">CNG Cascade Pressure and Temperature</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Temperature is the silent enemy in CNG filling. When CNG is filled rapidly at 200 bar into the vehicle tank, the temperature of the gas increases. This leads to a sudden increase in gas volume and results in an underfill when the ambient temperature of the gas cools down. Modern cascade systems and dispensers use temperature compensation (following NGV2 and ISO 11439 standards) to adjust the filling pressure dynamically based on the gas temperature.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Why CNG Cascade Pressure Matters in Fueling</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Optimizing the cascade pressure is not just about physics; it is also about business and safety. Here are some important aspects that you must consider:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Customer Satisfaction:</strong> An unsatisfied customer means a loss in business. A customer does not want an underfilled tank, which they have paid for. Maintaining exact pressure and refill satisfies the customer and improves business capacity in the long run.</li>
+          <li><strong class="text-slate-200">Operational Efficiency:</strong> It reduces the run time of the compressor and saves electricity and cost.</li>
+          <li><strong class="text-slate-200">Safety:</strong> It prevents overpressure, which may trigger Pressure Relief Devices (PRDs) and vent gas into the atmosphere.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">How to Use the Calculator: Required Inputs</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>To get accurate results from the CNG Dispensing Cascading Pressure Calculator, you need to define your baseline parameters. The table below outlines the standard inputs and assumptions required for the calculation:</p>
+        <div class="bg-slate-900/50 border border-slate-700 rounded-xl p-4 overflow-x-auto">
+          <table class="w-full text-sm text-left text-slate-300">
+            <caption class="text-base font-semibold text-white mb-3 text-left">Calculation Assumption Table</caption>
+            <thead>
+              <tr class="border-b border-slate-600 text-xs uppercase tracking-wider text-slate-400">
+                <th class="px-4 py-3 font-semibold">Parameter</th>
+                <th class="px-4 py-3 font-semibold">Description</th>
+                <th class="px-4 py-3 font-semibold">Unit</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-700/50 text-sm">
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Cascade bank pressure</td><td class="px-4 py-2">Initial pressure of the storage bank</td><td class="px-4 py-2">bar</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Cascade bank volume</td><td class="px-4 py-2">Physical size of the storage banks (Low, Med, High)</td><td class="px-4 py-2">L</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Vehicle pressure</td><td class="px-4 py-2">Starting pressure inside the vehicle tank</td><td class="px-4 py-2">bar</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Vehicle volume</td><td class="px-4 py-2">Physical size of the vehicle tank</td><td class="px-4 py-2">L</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Target pressure</td><td class="px-4 py-2">Desired final pressure in the vehicle tank</td><td class="px-4 py-2">bar</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Temperature</td><td class="px-4 py-2">Assumed gas or ambient temperature</td><td class="px-4 py-2">°C / K</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Gas Property</td><td class="px-4 py-2">Molar mass, Z-factor, or gas composition</td><td class="px-4 py-2">g/mol, -</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Pressure basis</td><td class="px-4 py-2">Specifies if input pressures are Gauge or Absolute</td><td class="px-4 py-2">bar(g) / bar(a)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Example: Real-World CNG Cascade Calculation</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>To understand how these inputs affect the final fill, let’s look at a real-world calculation using the tool.</p>
+        
+        <h3 class="text-lg font-bold text-white mt-4 mb-2">1. Station and Vehicle Inputs</h3>
+        <div class="bg-slate-900/50 border border-slate-700 rounded-xl p-4 overflow-x-auto">
+          <table class="w-full text-sm text-left text-slate-300">
+            <thead>
+              <tr class="border-b border-slate-600 text-xs uppercase tracking-wider text-slate-400">
+                <th class="px-4 py-3 font-semibold">Category</th>
+                <th class="px-4 py-3 font-semibold">Parameter</th>
+                <th class="px-4 py-3 font-semibold">Value</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-700/50 text-sm">
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2 font-semibold text-slate-200" rowspan="3">Station Storage Banks<br><span class="text-xs font-normal text-slate-400">(120 L each)</span></td><td class="px-4 py-2">Low Bank Pressure</td><td class="px-4 py-2">25 bar</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Medium Bank Pressure</td><td class="px-4 py-2">50 bar</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">High Bank Pressure</td><td class="px-4 py-2">200 bar</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2 font-semibold text-slate-200" rowspan="3">Vehicle Tank</td><td class="px-4 py-2">Volume</td><td class="px-4 py-2">20 L</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Start Pressure</td><td class="px-4 py-2">5 bar</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Target Pressure</td><td class="px-4 py-2">200 bar</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2 font-semibold text-slate-200" rowspan="3">Gas Properties</td><td class="px-4 py-2">Temperature</td><td class="px-4 py-2">20 °C</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Molar Mass</td><td class="px-4 py-2">16.04 g/mol</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Z-Factor</td><td class="px-4 py-2">0.9</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-bold text-white mt-6 mb-2">2. Fill Results</h3>
+        <div class="bg-slate-900/50 border border-slate-700 rounded-xl p-4 overflow-x-auto max-w-md">
+          <table class="w-full text-sm text-left text-slate-300">
+            <thead>
+              <tr class="border-b border-slate-600 text-xs uppercase tracking-wider text-slate-400">
+                <th class="px-4 py-3 font-semibold">Result Parameter</th>
+                <th class="px-4 py-3 font-semibold">Value</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-700/50 text-sm">
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Mass Delivered to Vehicle</td><td class="px-4 py-2 text-blue-300 font-bold font-mono">2.530 kg</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Final Vehicle Pressure</td><td class="px-4 py-2 text-blue-300 font-bold font-mono">178.0 bar</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Transfer Efficiency</td><td class="px-4 py-2 text-blue-300 font-bold font-mono">100.0 %</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
 
