@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CNG/LPG Cylinder Fill Estimator (PVT Gas Law) — FuelMath.net</title>
   <meta name="description" content="Calculate exact gas mass inside CNG and LPG cylinders from pressure gauge reading, temperature, and water capacity using the real gas law.">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-62883Q48DF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-62883Q48DF');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-62883Q48DF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-62883Q48DF');
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -59,7 +58,7 @@
     <p class="text-slate-400 mb-8 text-base">Calculate the exact gas mass (kg) inside on-board CNG or LPG cylinders from pressure gauge reading, temperature, and water capacity.</p>
 
     <!-- CALCULATOR ENGINE -->
-    <div data-tool="cng-lpg-pvt-cylinder" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12" data-tool="cng-lpg-pvt-cylinder">
 
       <!-- Inputs Panel -->
       <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
@@ -69,7 +68,6 @@
         </h2>
 
         <div class="space-y-5">
-
           <!-- Pressure & Temperature -->
           <div class="grid grid-cols-2 gap-3">
             <div>
@@ -104,11 +102,11 @@
             <div class="grid grid-cols-2 gap-3">
               <div>
                 <label class="block text-xs font-semibold text-slate-400 mb-1">Molar Mass (g/mol)</label>
-                <input type="number" data-field="molar" value="16.04" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                <input type="number" data-field="molar" step="0.01" value="16.04" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
               </div>
               <div>
                 <label class="block text-xs font-semibold text-slate-400 mb-1">Z-Factor</label>
-                <input type="number" data-field="zfactor" value="0.9" step="0.01" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
+                <input type="number" data-field="zfactor" step="0.01" value="0.9" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 font-mono">
               </div>
             </div>
           </div>
@@ -123,7 +121,6 @@
               <div class="flex justify-between text-slate-300"><span>LPG (Commercial 60/40 mix)</span><span class="text-blue-300">≈ 49.7 g/mol</span></div>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -197,6 +194,194 @@
           <h3 class="font-bold text-white group-hover:text-blue-300">Compressibility Z-Factor</h3>
           <p class="text-xs text-slate-400 mt-1">Derive an exact Z at your cylinder's pressure and temperature.</p>
         </a>
+      </div>
+    </section>
+
+    <!-- ARTICLE SECTION -->
+    
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">How Does a CNG Cylinder Fill Estimator Work?</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>A CNG cylinder stores natural gas at high pressure. When you want to estimate how much gas is inside the cylinder, the pressure reading alone is not enough. The cylinder's internal volume, gas temperature, gas composition, and the compressibility of the gas also affect the result.</p>
+        <p>This <strong class="text-white">CNG/LPG Cylinder Fill Estimator</strong> takes all these parameters into account and estimates the amount of gas inside a tank in kilograms (kg). It is very useful for understanding the relationship between <strong class="text-white">CNG cylinder pressure, cylinder capacity, temperature, and gas mass</strong>.</p>
+        
+        <p>The basic principle of the Estimator comes from the gas law. For an ideal gas, the relationship between pressure, volume, temperature, and the quantity of gas is described by:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          PV = nRT
+        </div>
+        
+        <p>However, CNG is stored at relatively high pressure, so it does not behave exactly the same as an ideal gas. Therefore, a <a href="/gas-engineering/compressibility-z-factor.html" class="text-blue-400 hover:text-blue-300 underline">compressibility factor (Z)</a> is used to differentiate between ideal and real-gas behaviour.</p>
+        
+        <p>The real-gas equation used for estimating gas mass is:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          m = (P × V × M) / (Z × R × T)
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">m</strong> = mass of the gas in kg</li>
+          <li><strong class="text-slate-200">P</strong> = absolute pressure in Pa</li>
+          <li><strong class="text-slate-200">V</strong> = cylinder volume in m³</li>
+          <li><strong class="text-slate-200">M</strong> = molar mass of the gas in kg/mol</li>
+          <li><strong class="text-slate-200">Z</strong> = compressibility factor</li>
+          <li><strong class="text-slate-200">R</strong> = universal gas constant, 8.314 J/(mol·K)</li>
+          <li><strong class="text-slate-200">T</strong> = absolute temperature in Kelvin</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Why Is Cylinder Water Capacity Important?</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Gas cylinders are commonly identified by their water capacity, which is the internal volume of the cylinder expressed in litres. For example, a cylinder may have a water capacity of:</p>
+        <ul class="list-disc list-inside space-y-1 text-slate-400">
+          <li>40 L, 50 L, 60 L, 70 L, 80 L, or 100 L</li>
+        </ul>
+        <p>A 60-litre cylinder does not contain 60 kg of CNG. The 60 L figure refers to the internal volume of the cylinder, not the mass of gas. If you filled it with water instead of CNG, it would hold exactly 60 litres. The cylinder's water capacity is generally stamped on the shoulder of the cylinder.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">How Do You Calculate CNG kg from Pressure?</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>To estimate the CNG mass, you need four main pieces of information:</p>
+        <ol class="list-decimal list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Cylinder pressure</strong></li>
+          <li><strong class="text-slate-200">Cylinder water capacity</strong></li>
+          <li><strong class="text-slate-200">Gas temperature</strong></li>
+          <li><strong class="text-slate-200">Gas properties</strong> (molar mass and compressibility factor)</li>
+        </ol>
+        <p>For methane, which is the principal component of natural gas, the molar mass is approximately <strong class="text-white">16.04 g/mol</strong>. The pressure must be converted to <strong class="text-white">absolute pressure</strong> before it is used in the gas-law calculation. If the pressure is given as gauge pressure:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          P<sub>absolute</sub> = P<sub>gauge</sub> + P<sub>atmospheric</sub>
+        </div>
+        <p>For example, a pressure of 200 bar(g) is approximately 201 bar absolute under normal atmospheric conditions. The difference is relatively small at high CNG pressures, but it is important to distinguish between gauge and absolute pressure in a thermodynamic calculation.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Estimating Gas in a CNG Cylinder</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Suppose a CNG cylinder has the following conditions:</p>
+        
+        <div class="bg-slate-900/50 border border-slate-700 rounded-xl p-4 overflow-x-auto">
+          <table class="w-full text-sm text-left text-slate-300">
+            <thead>
+              <tr class="border-b border-slate-600 text-xs uppercase tracking-wider text-slate-400">
+                <th class="px-4 py-3 font-semibold">Parameter</th>
+                <th class="px-4 py-3 font-semibold">Value</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-700/50 text-sm">
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Water capacity</td><td class="px-4 py-2">60 L</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Gauge pressure</td><td class="px-4 py-2">200 bar</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Temperature</td><td class="px-4 py-2">25°C</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Gas</td><td class="px-4 py-2">Methane</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Molar mass</td><td class="px-4 py-2">16.04 g/mol</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Z-factor</td><td class="px-4 py-2">0.90</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li>First, the cylinder volume is converted from litres to cubic meters: <strong class="text-blue-300 font-mono">60 L = 0.060 m³</strong></li>
+          <li>The temperature is then converted from Celsius to Kelvin: <strong class="text-blue-300 font-mono">25 + 273.15 = 298.15 K</strong></li>
+          <li>And the gauge pressure is converted to absolute pressure by adding atmospheric pressure.</li>
+        </ul>
+
+        <p>These values are then substituted into the real-gas equation:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          m = (P × V × M) / (Z × R × T)
+        </div>
+        <p>The result shows the gas mass in kilograms (KG). The actual result may slightly vary depending on gas composition, temperature, and Z-factor.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Effect of Temperature on CNG Cylinder Pressure</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Temperature is an important factor when considering CNG cylinder pressure. When compressed gas becomes warmer, its pressure increases. When the gas cools, its pressure decreases.</p>
+        <p>For example, a vehicle's CNG cylinder filled in cool conditions may show a different pressure after the vehicle is parked in direct sunlight. This does not necessarily mean that additional gas has entered the cylinder.</p>
+        <p>Similarly, pressure can fall after filling as the gas and cylinder temperature return to ambient conditions.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">What Is the CNG Z-Factor?</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>The <strong class="text-white">compressibility factor</strong>, represented by <strong class="text-white">Z</strong>, shows that real gases do not behave exactly like ideal gases, particularly at high pressures.</p>
+        <p>For an ideal gas: <strong class="text-blue-300 font-mono">Z = 1</strong>. For a real gas, the value differs from 1.</p>
+        <p>CNG is stored at high pressure, so using an appropriate Z-factor provides a much more accurate result than assuming ideal-gas behaviour. The appropriate Z-factor depends on factors such as:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li>Gas composition</li>
+          <li>Pressure</li>
+          <li>Temperature</li>
+        </ul>
+        <p>Therefore, there is no single Z-factor that is correct for every CNG cylinder and every operating condition.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">CNG Cylinder Capacity and Gas Mass</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>How much CNG can be stored depends strongly on cylinder volume and filling pressure. As a general principle:</p>
+        <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 text-center text-slate-200 font-semibold">
+          Higher cylinder volume → more gas at the same pressure
+        </div>
+        <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 text-center text-slate-200 font-semibold">
+          Higher pressure → more gas in the same cylinder
+        </div>
+        <p>However, the relationship is not always perfectly linear because real-gas behaviour and temperature affect the result. For example, a 100 L cylinder at a particular pressure will generally contain more CNG than a 50 L cylinder at the same pressure, assuming gas composition, temperature, and Z-factor remain identical.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Why 200 Bar Does Not Always Mean the Same Amount of CNG</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>A pressure reading such as <strong class="text-white">200 bar</strong> is not a fixed measurement of CNG mass. The amount of gas corresponding to 200 bar depends on the cylinder volume, temperature, molar mass, and Z-factor.</p>
+        <p>For example, 200 bar in a small cylinder and 200 bar in a much larger cylinder represent different gas volumes. The larger the cylinder, the higher the amount of gas inside it.</p>
+        <p>Temperature can also drastically change the relationship between pressure and mass. A 60 L cylinder at 200 bar at 20°C results in <strong class="text-blue-300 font-mono">8.774 kg</strong> of CNG. But when the temperature is increased to 30°C, the amount of CNG reduces to <strong class="text-blue-300 font-mono">8.485 kg</strong>.</p>
+        <p>Similarly, molar mass and Z-factor play an important role. When the composition of the gas changes, the gas mass changes even if all other parameters remain the same.</p>
+        <p>Therefore, statements such as "200 bar equals X kg of CNG" are incomplete unless the cylinder volume, temperature, and gas properties are also specified.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">CNG vs LPG: An Important Difference</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>CNG and LPG should not be treated as identical when estimating cylinder contents.</p>
+        
+        <h3 class="text-lg font-bold text-white mt-4 mb-2">CNG</h3>
+        <p>CNG is primarily stored as a <strong class="text-white">compressed gas</strong>. A pressure-volume-temperature (PVT) calculation is therefore highly useful for calculating the gas mass inside a CNG cylinder.</p>
+        
+        <h3 class="text-lg font-bold text-white mt-4 mb-2">LPG</h3>
+        <p>LPG is normally stored in a cylinder primarily as a <strong class="text-white">liquid</strong>, with a vapour space above the liquid. Because of this, cylinder pressure does not directly indicate the total mass of LPG in the cylinder. The PVT calculation on this page is intended strictly for the gaseous phase of LPG.</p>
+        
+        <h3 class="text-lg font-bold text-white mt-6 mb-2">Liquid LPG Mass Calculation</h3>
+        <p>When LPG is in liquid form, mass must be estimated using density rather than the gas law:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          m = ρ × V
+        </div>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">m</strong> = liquid LPG mass</li>
+          <li><strong class="text-slate-200">ρ</strong> = liquid LPG density</li>
+          <li><strong class="text-slate-200">V</strong> = liquid volume</li>
+        </ul>
+        <p>LPG density varies with composition and temperature. Propane, butane, and commercial LPG mixtures do not share the same densities. This is why a domestic LPG cylinder's rated filling quantity, such as 14.2 kg, should not be calculated simply from the cylinder's pressure.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Factors That Affect the Estimated Gas Mass</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Cylinder Volume:</strong> A larger cylinder can hold more gas at the same pressure and temperature.</li>
+          <li><strong class="text-slate-200">Pressure:</strong> Increasing pressure generally increases the amount of compressed gas in the cylinder.</li>
+          <li><strong class="text-slate-200">Temperature:</strong> Gas temperature affects pressure, and therefore affects the relationship between pressure and mass.</li>
+          <li><strong class="text-slate-200">Gas Composition:</strong> Natural gas is not always pure methane. It can contain other hydrocarbons and inert gases. The composition affects the gas's molar mass and thermodynamic properties.</li>
+          <li><strong class="text-slate-200">Compressibility Factor:</strong> The Z-factor accounts for real-gas behaviour and can vary with pressure, temperature, and gas composition.</li>
+          <li><strong class="text-slate-200">Measurement Accuracy:</strong> Pressure gauges have limited accuracy. A small pressure-reading error can affect the estimated mass.</li>
+          <li><strong class="text-slate-200">Cylinder Specifications:</strong> The stated water capacity is a nominal cylinder specification. Actual manufactured dimensions and tolerances can affect the precise internal volume.</li>
+        </ul>
       </div>
     </section>
 
