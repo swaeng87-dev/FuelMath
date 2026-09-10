@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Real Gas Compressibility Z-Factor Calculator | AGA-8 / ISO 12213 — FuelMath.net</title>
   <meta name="description" content="Solve the real gas compressibility factor (Z) from pressure, temperature, and gas gravity using Sutton pseudo-critical properties and the Dranchuk-Abu-Kassem correlation.">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-62883Q48DF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-62883Q48DF');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-62883Q48DF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-62883Q48DF');
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -171,6 +170,318 @@
           <h3 class="font-bold text-white group-hover:text-blue-300">CNG/LPG Cylinder Fill (PVT)</h3>
           <p class="text-xs text-slate-400 mt-1">Compute cylinder gas mass using the real gas law with Z correction.</p>
         </a>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- INTEGRATED ARTICLE SECTIONS                                  -->
+    <!-- ============================================================ -->
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Real Gas Compressibility Factor (Z-Factor)</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>The <strong class="text-white">real gas compressibility factor</strong>, also known as the <strong class="text-white">Z-factor</strong>, is a dimensionless quantity used to describe how much a real gas deviates from ideal-gas behaviour.</p>
+        <p>The compressibility factor provides a correction to the ideal gas equation. So, it is widely used in natural gas, petroleum, chemical, pipeline, CNG, and other gas-engineering calculations.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Technical Definition</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>It is commonly defined as:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          Z = PV / nRT
+        </div>
+        <p>where:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Z</strong> = compressibility factor</li>
+          <li><strong class="text-slate-200">P</strong> = absolute pressure</li>
+          <li><strong class="text-slate-200">V</strong> = gas volume</li>
+          <li><strong class="text-slate-200">n</strong> = amount of gas in moles</li>
+          <li><strong class="text-slate-200">R</strong> = universal gas constant</li>
+          <li><strong class="text-slate-200">T</strong> = absolute temperature</li>
+        </ul>
+        <p>For an ideal gas, the compressibility factor is exactly:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          Z = 1
+        </div>
+        <p>For a real gas, the value may be less than 1, equal to 1, or greater than 1. Everything depends on pressure, temperature, and gas composition.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Importance of the Z-Factor</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>The ideal gas law is useful for many applications. But it may become inaccurate when gas is compressed or when molecular interactions become significant. The real-gas equation is commonly written as:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          PV = ZnRT
+        </div>
+        <p>So the Z-factor acts as a correction factor. It shows the deviation of a real gas from ideal behaviour.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Ideal Gas and Real Gas</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>An ideal gas is a theoretical model based on simplifying assumptions. We assume that:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li>Gas molecules occupy negligible volume.</li>
+          <li>There are no intermolecular forces.</li>
+          <li>Collisions are perfectly elastic.</li>
+          <li>The gas follows the ideal gas law exactly.</li>
+        </ul>
+        <p>Real gases do not completely satisfy these assumptions. They deviate significantly when pressure increases and as the gas approaches conditions where molecular interactions are important. So we can simplify it by saying:</p>
+        
+        <div class="bg-slate-900/50 border border-slate-700 rounded-xl p-4 overflow-x-auto">
+          <table class="w-full text-sm text-left text-slate-300">
+            <thead>
+              <tr class="border-b border-slate-600 text-xs uppercase tracking-wider text-slate-400">
+                <th class="px-4 py-3 font-semibold">Gas behavior</th>
+                <th class="px-4 py-3 font-semibold">Compressibility factor</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-700/50 text-sm">
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Ideal-gas behaviour</td><td class="px-4 py-2 text-blue-300 font-mono">Z = 1</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Negative deviation from ideal behavior</td><td class="px-4 py-2 text-blue-300 font-mono">Z &lt; 1</td></tr>
+              <tr class="hover:bg-slate-700/30 transition-colors"><td class="px-4 py-2">Positive deviation from ideal behavior</td><td class="px-4 py-2 text-blue-300 font-mono">Z &gt; 1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methods of Z Calculation</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>There are several methods to calculate the compressibility factor. The appropriate method depends on the gas composition, pressure, temperature, required accuracy, and engineering application. Four common methods include:</p>
+
+        <h3 class="text-lg font-bold text-white mt-4 mb-2">Standing-Katz Compressibility Chart</h3>
+        <p>The <strong class="text-white">Standing-Katz chart</strong> is a classic industry reference for estimating the compressibility factor of natural gases. The chart relates Z to reduced pressure and temperature. It has been widely used in petroleum and natural-gas engineering.</p>
+
+        <h3 class="text-lg font-bold text-white mt-4 mb-2">Dranchuk-Abou-Kassem (DAK) Correlation</h3>
+        <p><em>Please check the "Methodology and Formula" section above for the DAK correlation details used in this calculator.</em></p>
+
+        <h3 class="text-lg font-bold text-white mt-4 mb-2">Hall-Yarborough Correlation</h3>
+        <p>The <strong class="text-white">Hall-Yarborough</strong> method is another commonly used correlation for calculating natural-gas compressibility from reduced temperature and pressure. Like DAK, it is based on the Standing-Katz data and is commonly used in petroleum and natural-gas engineering calculations.</p>
+
+        <h3 class="text-lg font-bold text-white mt-4 mb-2">Equations of State</h3>
+        <p>For more general thermodynamic calculations, an <strong class="text-white">equation of state (EOS)</strong> is used to describe the pressure-volume-temperature relationship of a real fluid. Common cubic equations of state include:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Peng-Robinson (PR)</strong></li>
+          <li><strong class="text-slate-200">Soave-Redlich-Kwong (SRK)</strong></li>
+          <li><strong class="text-slate-200">Redlich-Kwong (RK)</strong></li>
+        </ul>
+        <p>Equations of state are particularly useful for gas mixtures and hydrocarbons when we have to consider phase behaviour, composition, and high-pressure conditions.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Reduced Pressure and Temperature</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Reduced properties are used in many gas compressibility correlations rather than pressure and temperature alone.</p>
+        <p>Reduced pressure is defined as:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          P<sub>r</sub> = P / P<sub>c</sub>
+        </div>
+        <p>Reduced temperature is defined as:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          T<sub>r</sub> = T / T<sub>c</sub>
+        </div>
+        <p>where:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">P<sub>r</sub></strong> = reduced pressure</li>
+          <li><strong class="text-slate-200">T<sub>r</sub></strong> = reduced temperature</li>
+          <li><strong class="text-slate-200">P</strong> = absolute pressure</li>
+          <li><strong class="text-slate-200">T</strong> = absolute temperature</li>
+          <li><strong class="text-slate-200">P<sub>c</sub></strong> = critical pressure</li>
+          <li><strong class="text-slate-200">T<sub>c</sub></strong> = critical temperature</li>
+        </ul>
+        <p>These reduced properties are used in generalised compressibility charts and several empirical correlations to estimate Z.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Kay's Rule</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Natural gas is normally a mixture of several hydrocarbons and non-hydrocarbon components rather than a pure gas. Therefore, using the properties of a single component such as Methane may not be appropriate for the whole mixture.</p>
+        <p>A commonly used approximation for estimating the pseudocritical properties of a gas mixture is <strong class="text-white">Kay's mixing rule</strong>.</p>
+        <p>The pseudocritical temperature can be estimated as:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          T<sub>pc</sub> = Σ(y<sub>i</sub> T<sub>ci</sub>)
+        </div>
+        <p>The pseudocritical pressure can be estimated as:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          P<sub>pc</sub> = Σ(y<sub>i</sub> P<sub>ci</sub>)
+        </div>
+        <p>where:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">y<sub>i</sub></strong> = mole fraction of component i</li>
+          <li><strong class="text-slate-200">T<sub>ci</sub></strong> = critical temperature of component i</li>
+          <li><strong class="text-slate-200">P<sub>ci</sub></strong> = critical pressure of component i</li>
+        </ul>
+        <p>These pseudocritical properties can then be used to calculate approximate pseudoreduced properties:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          T<sub>pr</sub> = T / T<sub>pc</sub> &nbsp;&nbsp;•&nbsp;&nbsp; P<sub>pr</sub> = P / P<sub>pc</sub>
+        </div>
+        <p>The resulting pseudoreduced properties can be used with suitable compressibility correlations.</p>
+        <p>Kay's rule is an approximation and may require additional corrections when natural gas contains significant quantities of non-hydrocarbon components or under conditions where greater accuracy is required.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Impurity Corrections</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Standard general compressibility correlations are suitable for gases within the composition ranges for which the underlying correlation was developed.</p>
+        <p>Natural gas may contain significant quantities of non-hydrocarbon components such as <strong class="text-white">carbon dioxide (CO<sub>2</sub>)</strong> and <strong class="text-white">hydrogen sulfide (H<sub>2</sub>S)</strong>. These components significantly influence gas compressibility and pseudocritical properties.</p>
+        <p>For sour gases and gas mixtures containing high concentrations of CO<sub>2</sub> or H<sub>2</sub>S, corrections may be required before using generalised compressibility correlations.</p>
+
+        <h3 class="text-lg font-bold text-white mt-4 mb-2">Wichert-Aziz Correction</h3>
+        <p>The <strong class="text-white">Wichert-Aziz correction</strong> is a very common method for considering the effects of hydrogen sulfide and carbon dioxide on pseudocritical properties.</p>
+        <p>It modifies the pseudocritical temperature and pressure before calculating pseudoreduced properties and subsequently calculating the compressibility factor.</p>
+        <p>This correction is particularly relevant when sour-gas compositions contain high concentrations of H<sub>2</sub>S and/or CO<sub>2</sub>. You should always check the applicable composition and operating limits of the selected correlation before relying on the result.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Critical Compressibility Factor (Z<sub>c</sub>)</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>The compressibility factor at the critical point is known as the <strong class="text-white">critical compressibility factor</strong>, represented by <strong class="text-white">Z<sub>c</sub></strong>.</p>
+        <p>At the critical point:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          P = P<sub>c</sub> &nbsp;&nbsp;and&nbsp;&nbsp; T = T<sub>c</sub>
+        </div>
+        <p>A common misconception is that Z must equal 1 at the critical point. This is not true. Real gases generally have a critical compressibility factor different from 1.</p>
+        <p>For many simple substances, Z<sub>c</sub> is roughly in the range of <strong class="text-white">0.27 to 0.29</strong>. However, the actual value depends on the substance.</p>
+        <p>This shows an important distinction between the ideal-gas compressibility factor and the actual thermodynamic behaviour of a real fluid.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Boyle Temperature</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>The <strong class="text-white">Boyle temperature</strong> is the temperature at which the effects of attractive and repulsive intermolecular interactions balance in the low-pressure limit.</p>
+        <p>At the Boyle temperature, the first-order deviation from ideal-gas behaviour becomes zero. Consequently, the gas can exhibit behaviour close to ideal over an appropriate low-pressure range.</p>
+        <p>The Boyle temperature should not be interpreted as a condition in which the gas is exactly ideal at every pressure. At higher pressures, additional real-gas effects can still cause Z to differ from 1.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Factors Affecting Z-Factor</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <h3 class="text-lg font-bold text-white mt-2 mb-2">Pressure</h3>
+        <p>Pressure has a major influence on gas compressibility. At very low pressure, many gases approach ideal-gas behaviour and Z approaches 1. As pressure increases, molecular interactions become increasingly important.</p>
+
+        <h3 class="text-lg font-bold text-white mt-4 mb-2">Temperature</h3>
+        <p>Temperature changes the balance between molecular kinetic energy and intermolecular forces. So, changing the temperature can significantly alter the Z-factor at a given pressure.</p>
+
+        <h3 class="text-lg font-bold text-white mt-4 mb-2">Gas Composition</h3>
+        <p>The composition of a gas mixture affects its compressibility. Natural gas commonly contains methane along with ethane, propane, butanes, nitrogen, carbon dioxide, and hydrogen sulfide. Therefore, a Z-factor calculated for pure methane should not be used as the Z-factor of every natural-gas mixture.</p>
+
+        <h3 class="text-lg font-bold text-white mt-4 mb-2">Critical Properties</h3>
+        <p>Critical temperature and pressure are important parameters in many compressibility correlations. For gas mixtures, pseudocritical properties should be used instead.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Z Factor Applications</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <h3 class="text-lg font-bold text-white mt-2 mb-2">Natural Gas</h3>
+        <p>Z-factor calculations are commonly used for natural-gas volume, density, mass, pipeline flow, gas storage, and inventory calculations.</p>
+
+        <h3 class="text-lg font-bold text-white mt-4 mb-2">CNG Systems</h3>
+        <p>Compressed natural gas is stored at high pressure and makes real-gas behaviour very important. Z-factor calculations are used in CNG storage, filling, gas quantity, pressure-volume, and density calculations.</p>
+
+        <h3 class="text-lg font-bold text-white mt-4 mb-2">Gas Pipelines</h3>
+        <p>Pipeline engineering requires relationships between pressure, temperature, gas density, and flow. The compressibility factor is used in many gas-flow calculations.</p>
+
+        <h3 class="text-lg font-bold text-white mt-4 mb-2">Gas Storage</h3>
+        <p>Gas storage systems operate over a wide range of pressures and temperatures. Using the appropriate Z-factor helps improve calculations of the quantity and density of stored gas.</p>
+
+        <h3 class="text-lg font-bold text-white mt-4 mb-2">Gas Metering</h3>
+        <p>Corrections for pressure, temperature, and gas compressibility are required in gas measurement and custody-transfer calculations. The compressibility method depends on the gas composition, operating conditions, and measurement standard.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Gas Density Calculation</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>For a gas with molecular weight <strong class="text-white">M</strong>, real-gas density can be expressed as:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          ρ = PM / ZRT
+        </div>
+        <p>where:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">ρ</strong> = gas density</li>
+          <li><strong class="text-slate-200">P</strong> = absolute pressure</li>
+          <li><strong class="text-slate-200">M</strong> = molecular weight</li>
+          <li><strong class="text-slate-200">Z</strong> = compressibility factor</li>
+          <li><strong class="text-slate-200">R</strong> = appropriate gas constant</li>
+          <li><strong class="text-slate-200">T</strong> = absolute temperature</li>
+        </ul>
+        <p>This shows how important the Z-factor is when calculating natural-gas and other gas densities.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Gas Volume</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>The real-gas equation:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          PV = ZnRT
+        </div>
+        <p>can be rearranged to calculate volume:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          V = ZnRT / P
+        </div>
+        <p>We can use this equation to estimate the volume that a known quantity of gas occupies at a specified pressure and temperature.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Absolute Pressure and Temperature</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Real-gas calculations with the gas law require thermodynamically consistent quantities.</p>
+        <p>In particular:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li>Use <strong class="text-white">absolute pressure</strong>, not gauge pressure.</li>
+          <li>Use <strong class="text-white">absolute temperature</strong> rather than Celsius or Fahrenheit directly.</li>
+        </ul>
+        <p>Gauge pressure must be converted to absolute pressure before using it in gas-law calculations. Similarly, Celsius and Fahrenheit temperatures must be converted to an absolute temperature scale such as Kelvin or Rankine when needed.</p>
+        <p>Mixing incompatible units is another common source of errors in gas calculations.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Accuracy Level in Z-Factor</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>The accuracy of a calculated Z-factor depends on the calculation method, gas composition, input data, and operating conditions.</p>
+        <p>Different correlations and equations of state can produce different results, especially near:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li>The critical region</li>
+          <li>Very high pressures</li>
+          <li>Phase boundaries</li>
+          <li>Complex gas compositions</li>
+          <li>Conditions outside the correlation's validated range</li>
+        </ul>
+        <p>For high-accuracy engineering work, the selected correlation or equation of state should be appropriate for the gas and the expected operating range.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Limitations</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>A Z-factor calculator provides an estimate based on a particular method or correlation. It does not eliminate the need to evaluate whether that method is suitable for the intended engineering application.</p>
+        <p>The result can depend on:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li>The selected correlation or equation of state</li>
+          <li>Gas composition</li>
+          <li>Pressure</li>
+          <li>Temperature</li>
+          <li>Critical or pseudocritical properties</li>
+          <li>Presence of CO<sub>2</sub>, H<sub>2</sub>S, or other impurities</li>
+          <li>Validity range of the selected method</li>
+        </ul>
+        <p>For engineering applications, always verify that the selected calculation method, gas composition, pressure range, temperature range, units, and applicable standards are appropriate for the intended use.</p>
       </div>
     </section>
 
