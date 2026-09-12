@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LNG Boil-Off Gas (BOG) & Tank Loss Estimator — FuelMath.net</title>
   <meta name="description" content="Estimate daily boil-off gas volume, mass loss, and pressure buildup in cryogenic LNG storage tanks, ISO containers, and LNG carriers.">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-62883Q48DF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-62883Q48DF');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-62883Q48DF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-62883Q48DF');
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -69,7 +68,6 @@
         </h2>
 
         <div class="space-y-5">
-
           <!-- Tank Size -->
           <div>
             <label class="block text-sm font-semibold text-slate-300 mb-1.5">Tank Capacity <span class="text-slate-500 font-normal">(liquid volume)</span></label>
@@ -105,7 +103,6 @@
             </div>
             <p class="text-xs text-slate-500 mt-2">LNG liquid density varies 420–470 kg/m³ by composition and temperature.</p>
           </div>
-
         </div>
       </div>
 
@@ -201,6 +198,185 @@
           <h3 class="font-bold text-white group-hover:text-blue-300">Methane Leakage & Venting Impact</h3>
           <p class="text-xs text-slate-400 mt-1">Convert vented BOG into CO₂e warming impact using IPCC AR6 GWP values.</p>
         </a>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- INTEGRATED ARTICLE SECTIONS                                  -->
+    <!-- ============================================================ -->
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">What is BOG?</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p><strong class="text-white">Boil-off gas, or BOG,</strong> is the natural gas vapour generated when heat enters a cryogenic LNG storage system. Liquefied natural gas is stored at extremely low temperatures, typically around <strong class="text-white">-162°C at atmospheric pressure</strong>. Even highly insulated LNG tanks and containers absorb some heat from the surroundings.</p>
+        <p>As heat enters the LNG containment system, a small portion of the liquid LNG vaporises. This vapour is called <strong class="text-white">boil-off gas</strong>. The amount generated depends on factors such as tank insulation, ambient conditions, LNG temperature, tank geometry, filling level, and storage duration.</p>
+        <p>Our <strong class="text-white">LNG Boil-Off Gas (BOG) & Tank Loss Estimator</strong> provides a simple way to estimate daily liquid volume loss, LNG mass loss, and the equivalent volume of natural gas after regasification.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">How LNG Boil-Off Gas Is Generated</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>LNG is produced by cooling natural gas until it becomes a liquid. At atmospheric pressure, methane-rich LNG boils at approximately <strong class="text-white">-162°C</strong>. Maintaining LNG at cryogenic temperature requires effective insulation and controlled storage conditions.</p>
+        <p>However, no insulation system completely eliminates heat transfer. Heat from the surrounding environment gradually enters the tank through insulation, supports, piping, valves, tank roofs, and other thermal paths.</p>
+        <p>This heat causes a small amount of LNG to vaporise. The resulting vapour occupies a much larger volume than the original liquid when converted back to gas at standard conditions.</p>
+        <p>For this reason, even a relatively small percentage of LNG boil-off can represent a significant quantity of natural gas.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">What Is Boil-Off Rate (BOR)?</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>The <strong class="text-white">Boil-Off Rate, or BOR,</strong> expresses the amount of LNG that vaporises over a specified period. For storage applications, it is commonly expressed as a percentage of the LNG inventory or tank volume per day.</p>
+        <p>For example, if a tank contains 100,000 m³ of LNG and the assumed BOR is 0.05% per day:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          Daily LNG volume loss = 100,000 × 0.05 / 100 = 50 m³/day
+        </div>
+        <p>The actual mass of LNG lost depends on the LNG liquid density.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Factors That Affect LNG Boil-Off Rate</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-6">
+        <div>
+          <h3 class="text-lg font-bold text-white mb-2">1. Heat Ingress</h3>
+          <p>The primary physical cause of LNG vaporisation is heat entering the cryogenic system. Better insulation generally reduces heat ingress and therefore reduces BOG generation.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-white mb-2">2. Tank Insulation</h3>
+          <p>Insulation performance strongly influences boil-off. Degradation, moisture, damaged insulation, thermal bridges, and changes in vacuum conditions can increase heat transfer into the LNG system.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-white mb-2">3. Ambient Temperature</h3>
+          <p>Higher ambient temperatures can increase heat transfer into the LNG containment system. Solar radiation can also contribute to heat input, particularly for exposed equipment and smaller cryogenic containers.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-white mb-2">4. LNG Composition</h3>
+          <p>LNG is not pure methane. It can contain methane along with ethane, propane, nitrogen, and other components. The composition affects liquid density, boiling behaviour, vapour composition, and thermodynamic properties.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-white mb-2">5. Tank Filling Level</h3>
+          <p>Heat transfer characteristics can change as the LNG inventory changes. Tank geometry, vapour-space conditions, liquid level, and exposed surface area can influence actual BOG generation.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-white mb-2">6. Tank Age and Condition</h3>
+          <p>Long-term operation can affect insulation systems, vacuum performance, valves, piping, and other components. As a result, the actual boil-off performance of an older system may differ from its original design specification.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">BOG From LNG Carriers</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>LNG carriers continuously experience heat ingress during transportation. Even with highly efficient insulation, a small fraction of the LNG cargo can vaporise during a voyage.</p>
+        <p>Modern LNG carriers may use technologies such as <strong class="text-white">MEGI</strong> or <strong class="text-white">X-DF</strong> propulsion systems that can consume boil-off gas as fuel. This can significantly reduce the need to vent BOG to the atmosphere.</p>
+        <p>Depending on vessel design and operating conditions, BOG may be used as engine fuel, reliquefied and returned to the cargo tanks, or managed through other onboard systems.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">In Onshore LNG Storage Tanks</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Large LNG receiving terminals and storage facilities use heavily insulated full-containment tanks to minimise heat ingress. Nevertheless, some BOG is continuously generated.</p>
+        <p>BOG management is an important part of LNG terminal operation. Generated gas may be compressed and sent to the natural gas system, used as fuel, reliquefied, or otherwise managed according to the facility design.</p>
+        <p>The quantity of BOG becomes particularly important during activities such as <strong class="text-white">tank filling, unloading, loading, pressure control, LNG circulation, and changes in inventory</strong>.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">During LNG Storage and Transportation</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>BOG generation is not limited to large LNG tanks. LNG can experience boil-off during transportation and storage in:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li>LNG carriers</li>
+          <li>ISO LNG containers</li>
+          <li>Road LNG tankers</li>
+          <li>Small cryogenic storage tanks</li>
+          <li>Satellite LNG stations</li>
+          <li>LNG fueling systems</li>
+          <li>Industrial LNG storage facilities</li>
+        </ul>
+        <p>Smaller containers can have higher percentage boil-off rates because their surface-area-to-volume ratio is generally less favourable than that of very large storage tanks.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">BOG and LNG Mass Balance</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>For LNG inventory management, BOG should be considered as part of the overall material balance.</p>
+        <p>A simplified LNG inventory relationship can be represented as:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          LNG Inventory Change = LNG Inflow − LNG Outflow − BOG Loss
+        </div>
+        <p>In a real LNG facility, the complete mass balance can be considerably more complicated because it may also include loading and unloading operations, transfers, vapour return, reliquefaction, fuel-gas consumption, pressure-control systems, and measurement uncertainty.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">BOG And Product Loss</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>It is important to distinguish between <strong class="text-white">BOG generation</strong> and <strong class="text-white">BOG venting</strong>.</p>
+        <p>Boil-off gas can be generated without necessarily becoming a permanent product loss. A facility may recover the gas by compressing it, using it as fuel, returning it to the LNG system, or reliquefying it.</p>
+        <p>Therefore, the calculator's estimated mass of BOG represents the <strong class="text-white">quantity of LNG vaporised under the selected assumptions</strong>. The actual economic loss depends on how that BOG is subsequently managed.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Methane Emissions</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Natural gas is primarily methane, a greenhouse gas with a significantly higher warming effect than carbon dioxide over commonly used assessment periods.</p>
+        <p>If BOG is released directly into the atmosphere instead of being recovered or consumed, the methane contained in the gas can contribute to greenhouse-gas emissions.</p>
+        <p>For an emissions assessment, the estimated BOG quantity can be combined with an appropriate methane fraction and global warming potential (GWP) value. Because emissions accounting methodologies and GWP factors can vary by reporting framework, project-specific or regulatory values should be used for formal reporting.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Heat-Leak Calculation</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>The percentage-per-day BOR approach used by this estimator is useful for quick engineering estimates, planning, and preliminary calculations. However, it does not directly calculate heat transfer through the tank structure.</p>
+        <p>A detailed thermal model would begin with the heat entering the cryogenic system and relate that heat input to LNG vaporisation using the latent heat of vaporisation.</p>
+        <p>A simplified relationship is:</p>
+        <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 font-mono text-center text-blue-300 text-lg">
+          Q = m<sub>BOG</sub> × λ
+        </div>
+        <p>Where:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li><strong class="text-slate-200">Q</strong> = heat input associated with vaporisation</li>
+          <li><strong class="text-slate-200">m<sub>BOG</sub></strong> = mass vaporised</li>
+          <li><strong class="text-slate-200">λ</strong> = latent heat of vaporisation of LNG</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">LNG Density</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>The first conversion in this estimator is from liquid LNG volume to mass. This requires the LNG liquid density.</p>
+        <p>Unlike water, LNG does not have one universal density value. LNG density depends primarily on its composition and temperature. Methane-rich LNG generally has a different density from LNG containing larger quantities of ethane, propane, or other heavier hydrocarbons.</p>
+        <p>Using an assumed density such as <strong class="text-white">450 kg/m³</strong> is therefore appropriate for a preliminary estimate, but actual LNG density should be used for custody transfer, detailed engineering, or operational accounting whenever it is available.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Limitations of the LNG BOG Estimator</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>This calculator is intended for <strong class="text-white">preliminary engineering estimation</strong>. It uses a simplified BOR-based approach and should not replace detailed cryogenic system design calculations.</p>
+        <p>The result can differ from actual BOG generation because of:</p>
+        <ul class="list-disc list-inside space-y-2 text-slate-400">
+          <li>Variation in LNG composition</li>
+          <li>Actual LNG temperature</li>
+          <li>Actual tank liquid level</li>
+          <li>Ambient temperature variations</li>
+          <li>Solar heat input</li>
+          <li>Insulation performance</li>
+          <li>Tank geometry</li>
+          <li>Piping and equipment heat leaks</li>
+          <li>Pressure changes</li>
+          <li>LNG loading and unloading operations</li>
+          <li>BOG recovery or reliquefaction systems</li>
+        </ul>
+        <p>For detailed design, a qualified cryogenic engineer should perform a complete thermal and process analysis using project-specific equipment and operating data.</p>
       </div>
     </section>
 
