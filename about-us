@@ -1,1 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us & Contact — FuelMath.net</title>
+  <meta name="description" content="Learn about the mission behind FuelMath.net, our free online gas engineering toolset, and find our contact information.">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-62883Q48DF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-62883Q48DF');
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
 
+  <!-- Universal Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-black tracking-tight text-blue-400 flex items-center gap-1">
+        Fuel<span class="text-white">Math</span><span class="text-blue-300 text-xs px-2 py-0.5 rounded bg-blue-500/20 border border-blue-400/40 font-mono font-semibold">.net</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold text-slate-300">
+        <a href="/#gas-engineering" class="hover:text-blue-300 transition-colors">Gas Engineering</a>
+        <a href="/#industrial" class="hover:text-blue-300 transition-colors">Industrial Fuel</a>
+        <a href="/#petroleum" class="hover:text-blue-300 transition-colors">Petroleum ASTM</a>
+        <a href="/#mobility" class="hover:text-blue-300 transition-colors">Mobility & Fleet</a>
+      </nav>
+      <button id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-slate-900/98 px-4 pt-3 pb-5 space-y-1 text-sm font-medium text-slate-200">
+      <a href="/#gas-engineering" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Gas Engineering</a>
+      <a href="/#industrial" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Industrial Fuel</a>
+      <a href="/#petroleum" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Petroleum ASTM</a>
+      <a href="/#mobility" class="block px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-300">Mobility & Fleet</a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-400 mb-6 font-medium">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-200">About Us & Contact</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-8">About Us</h1>
+    
+    <section class="mb-12">
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>We are a group of professionals in the field of the piped natural gas industry. We work in the distribution of domestic gas supply in India. Fuelmath.net is our combined effort to deliver a free online toolset to the people so that people can do their needed calculation without any high valued software. We serve the people not only physically but also digitally with our tool website in the name of Fuelmath.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Our Mission</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>Apart from our daily physical job, our mission is to deliver the best. We follow it while we dig and lay pipelines and while building this site in the evening. We are not experts at website designing. So the designing part of our work, we outsourced some design and some part is done by different AI. But we are confident in delivering the best and most accurate tools to people, particularly to students and engineers in these field.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">About Fuelmath</h2>
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-slate-300 text-sm leading-relaxed space-y-4">
+        <p>We have grouped our tools into six broad categories:</p>
+        <ol class="list-decimal list-inside space-y-2 text-slate-400 ml-2">
+          <li>Biofuels blending</li>
+          <li>Gas engineering</li>
+          <li>Industrial energy</li>
+          <li>Mobility-logistics</li>
+          <li>Petroleum-standards</li>
+          <li>Tax-emissions</li>
+        </ol>
+        <p>The site is built in HTML and open-source JavaScript. All calculators and converters are built in-house using open-source, free materials. The formulas on which the tools are built are in textbooks and are well known.</p>
+        <p>But all the calculators and converters are reviewed by our expert engineers, so there is almost a 0% chance of an incorrect result.</p>
+        <p>The descriptive content written below the tools is written for the students. Some content ideas are borrowed or developed from Wikipedia, MoPNG and other open-source materials like <a href="https://ppac.gov.in">PPAC</a>.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">Contact Us</h2>
+      <div class="text-slate-300 text-sm leading-relaxed space-y-6 max-w-2xl">
+        <p>You can contact us by filling out this simple contact form:</p>
+        
+        <!-- Inbuilt Contact Form -->
+        <form id="contactForm" onsubmit="return sendMail(event);" class="space-y-5">
+          <div>
+            <label for="name" class="block text-sm font-semibold text-slate-300 mb-1.5">Your Name</label>
+            <input type="text" id="name" placeholder="John Doe" required class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-colors">
+          </div>
+          
+          <div>
+            <label for="email" class="block text-sm font-semibold text-slate-300 mb-1.5">Your Email</label>
+            <input type="email" id="email" placeholder="john@example.com" required class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-colors">
+          </div>
+          
+          <div>
+            <label for="subject" class="block text-sm font-semibold text-slate-300 mb-1.5">Subject</label>
+            <input type="text" id="subject" placeholder="How can we help?" required class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-colors">
+          </div>
+          
+          <div>
+            <label for="message" class="block text-sm font-semibold text-slate-300 mb-1.5">Message</label>
+            <textarea id="message" placeholder="Write your message here..." required class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg py-2.5 px-4 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-colors min-h-[120px] resize-y"></textarea>
+          </div>
+          
+          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-4 rounded-lg transition-colors cursor-pointer">
+            Send Message
+          </button>
+        </form>
+
+        <div class="pt-8 border-t border-slate-700 mt-8">
+          <h3 class="text-lg font-bold text-white mb-2">Mailing Address</h3>
+          <address class="not-italic text-slate-300 leading-relaxed">
+            Nabapally, Ward No 4<br>
+            PO & Dist Bankura, PIN 722101<br>
+            West Bengal, India
+          </address>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="border-t border-slate-700 py-8 px-4 text-center text-slate-400 text-xs bg-slate-900 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="font-medium">© FuelMath.net. All rights reserved.</p>
+      <div class="flex space-x-6 font-semibold">
+        <a href="/methodology.html" class="hover:text-blue-300 transition-colors">Methodology</a>
+        <a href="/privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+        <a href="/terms.html" class="hover:text-blue-300 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Inbuilt Form Script (No Third-Party Dependencies) -->
+  <script>
+    function sendMail(event) {
+      event.preventDefault(); // Prevent the page from refreshing
+
+      // 1. Get the values from the form
+      let name = document.getElementById("name").value;
+      let email = document.getElementById("email").value;
+      let subject = document.getElementById("subject").value;
+      let message = document.getElementById("message").value;
+
+      // 2. Format the body of the email
+      let body = "Name: " + name + "\r\n" +
+                 "Email: " + email + "\r\n\r\n" +
+                 "Message:\r\n" + message;
+
+      // 3. Construct the mailto link
+      let mailtoLink = "mailto:swa.eng.87@gmail.com" +
+                       "?subject=" + encodeURIComponent(subject) +
+                       "&body=" + encodeURIComponent(body);
+
+      // 4. Trigger the user's default email client
+      window.location.href = mailtoLink;
+      
+      return false;
+    }
+  </script>
+
+</body>
+</html>
