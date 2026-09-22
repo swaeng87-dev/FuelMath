@@ -1,6 +1,6 @@
 /* =============================================================
    FUELMATH.NET — CUSTOM STYLESHEET
-   Tailwind (via CDN) handles layout & color. This file holds
+   Tailwind handles layout & color. This file holds
    engineering-specific overrides, tool input polish, and blog prose.
    ============================================================= */
 
@@ -8,7 +8,10 @@
 :root {
   --fm-header-h: 4.5rem;
 }
-html { -webkit-text-size-adjust: 100%; }
+html { 
+  -webkit-text-size-adjust: 100%; 
+  scroll-behavior: smooth; /* Added: Smooth scroll for TOC links */
+}
 
 /* Keep anchor targets clear of the sticky header */
 .category-section,
@@ -43,6 +46,7 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
 .blog-article a { color:#60a5fa; text-decoration:underline; }
 .blog-article ul, .blog-article ol { margin:0 0 1.25rem 1.5rem; }
 .blog-article li { margin-bottom:.4rem; }
+
 .blog-article code {
   background:#1e293b; color:#93c5fd; padding:.15rem .4rem;
   border-radius:.35rem; font-size:.9em; font-family: ui-monospace, monospace;
@@ -61,6 +65,14 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
 [data-toc] a:hover { color:#60a5fa; }
 [data-toc] a.fm-toc-sub { padding-left:1rem; font-size:.84rem; }
 
+/* Added: Keyboard Accessibility Focus States */
+[data-toc] a:focus-visible,
+.blog-article a:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 /* ---------- No-results & empty states ---------- */
 .fm-empty { color:#94a3b8; }
 
@@ -69,4 +81,22 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
   header, footer, .fm-reading-progress, [data-toc] { display:none !important; }
   body { background:#fff !important; color:#000 !important; }
   .blog-article { color:#000; }
+  .blog-article a { color:#000; text-decoration:underline; }
+  
+  /* Added: Fix dark backgrounds for printing */
+  .blog-article code {
+    background: transparent !important;
+    color: #000 !important;
+    border: 1px solid #ccc;
+    padding: .1rem .3rem;
+  }
+  .blog-article blockquote {
+    background: transparent !important;
+    border-left: 3px solid #000;
+    color: #000 !important;
+  }
+  .blog-article th {
+    background: transparent !important;
+    color: #000 !important;
+  }
 }
